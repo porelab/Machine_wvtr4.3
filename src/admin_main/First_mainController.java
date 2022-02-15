@@ -22,8 +22,7 @@ public class First_mainController implements Initializable {
     @FXML
     private ImageView imgback;
     
-    
-
+   
     @FXML
     private Label lbltimedate;
 
