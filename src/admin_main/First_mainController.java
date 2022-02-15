@@ -19,8 +19,6 @@ public class First_mainController implements Initializable {
     @FXML
     private Button btnuser,btnfiles,btnorder,btnmainback;
 
-	//meet
-
     @FXML
     private ImageView imgback;
     
