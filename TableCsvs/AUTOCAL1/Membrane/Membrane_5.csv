@@ -1,0 +1,29 @@
+bubblepoint
+testname,bubblepoint
+bpressure,21.46
+bdiameter,0.31
+sample,Membrane
+samplediameter,9.3
+thikness,1
+fluidname,M16
+fluidvalue,15.9
+thresold,2000
+duration,0 min:20 sec
+durationsecond,20
+testtime,16:24:31
+testdate,22/09/2021
+customerid,AUTOCAL1
+indistry,Filtration
+application,water filter
+materialclassification,
+crosssection,Circular
+materialtype,Hydrophilic
+tfact,0.715
+splate,Large
+flow,4942.397192339971,4956.282902265964,4966.04867627985
+Dt,18.108,1.022,1.022
+p1,0.0,21.457236591134507,21.773098344396125
+p2,21.457236591134507,21.773098344396125,21.809719996948196
+Dp,21.457236591134507,0.31586175326161836,0.03662165255207128
+ans,4170.943820224719,16036.513043478137,138587.4583333338
+t,18.0,19.0,20.0

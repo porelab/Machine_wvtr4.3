@@ -1,0 +1,29 @@
+bubblepoint
+p1,0.0,1.8341344319829098,1.8310826276035705
+p2,1.8341344319829098,1.8310826276035705,1.8265049210345616
+bpressure,1.83
+fluidname,Galwick
+duration,0 min:22 sec
+crosssection,Square
+materialtype,Hydrophobic
+splate,Medium
+flow,4145.26588845655,4147.4021515220875,4142.061493858244
+bdiameter,2.01
+durationsecond,22
+thresold,5000
+ans,45429.59783693843,1386180.0000000051,924739.66666667
+testtime,15:01:26
+Dp,1.8341344319829098,0.0030518043793392735,0.00457770656900891
+testname,bubblepoint
+testdate,22/09/2021
+fluidvalue,15.9
+sample,sample1
+Dt,20.101,1.02,1.022
+tfact,0.4
+t,20.0,21.0,22.0
+application,Aeronautical
+customerid,AUTOCAL1
+thikness,1
+indistry,Non-woven & Paper
+samplediameter,2.3
+materialclassification,Consolidate

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="185.0" prefWidth="392.0" styleClass="bgwhite" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminpopuplogoutController">
+   <children>
+      <ImageView fitHeight="45.0" fitWidth="392.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@quickh.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="9.0" layoutY="7.0" prefHeight="31.0" prefWidth="90.0" styleClass="font-montserrat-semiBold" text="Logout" textFill="WHITE" AnchorPane.topAnchor="7.0">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="btncancel" layoutX="635.0" layoutY="17.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="btnCss" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@close1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="btnlogout" layoutX="151.0" layoutY="137.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="90.0" styleClass="linear-grad-to-bottom-right" text="logout" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Label layoutX="76.0" layoutY="77.0" prefHeight="31.0" prefWidth="256.0" text="Logout From Admin ?">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Button fx:id="btnrefrace" layoutX="332.0" layoutY="67.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="btnCss">
+         <effect>
+            <Glow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

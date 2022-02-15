@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="768.0" prefWidth="1366.0" styleClass="firstpagebk" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1366.0" layoutX="109.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1f93ff00" height="65.0" layoutX="547.0" layoutY="336.0" stroke="WHITE" strokeType="INSIDE" styleClass="recanglearc" width="484.0" />
+      <TextField fx:id="txtemail" layoutX="562.0" layoutY="336.0" prefHeight="65.0" prefWidth="484.0" promptText=" USER ID" styleClass="textboxlogin">
+         <font>
+            <Font size="23.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TextField>
+      <Rectangle arcHeight="15.0" arcWidth="15.0" fill="#1f93ff00" height="65.0" layoutX="551.0" layoutY="430.0" stroke="WHITE" strokeType="INSIDE" styleClass="recanglearc" width="484.0" />
+      <PasswordField fx:id="txtpass" layoutX="562.0" layoutY="432.0" prefHeight="65.0" prefWidth="484.0" promptText="PASSWORD" styleClass="textboxlogin" />
+      <Button fx:id="btnlogin" layoutX="626.0" layoutY="533.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="185.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom" text="Sign In" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblcact" graphicTextGap="8.0" layoutX="931.0" layoutY="537.0" styleClass="font-montserrat-medium" text="Create Account" textFill="#ffffff99" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="913.0" layoutY="570.0" styleClass="font-montserrat-medium" text="Forgot Password ?" textFill="#ffffff99" visible="false">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbltime" layoutX="1149.0" layoutY="699.0" text="07.07.2018 | 11:12:12 AM" textFill="#f5f5f5" AnchorPane.bottomAnchor="51.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="699.0">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="uicon" fitHeight="147.0" fitWidth="201.0" layoutX="361.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@login.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="156.0" fitWidth="457.0" layoutX="54.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../application/1.%20NYI.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="628.0" layoutY="164.0" text="ASTM - E96" textFill="#f5f5f5">
+         <font>
+            <Font name="Calibri Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="371.0" layoutY="219.0" text="WATER VAPOR TRANSMISSION ANALYZER" textFill="#f5f5f5">
+         <font>
+            <Font name="Calibri Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="948.0" layoutY="260.0" text="Version 1.6" textFill="#f5f5f5">
+         <font>
+            <Font name="Calibri Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
+   <stylesheets>
+      <URL value="@../application/application.css" />
+      <URL value="@../application/new_application.css" />
+   </stylesheets>
+</AnchorPane>

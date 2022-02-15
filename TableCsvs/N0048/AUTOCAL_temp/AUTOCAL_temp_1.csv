@@ -1,0 +1,29 @@
+bubblepoint
+testname,bubblepoint
+bpressure,1.85
+bdiameter,3.76
+sample,AUTOCAL_temp
+samplediameter,1.0
+thikness,0.2
+fluidname,Porewick
+fluidvalue,16.0
+thresold,5000
+duration,0 min:22 sec
+durationsecond,22
+testtime,14:43:11
+testdate,22/09/2021
+customerid,N0048
+indistry,Filtration
+application,water filter
+materialclassification,Fibrous
+crosssection,Triangular
+materialtype,Hydrophilic
+tfact,0.75
+splate,Small
+flow,4164.950026703288,4165.255207141222,4164.3396658274205
+Dt,20.106,1.023,1.019
+p1,0.0,1.8524452582589457,1.8478675516899368
+p2,1.8524452582589457,1.8478675516899368,1.8448157473105975
+Dp,1.8524452582589457,0.00457770656900891,0.0030518043793392735
+ans,45205.37644151565,930827.7000000032,1390476.4500000048
+t,20.0,21.0,22.0
