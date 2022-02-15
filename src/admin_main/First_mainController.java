@@ -26,6 +26,7 @@ public class First_mainController implements Initializable {
     @FXML
     private Label lbltimedate;
 
+    //ffffffff
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
