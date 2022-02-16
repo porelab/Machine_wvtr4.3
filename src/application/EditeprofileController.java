@@ -84,12 +84,12 @@ btnlogout.setOnAction(new EventHandler<ActionEvent>() {
 		List<List<String>> alldata=d.getData("select * from userinfo where uid='"+Myapp.uid+"'");
 		System.out.println("alalalalal"+alldata);
 		
-		txtindname.setText(alldata.get(0).get(5));
-		txtuname.setText(alldata.get(0).get(3));
-		txtuname1.setText(alldata.get(0).get(3));
-		txtemail.setText(alldata.get(0).get(0));
-		lbluid.setText(alldata.get(0).get(6));
-		Myapp.oldpass=""+alldata.get(0).get(1);
+//		txtindname.setText(alldata.get(0).get(5));
+//		txtuname.setText(alldata.get(0).get(3));
+	//	txtuname1.setText(alldata.get(0).get(3));
+		//txtemail.setText(alldata.get(0).get(0));
+//		lbluid.setText(alldata.get(0).get(6));
+//		Myapp.oldpass=""+alldata.get(0).get(1);
 	}
 
 	public void buttonclick()

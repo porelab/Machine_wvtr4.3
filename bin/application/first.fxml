@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="maincontent" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NFirstController">
+<StackPane fx:id="maincontent" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NFirstController">
    <children>
       <AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" styleClass="firstpagebk" stylesheets="@application.css">
          <children>
@@ -35,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="67.0" fitWidth="249.0" layoutX="1106.0" layoutY="47.0" pickOnBounds="true" smooth="false" visible="false" AnchorPane.rightAnchor="0.0">
+            <ImageView fitHeight="67.0" fitWidth="249.0" layoutX="1106.0" layoutY="47.0" pickOnBounds="true" smooth="false" AnchorPane.rightAnchor="0.0">
                <image>
                   <Image url="@profilebkimg.png" />
                </image>
@@ -43,7 +44,7 @@
                   <Reflection />
                </effect>
             </ImageView>
-            <ImageView fitHeight="57.0" fitWidth="58.0" layoutX="1302.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.topAnchor="52.0">
+            <ImageView fitHeight="57.0" fitWidth="58.0" layoutX="1302.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="52.0">
                <image>
                   <Image url="@profileimg.png" />
                </image>
@@ -63,7 +64,7 @@
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="txtuname" alignment="CENTER" layoutX="1129.0" layoutY="62.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="171.0" text="Hi, " textFill="WHITESMOKE" visible="false">
+            <Button fx:id="txtuname" alignment="CENTER" layoutX="1129.0" layoutY="62.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="171.0" text="Hi, " textFill="WHITESMOKE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -76,7 +77,7 @@
                </cursor>
             </Button>
             <Rectangle fx:id="recmain" arcHeight="5.0" arcWidth="5.0" fill="#05050540" height="768.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="1366.0" />
-            <Label fx:id="lbltime1111" layoutX="1143.0" layoutY="121.0" prefHeight="36.0" prefWidth="50.0" text="Status :" textFill="WHITESMOKE" visible="false">
+            <Label fx:id="lbltime1111" layoutX="1143.0" layoutY="126.0" prefHeight="36.0" prefWidth="50.0" text="Status :" textFill="WHITESMOKE">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font>
@@ -204,7 +205,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="btnport" layoutX="1205.0" layoutY="126.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" style="-fx-border-width: 0.5px; -fx-border-color: white;" styleClass="btnCss" text="Set Port" textFill="WHITE" visible="false" />
+            <Button fx:id="btnport" layoutX="1205.0" layoutY="131.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="116.0" style="-fx-border-width: 0.5px; -fx-border-color: white;" styleClass="btnCss" text="Set Port" textFill="WHITE" />
             <Button fx:id="btnrestart" layoutX="1235.0" layoutY="2.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" styleClass="cmbtrasperant" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="5.0">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -214,11 +215,11 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnadmin" layoutX="1244.0" layoutY="60.0" mnemonicParsing="false" styleClass="linear-grad-to-bottom" text="Admin mode" textFill="WHITE">
+            <Button fx:id="btnadmin" layoutX="794.0" layoutY="63.0" mnemonicParsing="false" styleClass="linear-grad-to-bottom" text="Admin mode" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <Button fx:id="btnadminlogout" layoutX="1243.0" layoutY="60.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" styleClass="linear-grad-to-bottom" text="logout" textFill="WHITE" visible="false">
+            <Button fx:id="btnadminlogout" layoutX="794.0" layoutY="95.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" styleClass="linear-grad-to-bottom" text="logout" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>

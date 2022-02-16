@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -56,8 +57,9 @@ DataStore.isconfigure.set(true);
 	     Myfont f=new Myfont(20);	     
 	     btnlogin.setFont(f.getM_M());
 	     
-	     login();
-	     
+//	     login();
+	
+	     logindirect();
 		lblcact.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -74,6 +76,76 @@ DataStore.isconfigure.set(true);
 		
 	}
 	
+	void logindirect()
+	{
+		btnlogin.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				System.out.println("Login call");
+				if(!txtemail.getText().trim().equals("")&& !txtpass.getText().trim().equals(""))
+				{
+						
+				if(!txtemail.getText().trim().equals("M19"))
+				{
+				
+					Toast.makeText(Main.mainstage, "Please eneter Conrrect User id.", 3000, 500, 500);
+					 
+				
+				}
+				else
+				{
+					if(!txtpass.getText().trim().equals("M19"))
+					{
+						System.out.println("Wrong pass");
+						Toast.makeText(Main.mainstage, "Please eneter Conrrect password.", 3000, 500, 500);
+					//	error.setVisible(true);
+					}
+					
+					else
+					{
+						
+						// FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/application/first.fxml"));
+
+						System.out.println("Login sucsses");
+						
+						Myapp.isadmin = true;
+						
+						if (Myapp.isadmin == true)
+						{
+						
+//							NFirstController.btnadminA.setVisible(false);
+						//	NFirstController.btnadminlogoutA.setVisible(true);
+	//							
+						}
+						
+						
+						System.out.println("Is Admin"+Myapp.isadmin);
+						
+						
+							 Openscreen.open("/application/first.fxml");
+								
+					}
+					   
+				}
+				
+				}
+				else {
+					Toast.makeText(Main.mainstage, "Fill up the required details.", 3000, 500, 500);
+				}
+				
+				}
+
+
+			
+			
+		});
+
+		
+	
+		
+	}
 	void login()
 	{
 		btnlogin.setOnAction(new EventHandler<ActionEvent>() {
@@ -145,14 +217,17 @@ DataStore.isconfigure.set(true);
 
 	}
 	
+	
+	
+	
 	private final class EscapeKeyHandler implements EventHandler<KeyEvent> {
 		@Override
 		public void handle(KeyEvent event) {
 
 			// the ESCAPE key lets the user reset the zoom level
 			if (KeyCode.ENTER.equals(event.getCode())) {
-				
-				login();
+				logindirect();
+//				login();
 			}
 		}
 

@@ -234,8 +234,10 @@ public class NFirstController implements Initializable {
 
 		connectHardware(DataStore.getCom());
 
-		txtuname.setText("Welcome, " + Myapp.username);
-		System.out.println("usename--:" + Myapp.username);
+		txtuname.setText("Logout");
+//		txtuname.setText("Welcome, " + Myapp.username);
+
+	//	System.out.println("usename--:" + Myapp.username);
 
 		Myfont f = new Myfont(15);
 		txtuname.setFont(f.getM_M());
@@ -456,7 +458,8 @@ btnadminlogout.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-				viewprofile();
+				//viewprofile();
+				logoutpopup();
 
 			}
 		});
@@ -625,6 +628,12 @@ btnadminlogout.setOnAction(new EventHandler<ActionEvent>() {
 	public void viewprofile() {
 
 		Openscreen.open("/application/editeprofile.fxml");
+	}
+	public void logoutpopup()
+	{
+	
+		mydia=new MyDialoug(Main.mainstage, "/application/Nlogoutpopup.fxml");
+		mydia.showDialoug();
 	}
 
 	void sendStop() {
