@@ -47,22 +47,19 @@ import javafx.scene.paint.Stop;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.stage.Popup;
-import toast.LoadAnchor;
 import toast.MyDialoug;
 import toast.Toast;
-import userinput.NLivetestControllerold.SerialReader;
 import Notification.Notification.Notifier;
 import application.DataStore;
 import application.Main;
 import application.Myapp;
 import application.SerialWriter;
 import application.writeFormat;
-import communicationProtocol.Mycommand;
 
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXToggleButton;
+import communicationProtocol.Mycommand;
 
-import data_read_write.CalculatePorometerData;
 import data_read_write.CsvWriter;
 import de.tesis.dynaware.javafx.fancychart.zoom.Zoom;
 import eu.hansolo.tilesfx.Tile;
@@ -93,7 +90,8 @@ public class NLivetestController implements Initializable {
 
 	List<String> p1list, p2list, daltatlist, flowlist, bans, daltaplist,
 			darcylist, wetplist, wetflist, dryplist, dryflist, tlist;
-
+	
+	
 	ListChangeListener<Double> bubblelistener1;
 	int skip, skipwet = 0, skipdry = 0;
 	MyDialoug mydia;
@@ -162,12 +160,13 @@ public class NLivetestController implements Initializable {
 
 	private Notifier notifier;
 
-	int testno = 1, trails;
+	int testno = 1;
+		
 
 	Myfont f = new Myfont(22);
 
 	double calculationdia = 0;
-	double conditionflow, conditionpressure;
+	
 
 	double curpre, curflow;
 
@@ -200,39 +199,6 @@ public class NLivetestController implements Initializable {
 
 	// setting thresold value from user selection and value from configure
 	// screen.
-	void setThresoldval() {
-		System.out.println("TH type : " + Myapp.thresold);
-		if (Myapp.thresold.equals("First Bubble")) {
-
-			try {
-				System.out.println("first data : " + DataStore.getthfirstbp());
-				thval = Integer.parseInt(DataStore.getthfirstbp());
-			} catch (Exception e) {
-
-				thval = 1000;
-			}
-
-		} else if (Myapp.thresold.equals("Moderate")) {
-
-			try {
-				thval = Integer.parseInt(DataStore.getthmoderat());
-			} catch (Exception e) {
-				thval = 3000;
-
-			}
-
-		} else if (Myapp.thresold.equals("Continous")) {
-
-			try {
-				thval = Integer.parseInt(DataStore.getthcontinous());
-			} catch (Exception e) {
-				thval = 5000;
-
-			}
-
-		}
-
-	}
 
 	// stop test function it is used when test is completed or in while
 	// running...
@@ -296,7 +262,7 @@ public class NLivetestController implements Initializable {
 	// set hardware connection status.. and if it connected then create
 	// communication bridge with it.
 	void connectHardware() {
-		Myapp.testtrial = "4";
+		//Myapp.testtrial = "4";
 		in = new SerialReader(DataStore.in);
 
 		try {
@@ -335,7 +301,7 @@ public class NLivetestController implements Initializable {
 
 		Myapp.PrintAll();
 
-		tones = new AudioClip(NLivetestControllerold.class.getResource(
+		tones = new AudioClip(NLivetestController.class.getResource(
 				"stoptone.mp3").toString());
 
 		if (DataStore.getchambertype().equals("Autometed")) {
@@ -379,18 +345,15 @@ public class NLivetestController implements Initializable {
 		addShortCut();
 		isRestart = new SimpleBooleanProperty(false);
 		isSkiptest = false;
-		Myapp.testtrial = "4";
-		trails = Integer.parseInt(Myapp.testtrial);
+		//Myapp.testtrial = "4";
 
 		DataStore.getconfigdata();
-		conditionflow = (double) Double.parseDouble(DataStore.getFc()) * 0.80;
-		conditionpressure = Double.parseDouble(Myapp.endpress);
 
 		isBubbleStart = new SimpleBooleanProperty(false);
 		isDryStart = new SimpleBooleanProperty(false);
 		lblfilename.setText(Myapp.sampleid);
 
-		setThresoldval();
+		
 		setPlateval();
 		lbltesttype.setText("Bubble Point");
 
@@ -473,7 +436,6 @@ public class NLivetestController implements Initializable {
 				// starttest.setDisable(true);
 
 				// dryClick(0); //permeability
-
 				isRestart.set(false);
 				mydia = new MyDialoug(Main.mainstage,
 						"/userinput/Re-testpopup.fxml");
@@ -484,7 +446,7 @@ public class NLivetestController implements Initializable {
 
 		// setTimer();
 
-		sendSetting(100);
+		//sendSetting(100);
 
 		isRestart.addListener(new ChangeListener<Boolean>() {
 
@@ -523,15 +485,10 @@ public class NLivetestController implements Initializable {
 		System.out.println("Flow ontrller : "+DataStore.getFc());
 		int flowcon=Integer.parseInt(DataStore.getFc());
 		System.out.println("Flow ontrller : "+flowcon);
-		int per=Integer.parseInt(Myapp.accbpt);
-		
-		int flowcounnnt=(int)65535*per/100;
-		
-		
 		
 		testtype=0;
 		stoptest.setDisable(true);
-		status.setText("Bubble-Point running..");
+		status.setText("WVTR running..");
 		lblcurranttest.setText("F/PT vs Time");
 
 		flowserireswet.getData().clear();
@@ -564,8 +521,8 @@ public class NLivetestController implements Initializable {
 		series1.getData().clear();
 		series2.getData().clear();
 
-		series1.getData().add(new XYChart.Data(0, thval));
-		series1.getData().add(new XYChart.Data(conditionpressure, thval));
+//		series1.getData().add(new XYChart.Data(0, thval));
+//		series1.getData().add(new XYChart.Data(conditionpressure, thval));
 
 		ind = 0;
 		t1 = System.currentTimeMillis();
@@ -577,53 +534,44 @@ public class NLivetestController implements Initializable {
 				// TODO Auto-generated method stub
 
 				int minde = 1500;
-				Mycommand.setDACValue('2', flowcounnnt, 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-				Mycommand.valveOff('4', 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
+//				Mycommand.setDACValue('2', flowcounnnt, 0);
+//				try {
+//
+//					Thread.sleep(minde);
+//				} catch (Exception e) {
+//
+//				}
+				Mycommand.valveOn('1', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				Mycommand.valveOff('1', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				
 				Mycommand.valveOn('2', 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-				Mycommand.valveOn('5', 0);
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-				Mycommand.setDACValue('1', flowcounnnt, 0);
-
-				try {
-
-					Thread.sleep(minde + 3000);
-				} catch (Exception e) {
-
-				}
-				Mycommand.valveOff('5', 0);
-
-				try {
-
-					Thread.sleep(minde);
-				} catch (Exception e) {
-
-				}
-
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				Mycommand.valveOff('2', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				
+				Mycommand.valveOn('3', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				Mycommand.valveOff('3', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+			
+				Mycommand.valveOn('4', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				Mycommand.valveOff('4', 0);
+				try {Thread.sleep(2500);} catch (Exception e) {}
+				
+				
+				
 				Mycommand.setDelay(400, 0);
-				Mycommand.sendAdcEnableBits("101", 1000);
+				Mycommand.sendAdcEnableBits("111111", 1000);
 				Mycommand.startADC(2500);
 
 			}
@@ -672,8 +620,8 @@ public class NLivetestController implements Initializable {
 		series1.getData().clear();
 		series2.getData().clear();
 
-		series1.getData().add(new XYChart.Data(0, thval));
-		series1.getData().add(new XYChart.Data(conditionpressure, thval));
+//		series1.getData().add(new XYChart.Data(0, thval));
+//		series1.getData().add(new XYChart.Data(conditionpressure, thval));
 
 		ind = 0;
 		t1 = System.currentTimeMillis();
@@ -686,36 +634,9 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	// calculate darcy
-	String getDarcy(double ddp, double ddf) {
+	
 
-		double k = 0;
-		try {
-
-			ddp = (double) ddp / 14.696;
-			// ddf = ddf / 60;
-			double vis = Double.parseDouble(Myapp.fluidvalue);
-			double len = Double.parseDouble(Myapp.thikness);
-			k = (4 * (ddf * vis * len))
-					/ (calculationdia * calculationdia * 3.141592653589793 * ddp);
-
-			darcyavg = darcyavg + k;
-
-		} catch (Exception e) {
-		}
-		return "" + k;
-	}
-
-	// calculate darcy avg
-	double getDarcyAvg() {
-		double ans;
-
-		ans = (double) darcyavg / darcylist.size();
-
-		ans = (double) Math.round(ans * 100) / 100;
-
-		return ans;
-	}
+	
 
 	// get differencial time
 	double getTime() {
@@ -841,37 +762,11 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	// get diameter from bubble point pressure.
-	public String getBubbledia(double bp) {
-		double st = Double.parseDouble(Myapp.fluidvalue);
-
-		// double d1=(double)0.415 * st/bp;
-		double d1 = (double) (4 * st * 10000 * Double
-				.parseDouble(Myapp.tfactore)) / (bp * 68947.6);
-
-		if (Myapp.crossection.equals("Eliptical")) {
-			d1 = d1 * 0.72;
-		} else if (Myapp.crossection.equals("Slit")) {
-			d1 = d1 * 0.71;
-		} else if (Myapp.crossection.equals("Rectangular")) {
-			d1 = d1 * 0.75;
-		}
-
-		String d = getRound(d1, 4);
-
-		String sst = "surface : " + st + "\nbpressure: " + bp + "\nDiameter : "
-				+ d + "\nCrosssection : " + Myapp.crossection + "\nTfactor :"
-				+ Myapp.tfactore;
-		System.out.println(sst);
-		// para.setText(sst);
-
-		return "" + d;
-	}
-
+	
 	// set main graphs....
 	void setGraph() {
 		root.getChildren().add(sc);
-		DataStore.pressure_max = Integer.parseInt(Myapp.endpress);
+		//.pressure_max = Integer.parseInt(Myapp.endpress);
 		sc.setAxisSortingPolicy(SortingPolicy.Y_AXIS.NONE);
 		sc.setAxisSortingPolicy(SortingPolicy.X_AXIS.NONE);
 
@@ -889,9 +784,8 @@ public class NLivetestController implements Initializable {
 		sc.prefWidthProperty().bind(root.widthProperty());
 		sc.prefHeightProperty().bind(root.heightProperty());
 
-		trails = Integer.parseInt(Myapp.testtrial);
-
-		xAxis.setUpperBound(conditionpressure);
+		
+		//xAxis.setUpperBound(conditionpressure);
 		xAxis.setAutoRanging(true);
 		Zoom zoom = new Zoom(sc, root);
 
@@ -955,11 +849,11 @@ public class NLivetestController implements Initializable {
 
 				.barBackgroundColor(Color.GRAY)
 				.backgroundColor(Color.valueOf("#f1f1f1"))
-				.maxValue(conditionpressure)
+				.maxValue(Integer.parseInt(DataStore.getH()))
 				.startFromZero(true)
 				.thresholdVisible(false)
-				.title("Pressure")
-				.unit("Psi")
+				.title("Humidity ")
+				.unit("%RH")
 
 				.textColor(Color.GRAY)
 				.unitColor(Color.GRAY)
@@ -983,15 +877,15 @@ public class NLivetestController implements Initializable {
 				.minValue(0)
 				.barBackgroundColor(Color.GRAY)
 				.backgroundColor(Color.valueOf("#f1f1f1"))
-				.maxValue(conditionflow)
+				.maxValue(70)
 				.startFromZero(true)
 				.thresholdVisible(false)
-				.title("Flow")
+				.title("Temperature")
 				.textColor(Color.GRAY)
 				.unitColor(Color.GRAY)
 				.titleColor(Color.GRAY)
 				.valueColor(Color.GRAY)
-				.unit("Sccm")
+				.unit("°C")
 				.gradientStops(new Stop(0, Bright.BLUE),
 						new Stop(0.1, Bright.BLUE_GREEN),
 						new Stop(0.2, Bright.GREEN),
@@ -1240,25 +1134,7 @@ public class NLivetestController implements Initializable {
 		return ls;
 	}
 
-	// set flow accuricy
-	List<Integer> getFlowAccuricy() {
-		/*
-		 * int fl = Integer.parseInt(Myapp.accbpt); fl = fl - 100; int fc =
-		 * Integer.parseInt(DataStore.getFc()); int s1 = (int) fl * fc / 100;
-		 * 
-		 * int fla = (int) s1 * 65535 / fc;
-		 * System.out.println("Flow Accuracy : " + s1 + " : " + fla);
-		 * List<Integer> data = getValueList(fla);
-		 */
-
-		int fl = Integer.parseInt(Myapp.accbpt);
-		int max = 65535;
-		int c = fl * max / 100;
-		System.out.println("Count set flow controller:" + c);
-		List<Integer> data = getValueList(c);
-		return data;
-	}
-
+	
 	// set step size
 	List<Integer> getStepSize() {
 		int fl = Integer.parseInt(Myapp.accstep);
@@ -1290,68 +1166,7 @@ public class NLivetestController implements Initializable {
 		return data;
 	}
 
-	// send setting to MCU
-	void sendSetting(int delay) {
-		System.out.println("Sending settings");
-		writeFormat wrD = new writeFormat();
-		wrD.addChar('A');
-		wrD.addChar('S');
-		wrD.addData1(getFlowAccuricy());
-		wrD.addData1(getStepSize());
-		wrD.addChar(Myapp.stabilitytype.charAt(0));
-
-		if (Myapp.stabilitytype.equals("1")) {
-			wrD.addBlank(3);
-			int fl = Integer.parseInt(Myapp.accstability);
-			int val = 0;
-			if (fl == 10) {
-				val = (int) mindelay;
-			} else {
-				int v = (int) (maxdelay - mindelay) / 9;
-				int c = (int) ((fl - 10) / 10) * v;
-				val = c + (int) mindelay;
-			}
-			System.out.println("Delay : " + val);
-			wrD.addData1(getValueList(val));
-
-		} else if (Myapp.stabilitytype.equals("2")) {
-
-			int fl = Integer.parseInt(Myapp.accstability);
-			int val = 0;
-			if (fl == 10) {
-				val = (int) minavg;
-			} else if (fl == 100) {
-				val = (int) maxavg;
-			} else {
-				int v = (int) (maxavg - minavg) / 9;
-				int c = (int) ((fl - 10) / 10) * v;
-				val = c + (int) minavg;
-			}
-
-			System.out.println("Sample avg : " + val);
-
-			wrD.addData1(getValueList(val));
-			wrD.addData1(getValueList((int) mindelay));
-		} else {
-
-		}
-
-		wrD.addBlank(3);
-		wrD.addLast();
-		sendData(wrD, delay);
-
-		writeFormat ww = new writeFormat();
-		ww.addStart();
-		ww.addChar('D');
-		ww.addChar('A');
-		ww.addData1(getValueList(700));
-		ww.addData1(getValueList(700));
-		ww.addData1(getValueList(700));
-		ww.addData1(getValueList(700));
-		ww.addLast();
-		sendData(ww, 500);
-	}
-
+	
 	// set all incomming packet event...
 	public class SerialReader implements SerialPortEventListener {
 
@@ -1392,269 +1207,36 @@ public class NLivetestController implements Initializable {
 					if (readData.get(i) == 'F'
 							&& readData.get(i + 1) == (int) 'M'
 							&& readData.get(i + 2) == (int) 'A') {
-						double pr = 0, fl = 0;
+						double h1 = 0,h2=0,h3=0, t1 = 0,t2=0,t3=0;
+						
 						List<Integer> reading = getAdcData(readData);
 
-						int maxpre = Integer.parseInt(DataStore.getPg2());
-						pr = (double) reading.get(2) * maxpre / 65535;
+						
+						h1 = (double) reading.get(0) * Integer.parseInt(DataStore.getH()) / 65535;
+						h2 = (double) reading.get(1) * Integer.parseInt(DataStore.getH()) / 65535;
+						h3 = (double) reading.get(2) * Integer.parseInt(DataStore.getH()) / 65535;
 
-						fl = (double) reading.get(0)
-								* Integer.parseInt(DataStore.getFc()) / 65535;
+						
+						t1 = (double) reading.get(3) * Integer.parseInt(DataStore.getT()) / 65535;
+						t2 = (double) reading.get(4) * Integer.parseInt(DataStore.getT()) / 65535;
+						t3 = (double) reading.get(5) * Integer.parseInt(DataStore.getT()) / 65535;
 
+						
 						System.out.println("" + reading);
 
-						System.out.println("Pr1 : " + pr + "\nFc : " + fl);
+						//System.out.println("Pr1 : " + pr + "\nFc : " + fl);
 
-						DataStore.liveflow.set(fl);
+						DataStore.liveflow.set(h1);
 
-						DataStore.livepressure.set(pr);
+						DataStore.livepressure.set(t1);
 
 						if (testtype == 0) {
 
-							setBubblePoints(pr, fl);
+							//setBubblePoints(pr, fl);
 
 						}
 
 					}
-
-					else if (readData.get(i) == (int) 'T'
-							&& readData.get(i + 1) == (int) 'D') {
-						int prd, fld;
-						double pr = 0, fl = 0;
-
-						// pressure.....
-						int a = 0, a1, a2, a3;
-						a1 = readData.get(i + 5);
-						a2 = readData.get(i + 6);
-						a3 = readData.get(i + 7);
-
-						System.out.println("Original Pressure Data BIT :" + a1
-								+ " : " + a2 + " : " + a3);
-
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						prd = a;
-
-						if (readData.get(i + 2) == (int) 'P'
-								&& readData.get(i + 3) == (int) 'R') {
-							if (readData.get(i + 4) == (int) '1') {
-								int maxpre = Integer
-										.parseInt(DataStore.getPr());
-								pr = (double) a * maxpre / 65535;
-
-								System.out
-										.println(" Pressure Regulator..... : "
-												+ pr);
-
-							}
-
-						} else if (readData.get(i + 2) == (int) 'P'
-								&& readData.get(i + 3) == (int) 'G') {
-							if (readData.get(i + 4) == (int) '1') {
-								int maxpre = Integer.parseInt(DataStore
-										.getPg1());
-								pr = (double) a * maxpre / 65535;
-
-								// pr = pr - 14.7;
-								// b1 = b1 - Myapp.pg1offset.get();
-								System.out
-										.println(" Pressure guage1 original..... : "
-												+ a);
-
-								System.out.println(" Pressure guage1 ..... : "
-										+ pr);
-
-							} else if (readData.get(i + 4) == (int) '2') {
-								int maxpre = Integer.parseInt(DataStore
-										.getPg2());
-								System.out.println("Pressure Gauge2 Org Data "
-										+ a);
-								pr = (double) a * maxpre / 65535;
-
-								// b1 = b1 - Myapp.pg2offset.get();
-
-								System.out.println(" Pressure gauge2 ..... : "
-										+ pr);
-
-							} else {
-								char c = (char) (int) readData.get(i + 6);
-								System.out.println("Not found : "
-										+ readData.get(i + 6) + " : " + c);
-							}
-						}
-
-						// flow.....
-						a1 = readData.get(i + 11);
-						a2 = readData.get(i + 12);
-						a3 = readData.get(i + 13);
-
-						System.out.println("Original Flow Data BIT :" + a1
-								+ " : " + a2 + " : " + a3);
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						fld = a;
-
-						if (readData.get(i + 8) == (int) 'F'
-								&& readData.get(i + 9) == (int) 'C') {
-							if (readData.get(i + 10) == (int) '1') {
-								fl = (double) a
-										* Integer.parseInt(DataStore.getFc())
-										/ 65535;
-
-								System.out.println("Flow Controller :  ... :"
-										+ fl);
-
-							}
-
-						} else if (readData.get(i + 8) == (int) 'F'
-								&& readData.get(i + 9) == (int) 'M') {
-							if (readData.get(i + 10) == (int) '1') {
-								fl = (double) a
-										* Integer.parseInt(DataStore.getFm1())
-										/ 65535;
-								System.out.println(" Flow meter 1.... : " + a);
-
-								// b=(double)a*8000/65535;
-								System.out.println("Flow Meter 1 : ... :" + fl);
-
-							} else if (readData.get(i + 10) == (int) '2') {
-								fl = (double) a
-										* Integer.parseInt(DataStore.getFm2())
-										/ 65535;
-								// b=(double)a*8000/65535;
-								System.out.println("Flow Meter 2 : ... :" + fl);
-
-							}
-						}
-
-						// setdata
-
-						DataStore.liveflow.set(fl);
-
-						DataStore.livepressure.set(pr);
-
-						if (testtype == 0) {
-							setBubblePoints(pr, fl);
-						}
-
-					}
-
-					if (readData.get(i) == 80 && readData.get(i + 5) == 70) {
-
-						double pr, fl;
-						// System.out.println("Pressure:
-						// "+Integer.parseInt(Integer.toHexString(readData.get(i+1))+""+Integer.toHexString(readData.get(i+2))+""+Integer.toHexString(readData.get(i+3)),16));
-						int a = 0, a1, a2, a3;
-						a1 = readData.get(i + 2);
-						a2 = readData.get(i + 3);
-						a3 = readData.get(i + 4);
-						System.out
-								.println("...........................................................\n\nOriginal Pressure Data BIT :"
-										+ a1 + " : " + a2 + " : " + a3);
-
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						System.out.println("Original Pressure Data ..... : "
-								+ a);
-
-						// double b=(double)a*110/16777215;
-
-						double b1 = 0;
-						// b = Math.round(b*10000)/10000D;
-						if (readData.get(i + 1) == 49) {
-							int maxpre = Integer.parseInt(DataStore.getPr());
-							b1 = (double) a * maxpre / 65535;
-
-							System.out.println(" Pressure Regulator..... : "
-									+ b1);
-
-							DataStore.spr.set(b1);
-
-						} else if (readData.get(i + 1) == 50) {
-							int maxpre = Integer.parseInt(DataStore.getPg1());
-							b1 = (double) a * maxpre / 65535;
-
-							// b1 = b1 - Myapp.pg1offset.get();
-							System.out
-									.println(" Pressure guage1 ..... : " + b1);
-
-							DataStore.spg1.set(b1);
-
-							DataStore.sv3.set(true);
-
-						} else if (readData.get(i + 1) == 51) {
-							int maxpre = Integer.parseInt(DataStore.getPg2());
-							System.out.println("Pressure Gauge2 Org Data " + a);
-							b1 = (double) a * maxpre / 65535;
-
-							// b1 = b1 - Myapp.pg2offset.get();
-
-							System.out
-									.println(" Pressure gauge2 ..... : " + b1);
-
-							DataStore.spg2.set(b1);
-							DataStore.sv3.set(false);
-						}
-
-						a1 = readData.get(i + 7);
-						a2 = readData.get(i + 8);
-						a3 = readData.get(i + 9);
-
-						System.out.println("Original Flow Data BIT :" + a1
-								+ " : " + a2 + " : " + a3);
-						a = a1 << 16;
-						a2 = a2 << 8;
-						a = a | a2;
-						a = a | a3;
-						System.out.println("Original Flow Data ..... : " + a);
-						double b = 0;
-						// System.out.println("BIT VALUE:"+readData.get(i+1));
-						if (readData.get(i + 6) == 49) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFc())
-									/ 65535;
-
-							System.out.println("Flow Controller :  ... :" + b);
-							DataStore.sfc.set((int) b);
-
-						} else if (readData.get(i + 6) == 50) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFm1())
-									/ 65535;
-							// b=(double)a*8000/65535;
-							System.out.println("Flow Meter 1 : ... :" + b);
-							DataStore.sfm1.set((int) b);
-							DataStore.sv1.set(true);
-							DataStore.sv2.set(false);
-						} else if (readData.get(i + 6) == 51) {
-							b = (double) a
-									* Integer.parseInt(DataStore.getFm2())
-									/ 65535;
-							// b=(double)a*200000/65535;
-							System.out.println("Flow Meter 2 : ... :" + b);
-							DataStore.sfm2.set((int) b);
-							DataStore.sv1.set(false);
-							DataStore.sv2.set(true);
-						}
-
-						fl = b;
-						DataStore.liveflow.set((double) b);
-						pr = b1;
-						DataStore.livepressure.set(b1);
-
-						// System.out.println("test tyepe : " + testtype);
-						if (testtype == 0) {
-							setBubblePoints(pr, fl);
-						}
-
-					}
-
 					readData.clear();
 					break;
 
@@ -1679,6 +1261,32 @@ public class NLivetestController implements Initializable {
 		}
 
 	}
+	
+	
+	void setPoints(double h1,double h2,double h3,double t1,double t2,double t3)
+	{
+		System.out.println("H1 : "+h1);
+		System.out.println("H2 : "+h2);
+		System.out.println("H3 : "+h3);
+		System.out.println("T1 : "+t1);
+		System.out.println("T2 : "+t2);
+		System.out.println("T3 : "+t3);
+		
+		
+		t2 = System.currentTimeMillis();
+		Platform.runLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				
+				double t=getTime();
+				series2.getData().add(new XYChart.Data(t, t1));
+				series1.getData().add(new XYChart.Data(t,h1));
+				
+			}
+		});
+		
+	}
 
 	void setBubblePoints(double pr, double fl) {
 		Platform.runLater(new Runnable() {
@@ -1695,6 +1303,8 @@ public class NLivetestController implements Initializable {
 		p2 = pr;
 		t2 = System.currentTimeMillis();
 
+		int conditionpressure=30;
+		
 		if (p2 < conditionpressure) {
 			if (p2 != 0 && p1 != p2) {
 				System.out.println("IN if p2!=0 and  " + p1 + " - " + p2);
@@ -1786,13 +1396,13 @@ public class NLivetestController implements Initializable {
 													+ ((t2test - t1test) / 1000)
 													+ " seconds ");
 									ind++;
-									String bubblepoint = getBubbledia(bbp);
-									bbd = Double.parseDouble(bubblepoint);
+									//String bubblepoint = getBubbledia(bbp);
+									//bbd = Double.parseDouble(bubblepoint);
 
 									lblbpc.setText("Bubble Point : " + bbd
 											+ " µ");
 
-									Myapp.bps.put("" + bbp, "" + bubblepoint);
+									//Myapp.bps.put("" + bbp, "" + bubblepoint);
 
 									Mycommand.stopADC(0);
 									Mycommand.valveOn('5', 500);
@@ -1885,7 +1495,7 @@ public class NLivetestController implements Initializable {
 			p2 = pr;
 			t2 = System.currentTimeMillis();
 
-			if (p2 < conditionpressure) {
+			if (p2 < 30) {
 				if (p2 != 0 && p1 != p2) {
 					System.out.println("IN if p2!=0 and  " + p1 + " - " + p2);
 
@@ -1985,14 +1595,13 @@ public class NLivetestController implements Initializable {
 
 										ind++;
 
-										String bubblepoint = getBubbledia(bbp);
-										bbd = Double.parseDouble(bubblepoint);
+										//String bubblepoint = getBubbledia(bbp);
+										//bbd = Double.parseDouble(bubblepoint);
 
 										lblbpc.setText("Bubble Point : " + bbd
 												+ " µ");
 
-										Myapp.bps.put("" + bbp, ""
-												+ bubblepoint);
+										
 										wrd = new writeFormat();
 										wrd.stopBpN();
 										wrd.addLast();
@@ -2113,8 +1722,6 @@ public class NLivetestController implements Initializable {
 
 			String[] ff = f.list();
 
-			CalculatePorometerData c = new CalculatePorometerData();
-
 			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_" + findInt(ff)
 					+ ".csv");
 
@@ -2125,8 +1732,8 @@ public class NLivetestController implements Initializable {
 			cs.newLine("sample", Myapp.sampleid);
 			cs.newLine("samplediameter", "" + calculationdia);
 			cs.newLine("thikness", Myapp.thikness);
-			cs.newLine("fluidname", Myapp.fluidname);
-			cs.newLine("fluidvalue", Myapp.fluidvalue);
+			//cs.newLine("fluidname", Myapp.fluidname);
+			//cs.newLine("fluidvalue", Myapp.fluidvalue);
 			cs.newLine("thresold", "" + thval);
 
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -2155,9 +1762,9 @@ public class NLivetestController implements Initializable {
 			cs.newLine("indistry", Myapp.indtype);
 			cs.newLine("application", Myapp.materialapp);
 			cs.newLine("materialclassification", Myapp.classification);
-			cs.newLine("crosssection", Myapp.crossection);
+		//	cs.newLine("crosssection", Myapp.crossection);
 			cs.newLine("materialtype", Myapp.materialtype);
-			cs.newLine("tfact", Myapp.tfactore);
+		//	cs.newLine("tfact", Myapp.tfactore);
 			cs.newLine("splate", Myapp.splate);
 
 			cs.newLine("flow", flowlist);

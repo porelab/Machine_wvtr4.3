@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import com.jfoenix.controls.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../userinput/Nnew_application.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfigurationPart.NConfigurePageController">
+<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" stylesheets="@../userinput/Nnew_application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ConfigurationPart.NConfigurePageController">
    <children>
       <TabPane layoutX="-4.0" layoutY="112.0" prefHeight="660.0" prefWidth="1376.0" styleClass="tab-pane5" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -69,12 +75,12 @@
                               </Label>
                               <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="42.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
                               <JFXToggleButton fx:id="pg1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="28.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                              <Label layoutX="42.0" layoutY="81.0" styleClass="col-gray70" text="Pressure Guage1" textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="81.0">
+                              <Label layoutX="42.0" layoutY="81.0" styleClass="col-gray70" text="Temp (‘C) :  " textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="81.0">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="42.0" layoutY="152.0" styleClass="col-gray70" text="Pressure Guage2" textFill="WHITE">
+                              <Label layoutX="42.0" layoutY="152.0" styleClass="col-gray70" text="Humidity (%rH): " textFill="WHITE">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
@@ -248,7 +254,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
                      <children>
-                        <Label layoutX="39.0" layoutY="56.0" styleClass="col-gray70" text="Select Chamber" textFill="#bcbcbc" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
+                        <Label layoutX="39.0" layoutY="56.0" styleClass="col-gray70" text="Temp (‘C): " textFill="#bcbcbc" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -269,7 +275,7 @@
                            </font>
                         </RadioButton>
                         <Line endX="570.0" layoutX="140.0" layoutY="107.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="106.0" />
-                        <Label layoutX="39.0" layoutY="129.0" styleClass="col-gray70" text="Low Pressure Gauge" textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="129.0">
+                        <Label layoutX="39.0" layoutY="129.0" styleClass="col-gray70" text="Humidity (%rH): " textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="129.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -304,14 +310,14 @@
                         </Label>
                         <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="394.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
                         <JFXToggleButton fx:id="valvecflow" alignment="BASELINE_CENTER" layoutX="385.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                        <Label layoutX="789.0" layoutY="57.0" text="Set Thresold Value" textFill="#0e3c87">
+                        <Label layoutX="789.0" layoutY="57.0" text="Test Data" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
                         <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                         <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
-                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="First Bubble" textFill="WHITE" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
+                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="Data Interval" textFill="WHITE" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -327,7 +333,7 @@
                            </styleClass>
                         </TextField>
                         <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.topAnchor="184.0" />
-                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Moderate" textFill="WHITE" AnchorPane.leftAnchor="790.0">
+                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Test Type" textFill="WHITE" AnchorPane.leftAnchor="790.0">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -343,7 +349,7 @@
                            </styleClass>
                         </TextField>
                         <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Continous" textFill="WHITE">
+                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Test Method" textFill="WHITE">
                            <font>
                               <Font size="25.0" />
                            </font>
@@ -385,6 +391,11 @@
                         </Label>
                         <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="397.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
                         <JFXToggleButton fx:id="curvefittgb" alignment="BASELINE_CENTER" layoutX="388.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
+                        <Label layoutX="106.0" layoutY="14.0" text="Starting Condition" textFill="#0e3c87">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
@@ -463,7 +474,7 @@
                               <String fx:value="combo-box1" />
                            </styleClass>
                         </ComboBox>
-                        <Label layoutX="140.0" layoutY="125.0" styleClass="col-gray70" text="Pressure" textFill="WHITE" AnchorPane.leftAnchor="55.0">
+                        <Label layoutX="140.0" layoutY="125.0" styleClass="col-gray70" text="Temperature" textFill="WHITE" AnchorPane.leftAnchor="55.0">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -583,9 +594,6 @@
                      </children>
                   </AnchorPane>
                </content>
-            </Tab>
-            <Tab text="Admin Screen1">
-             	 <fx:include source="../admin_setting/admin_screen1.fxml" />
             </Tab>
         </tabs>
       </TabPane>

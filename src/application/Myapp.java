@@ -70,10 +70,10 @@ public class Myapp {
 	public static SimpleBooleanProperty hb=new SimpleBooleanProperty(true);
 	public static String username,email,pass,status;
 	
-	public static String sampleid,testtrial,indtype,materialapp,fluidname,fluidvalue,classification,crossection,thresold,tfactore,splate,thikness,industryname,lotnumber,startpress;
+	public static String sampleid,indtype,materialapp,classification,splate="small",thikness,industryname,lotnumber,testdata,dataint,testtype,testmethod;
 	
 	//New ADD
-	public static String materialtype,accbpt="100",accstep="50",accstability="50",stabilitytype,endpress,testsequence,chambertype,crossovertgl;
+	public static String materialtype,accstep="50",accstability="50",endpress,testsequence,chambertype,crossovertgl;
 	
 	
 	public static Map<String,String> bps=new HashMap<String, String>();
@@ -338,16 +338,19 @@ public class Myapp {
 	public static void PrintAll() {
 		System.out.println("sample id--"+Myapp.sampleid);
 		System.out.println("Lot no --"+Myapp.lotnumber);
-		System.out.println("Test trial--"+Myapp.testtrial);
-		System.out.println("Wetting fluid -"+Myapp.fluidname+"-----Wetting value"+Myapp.fluidvalue);
-		System.out.println("Toutchocity Factor--"+Myapp.tfactore);
-		System.out.println("BPT Thresold--"+Myapp.thresold);
-		System.out.println("BPT ACC--"+Myapp.accbpt);
-		System.out.println("Test ACC--"+Myapp.accstep);
-		System.out.println("Data stability---Typr----"+Myapp.stabilitytype+"--Value"+Myapp.accstability);
-		System.out.println("Test Press start and and---->"+Myapp.startpress+"---End Press---"+Myapp.endpress);
-		System.out.println("Test Medthod--"+Myapp.testsequence);
 		System.out.println("Sample Plate--"+Myapp.splate);
+		System.out.println("Thickness --"+Myapp.thikness);
+		System.out.println("Inds Type --"+Myapp.indtype);
+		System.out.println("Material App --"+Myapp.materialapp);
+		System.out.println("Sample Plate --"+Myapp.splate);
+		System.out.println("Test Data --"+Myapp.testdata);
+		System.out.println("Data Type --"+Myapp.dataint);
+		System.out.println("Test Type --"+Myapp.testtype);
+		System.out.println("Test Method --"+Myapp.testmethod);
+		
+		
+		
+		
 		
 	}
 	

@@ -92,7 +92,7 @@ public class SaveprojectController implements Initializable {
 	{
 		Database d1=new Database();
 		
-		if(d1.Insert("INSERT INTO projects VALUES('"+Myapp.sampleid+"','"+Myapp.indtype+"','"+Myapp.materialapp+"','"+Myapp.classification+"','"+Myapp.crossection+"','"+Myapp.thresold+"','"+Myapp.fluidname+":"+Myapp.fluidvalue+"','"+Myapp.email+"','"+projectname.getText()+"','"+Myapp.testtrial+"','"+Myapp.tfactore+"','"+Myapp.splate+"','"+Myapp.thikness+"','"+Myapp.materialtype+"','"+Myapp.endpress+"','"+Myapp.accbpt+"','"+Myapp.accstep+"','"+Myapp.lotnumber+"','"+Myapp.startpress+"','"+Myapp.testsequence+"','"+Myapp.stabilitytype+"','"+Myapp.accstability+"')"))
+		if(d1.Insert("INSERT INTO Nprojects VALUES('"+Myapp.sampleid+"','"+Myapp.email+"','"+Myapp.lotnumber+"','"+Myapp.thikness+"','"+Myapp.indtype+"','"+Myapp.materialapp+"','"+Myapp.classification+"','"+Myapp.materialtype+"','"+Myapp.splate+"','"+Myapp.testdata+"','"+Myapp.dataint+"','"+Myapp.testtype+"','"+Myapp.testmethod+"','"+projectname.getText()+"')"))
 		{
 			
 		System.out.println("Insert data New Project");

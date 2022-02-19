@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="maincontent" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NFirstController">
+<StackPane fx:id="maincontent" maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" stylesheets="@new_application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.NFirstController">
    <children>
       <AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1366.0" prefHeight="768.0" prefWidth="1366.0" styleClass="firstpagebk" stylesheets="@application.css">
          <children>
@@ -126,7 +126,7 @@
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" layoutX="151.0" layoutY="38.0" styleClass="font-montserrat-semiBold" text="Bubble Point Analyzer" textFill="WHITE" AnchorPane.topAnchor="38.0">
+            <Label alignment="CENTER" layoutX="138.0" layoutY="37.0" prefHeight="45.0" prefWidth="585.0" styleClass="font-montserrat-semiBold" text="Water Vapor Transmission Analyzer" textFill="WHITE" AnchorPane.topAnchor="37.0">
                <font>
                   <Font size="30.0" />
                </font>
@@ -170,7 +170,7 @@
                   <Image url="@logo1.png" />
                </image>
             </ImageView>
-            <Label fx:id="lbltime11111" layoutX="155.0" layoutY="72.0" prefHeight="36.0" prefWidth="170.0" text="BPA - 100 , V4.3" textFill="WHITESMOKE">
+            <Label fx:id="lbltime11111" layoutX="155.0" layoutY="72.0" prefHeight="36.0" prefWidth="170.0" text="WVTR - 100 , V1.6" textFill="WHITESMOKE">
                <font>
                   <Font name="Calibri" size="15.0" />
                </font>
@@ -215,11 +215,11 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnadmin" layoutX="794.0" layoutY="63.0" mnemonicParsing="false" styleClass="linear-grad-to-bottom" text="Admin mode" textFill="WHITE">
+            <Button fx:id="btnadmin" layoutX="794.0" layoutY="63.0" mnemonicParsing="false" styleClass="linear-grad-to-bottom" text="Admin mode" textFill="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>
-            <Button fx:id="btnadminlogout" layoutX="794.0" layoutY="95.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" styleClass="linear-grad-to-bottom" text="logout" textFill="WHITE">
+            <Button fx:id="btnadminlogout" layoutX="794.0" layoutY="95.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" styleClass="linear-grad-to-bottom" text="logout" textFill="WHITE" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font></Button>

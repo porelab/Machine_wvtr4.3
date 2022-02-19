@@ -189,14 +189,14 @@ public class NFirstController implements Initializable {
 		btnadminlogoutA = btnadminlogout;
 		System.out.println("Is Admin"+Myapp.isadmin);
 		
-		
+		/*
 		if (Myapp.isadmin == true)
 		{
 		
 			btnadmin.setVisible(false);
 			btnadminlogout.setVisible(true);
 				
-		}
+		}*/
 		
 		
 		DataStore.isconfigure.set(true);

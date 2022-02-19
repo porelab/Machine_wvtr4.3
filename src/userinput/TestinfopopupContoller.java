@@ -47,27 +47,27 @@ public class TestinfopopupContoller implements Initializable {
 			}
 		
 		
-			
-		if (Myapp.thresold.equals("First Bubble")) {
-
-			lblbptthresold.setText(Myapp.thresold+" : 1000");
-
-		} else if (Myapp.thresold.equals("Moderate")) {
-
-			lblbptthresold.setText(Myapp.thresold+" : 3000");
-		} else if (Myapp.thresold.equals("Continous")) {
-
-			lblbptthresold.setText(Myapp.thresold+" : 5000");
-
-		}
-		
-		
-	
-		lbltfactore.setText(""+Myapp.tfactore);
-		lblfluid.setText(Myapp.fluidname+" : "+Myapp.fluidvalue+" mN/m");
-		lblbptacc.setText(Myapp.accbpt+" %");
-		lbltestpressure.setText(Myapp.endpress+" psi");
-		
+//			
+//		if (Myapp.thresold.equals("First Bubble")) {
+//
+//			lblbptthresold.setText(Myapp.thresold+" : 1000");
+//
+//		} else if (Myapp.thresold.equals("Moderate")) {
+//
+//			lblbptthresold.setText(Myapp.thresold+" : 3000");
+//		} else if (Myapp.thresold.equals("Continous")) {
+//
+//			lblbptthresold.setText(Myapp.thresold+" : 5000");
+//
+//		}
+//		
+//		
+//	
+//		lbltfactore.setText(""+Myapp.tfactore);
+//		lblfluid.setText(Myapp.fluidname+" : "+Myapp.fluidvalue+" mN/m");
+//		lblbptacc.setText(Myapp.accbpt+" %");
+//		lbltestpressure.setText(Myapp.endpress+" psi");
+//		
 		btnclose.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override

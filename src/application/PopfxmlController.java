@@ -38,6 +38,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import junit.extensions.TestDecorator;
 
 public class PopfxmlController implements Initializable {
 
@@ -46,17 +47,12 @@ public class PopfxmlController implements Initializable {
 	
 	int valbpt,valtestacc,valdatas;
 
-	@FXML
-	TextField pendp1, pendp2;
 
 	@FXML
 	Label  pendp,pthresold, pfluid;
 
 	@FXML
-	TextField psid,lotno,ptfact,pbptacc,txtdatastability,pporoacc;
-	
-	@FXML
-	ComboBox<String> cmbtesttrial,cmbfluid,cmbbptthresold;
+	TextField psid,lotno,txtthickness,txttestdata,txtdatainterval;
 	
 	@FXML
 	Button starttest, btncancel;
@@ -67,12 +63,23 @@ public class PopfxmlController implements Initializable {
 	@FXML
 	RadioButton bwd, dbw, bdw,datas1,datas2,datas3;
 
-	static String selectedrad6 = "",selectedrad7 = "";
+	static String selectedradtm = "",selectedrad6 = "",selectedrad7 = "";
 
-	static ToggleGroup tgb6,tgb7;
+	static ToggleGroup tgb6,tgb7,tgbtm;
+	
 
-    @FXML
-    private Button testaccbtnsub,testaccbtnplus,datasbtnsub,datasbtnplus,bptbtnsub,bptbtnplus;
+
+	    @FXML
+	    private RadioButton rbupright;
+
+	    @FXML
+	    private RadioButton rbinverted;
+
+	    @FXML
+	    private RadioButton rbwater;
+
+	    @FXML
+	    private RadioButton rbdesiccant;
 
 	
 	
@@ -80,6 +87,8 @@ public class PopfxmlController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		System.out.println("I am in Quick test");
+		setTesType();
+		setTestMethod();
 		setAllThings();
 		
 		setTestSequence();
@@ -120,6 +129,77 @@ public class PopfxmlController implements Initializable {
 		
 	}
 	
+	void setTesType() {
+
+		tgb6 = new ToggleGroup();
+
+		rbupright.setToggleGroup(tgb6);
+		rbupright.setUserData("1");
+		rbinverted.setToggleGroup(tgb6);
+		rbinverted.setUserData("2");
+	
+		selectedrad6 = "1";
+		Myapp.testsequence = "Upright";
+
+		tgb6.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> arg0,
+					Toggle arg1, Toggle arg2) {
+
+				selectedrad6 = arg2.getUserData().toString();
+
+				if (selectedrad6.equals("1")) {
+					Myapp.testsequence = "Upright";
+				}
+
+				 else {
+					Myapp.testsequence = "Inverted";
+				}
+
+			}
+		});
+
+	}
+
+	
+		void setTestMethod() {
+
+		tgbtm = new ToggleGroup();
+
+		
+		rbwater.setToggleGroup(tgbtm);
+		rbwater.setUserData("1");
+		rbdesiccant.setToggleGroup(tgbtm);
+		rbdesiccant.setUserData("2");
+		
+
+		selectedradtm = "1";
+		Myapp.testmethod = "Water";
+
+		tgbtm.selectedToggleProperty().addListener(
+				new ChangeListener<Toggle>() {
+
+					@Override
+					public void changed(ObservableValue<? extends Toggle> arg0,
+							Toggle arg1, Toggle arg2) {
+
+						selectedradtm = arg2.getUserData().toString();
+
+						if (selectedradtm.equals("1")) {
+							Myapp.testmethod = "Water";
+						}
+
+						 else {
+							Myapp.testmethod = "Desiccant";
+						}
+
+					}
+				});
+
+	}
+
+	
 
 	void addShortCut() {
 
@@ -140,114 +220,76 @@ public class PopfxmlController implements Initializable {
 		Database d = new Database();
 
 		List<List<String>> alldata = d
-				.getData("select * from projects where useremailid='"
+				.getData("select * from Nprojects where useremailid='"
 						+ Myapp.email + "' and project='" + projectname + "' ");
 
-		String classificati = "" + alldata.get(0).get(3);
-
-		// System.out.println("Claidifcation"+alldata.get(0).get(3));
-		String splate = "" + alldata.get(0).get(11);
-	
-		// Industry name //
 		psid.setText(alldata.get(0).get(0));
-		ptfact.setText(alldata.get(0).get(10));
-		pendp1.setText(alldata.get(0).get(14));
-		pbptacc.setText(alldata.get(0).get(15));
+		lotno.setText(alldata.get(0).get(2));
+		txtthickness.setText(alldata.get(0).get(4));
 		
-		
-		pporoacc.setText(alldata.get(0).get(16));
-		lotno.setText(alldata.get(0).get(17));
-		pendp2.setText(alldata.get(0).get(18));
-		
-			/*New Chnages 01-07-2019*/
-		
-		cmbbptthresold.setValue(alldata.get(0).get(5));
-		cmbfluid.setValue(alldata.get(0).get(6));
-		cmbtesttrial.setValue(alldata.get(0).get(9));
-		
-		String accstability= (alldata.get(0).get(21));
-		
-		String stabilitytype = "" + alldata.get(0).get(20);
-		Myapp.accstability = (accstability);
+		txttestdata.setText(alldata.get(0).get(9));		
+		txtdatainterval.setText(alldata.get(0).get(10));
 
-		// Stability Type
-
-		if (stabilitytype.equals("1")) {
-			datas1.selectedProperty().set(true);
-			Myapp.stabilitytype = "1";
-			txtdatastability.setText(accstability);
+		String testtype = "" + alldata.get(0).get(11);
+		String testmethod = "" + alldata.get(0).get(12);
+		
+		
+		/*Test Type*/
+		if (testtype.equals("Upright")) {
+			rbupright.selectedProperty().set(true);
+			Myapp.testtype = "Upright";
 
 		}
-
-		else if (stabilitytype.equals("2")) {
-			datas2.selectedProperty().set(true);
-			Myapp.stabilitytype = "2";
-			txtdatastability.setText(accstability);
-		}
-
 		else {
-			datas3.selectedProperty().set(true);
-			Myapp.stabilitytype = "3";
-			txtdatastability.setText(accstability);
+			rbinverted.selectedProperty().set(true);
+			Myapp.testtype = "Inverted";
+
 		}
+		
+		/*Test Method*/
+		if (testmethod.equals("Water")) {
+			rbwater.selectedProperty().set(true);
+			Myapp.testmethod = "Water";
 
+		}
+		else {
+			rbdesiccant.selectedProperty().set(true);
+			Myapp.testmethod = "Desiccant";
 
-		Myapp.thresold = alldata.get(0).get(5);
+		}
+		
+		
+		
+		/*New changes 01-07-2019*/
+		
+		
 		Myapp.sampleid = alldata.get(0).get(0);
-		Myapp.testtrial = alldata.get(0).get(9);
-		Myapp.tfactore = alldata.get(0).get(10);
-		Myapp.indtype = alldata.get(0).get(1);
-		Myapp.materialapp = alldata.get(0).get(2);
-
-		String[] s = alldata.get(0).get(6).toString().split(":");
-		Myapp.fluidname = "" + s[0];
-		Myapp.fluidvalue = "" + s[1];
-		Myapp.splate = splate;
-		Myapp.thikness = alldata.get(0).get(12);
-		Myapp.materialtype = alldata.get(0).get(13);
-		Myapp.endpress = alldata.get(0).get(14);
-		Myapp.accbpt = (alldata.get(0).get(15));
-		Myapp.accstep= (alldata.get(0).get(16));
-		Myapp.lotnumber = (alldata.get(0).get(17));
-		Myapp.startpress = (alldata.get(0).get(18));
+		Myapp.lotnumber = alldata.get(0).get(2);
+		Myapp.thikness = alldata.get(0).get(3);
+		Myapp.indtype = alldata.get(0).get(4);
+		Myapp.materialtype = alldata.get(0).get(5);
+		Myapp.classification = alldata.get(0).get(6);
+		Myapp.materialapp = alldata.get(0).get(7);
+		Myapp.splate = alldata.get(0).get(8);
 		
-		Myapp.accstability = (alldata.get(0).get(21));
-
-		valbpt = (int) (Double.parseDouble(Myapp.accbpt));
-		valtestacc = (int) (Double.parseDouble(Myapp.accstep));
-		valdatas = (int) (Double.parseDouble(Myapp.accstability));
+		Myapp.testdata = alldata.get(0).get(9);
+		Myapp.dataint = alldata.get(0).get(10);
+		Myapp.testtype = alldata.get(0).get(11);
+		Myapp.testmethod= alldata.get(0).get(12);
+	
 		
 		
 		
-		String testsequance = "" + alldata.get(0).get(19);
-		Myapp.testsequence = testsequance;
-//		System.out.println("Test Seu....................." + testsequance);
-
-		if (testsequance.equals("WUPDUP")) {
-			bwd.selectedProperty().set(true);
-			Myapp.testsequence = "WUPDUP";
-
-		}
-
-		else if (testsequance.equals("DUPWUP")) {
-			dbw.selectedProperty().set(true);
-			Myapp.testsequence = "DUPWUP";
-
-		}
-
-		else {
-			bdw.selectedProperty().set(true);
-			Myapp.testsequence = "WUPDCALCULATED";
-
-		}
-
+		
+		
+		
 	}
 
 	void LoadProject() {
 
 		Database d = new Database();
 		List<List<String>> info = d
-				.getData("select project from projects where useremailid='"
+				.getData("select project from Nprojects where useremailid='"
 						+ Myapp.email + "'");
 		try {
 			cmboproject.getItems().add("Last Project");
@@ -325,36 +367,13 @@ public class PopfxmlController implements Initializable {
 	}
 	void setAllThings()
 	{
-		cmbtesttrial.setItems(FXCollections.observableArrayList("1", "2", "3", "4",
-				"5", "6", "7", "8", "9", "10"));
-		
-		cmbbptthresold.setItems(FXCollections.observableArrayList("First bubble","Moderate","Continous"));
-
-		getFluiddata();
 		
 		setDataStability();
 		
-		setAccuracybtn();
 		
 	}
 	
-	void getFluiddata() {
-		Database d = new Database();
-		List<List<String>> info = d.getData("select * from fluiddata");
-
-		try {
-
-		//	cmbfluid.getItems().add("Add Fluid");
-			for (int i = 0; i < info.size(); i++) {
-				cmbfluid.getItems().add(
-						info.get(i).get(0) + ":" + info.get(i).get(1));
-
-			}
-		} catch (Exception e) {
-			Exception ss;
-		}
-
-	}
+	
 
 	void setDataStability() {
 
@@ -368,132 +387,10 @@ public class PopfxmlController implements Initializable {
 		datas3.setUserData("3");
 
 		selectedrad7 = "1";
-		Myapp.stabilitytype = "1";
 
-		tgb7.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+	
+	
 
-			@Override
-			public void changed(ObservableValue<? extends Toggle> arg0,
-					Toggle arg1, Toggle arg2) {
-				if (arg2 == null)
-					arg1.setSelected(true);
-				selectedrad7 = arg2.getUserData().toString();
-
-				if (selectedrad7.equals("1")) {
-					Myapp.stabilitytype = "1";
-				}
-
-				else if (selectedrad7.equals("2")) {
-					Myapp.stabilitytype = "2";
-				} else {
-					Myapp.stabilitytype = "3";
-				}
-			}
-		});
-
-	}
-
-	void setAccuracybtn() {
-		bptbtnplus.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valbpt != 100) {
-			
-					valbpt = valbpt + 5;
-					pbptacc.setText("" + valbpt);
-					Myapp.accbpt = ""+valbpt;
-					
-
-				}
-
-			}
-		});
-
-		bptbtnsub.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valbpt != 10) {
-					valbpt = valbpt - 5;
-
-					pbptacc.setText(""+valbpt);
-					Myapp.accbpt = ""+valbpt;
-
-				}
-				
-			}
-		});
-
-/*Test Acc*/
-		testaccbtnplus.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valtestacc != 100) {
-			
-					valtestacc = valtestacc + 10;
-					pporoacc.setText("" + valtestacc);
-					Myapp.accstep = ""+valtestacc;
-					
-
-				}
-
-			}
-		});
-
-		testaccbtnsub.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valtestacc != 10) {
-					valtestacc = valtestacc - 10;
-
-					pporoacc.setText(""+valtestacc);
-					Myapp.accstep = ""+valtestacc;
-
-				}
-				
-			}
-		});
-
-		/*Data stability*/
-		datasbtnplus.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valdatas != 100) {
-			
-					valdatas = valdatas + 10;
-					txtdatastability.setText("" + valdatas);
-					Myapp.accstability = ""+valdatas;
-					
-
-				}
-
-			}
-		});
-
-		datasbtnsub.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// TODO Auto-generated method stub
-				if (valdatas != 10) {
-					valdatas = valdatas - 10;
-
-					txtdatastability.setText(""+valdatas);
-					Myapp.accstability = ""+valdatas;
-
-				}
-				
-			}
-		});
 
 		
 		
@@ -506,97 +403,64 @@ public class PopfxmlController implements Initializable {
 		
 		Database d1 = new Database();
 		List<List<String>> alldata = d1
-				.getData("select * from lastprojects where lid='" + Myapp.email
+				.getData("select * from lastNprojects where lid='" + Myapp.email
 						+ "' ");
 
 		
 		psid.setText(alldata.get(0).get(1));
-		ptfact.setText(alldata.get(0).get(8));
-		pendp1.setText(alldata.get(0).get(14));
-		pbptacc.setText(alldata.get(0).get(15));
-		pporoacc.setText(alldata.get(0).get(16));
-		lotno.setText(alldata.get(0).get(17));
-		pendp2.setText(alldata.get(0).get(18));
+		lotno.setText(alldata.get(0).get(2));
+		txtthickness.setText(alldata.get(0).get(3));
+		
+		txttestdata.setText(alldata.get(0).get(9));		
+		txtdatainterval.setText(alldata.get(0).get(10));
+
+		String testtype = "" + alldata.get(0).get(11);
+		String testmethod = "" + alldata.get(0).get(12);
+		
+		
+		/*Test Type*/
+		if (testtype.equals("Upright")) {
+			rbupright.selectedProperty().set(true);
+			Myapp.testtype = "Upright";
+
+		}
+		else {
+			rbinverted.selectedProperty().set(true);
+			Myapp.testtype = "Inverted";
+
+		}
+		
+		/*Test Method*/
+		if (testmethod.equals("Water")) {
+			rbwater.selectedProperty().set(true);
+			Myapp.testmethod = "Water";
+
+		}
+		else {
+			rbdesiccant.selectedProperty().set(true);
+			Myapp.testmethod = "Desiccant";
+
+		}
+		
 		
 		
 		/*New changes 01-07-2019*/
 		
-		cmbbptthresold.setValue(alldata.get(0).get(6));
-		cmbfluid.setValue(alldata.get(0).get(7));
-		cmbtesttrial.setValue(alldata.get(0).get(9));
 		
-		Myapp.thresold = alldata.get(0).get(6);
 		Myapp.sampleid = alldata.get(0).get(1);
-		Myapp.testtrial = (alldata.get(0).get(9));
-		Myapp.tfactore = (alldata.get(0).get(8));
-		Myapp.indtype = alldata.get(0).get(2);
-		Myapp.materialapp = alldata.get(0).get(3);
-
-		String[] s = alldata.get(0).get(7).toString().split(":");
-		Myapp.fluidname = "" + s[0];
-		Myapp.fluidvalue = "" + s[1];
-		Myapp.splate = alldata.get(0).get(11);
-		Myapp.thikness = alldata.get(0).get(12);
-		Myapp.materialtype = alldata.get(0).get(13);
-		Myapp.endpress = (alldata.get(0).get(14));
-		Myapp.accbpt = (alldata.get(0).get(15));
-		Myapp.accstep = (alldata.get(0).get(16));
-		Myapp.lotnumber = (alldata.get(0).get(17));
-		Myapp.startpress = (alldata.get(0).get(18));
-		String testsequance = "" + alldata.get(0).get(19);
-
-		Myapp.crossection = (alldata.get(0).get(5));
+		Myapp.lotnumber = alldata.get(0).get(2);
+		Myapp.thikness = alldata.get(0).get(3);
+		Myapp.indtype = alldata.get(0).get(4);
+		Myapp.materialtype = alldata.get(0).get(5);
+		Myapp.classification = alldata.get(0).get(6);
+		Myapp.materialapp = alldata.get(0).get(7);
+		Myapp.splate = alldata.get(0).get(8);
 		
-
-
-		String stabilitytype = "" + alldata.get(0).get(20);
-		String accstability= (alldata.get(0).get(21));
-		Myapp.accstability =""+ accstability;
-
-		valbpt = (int) (Double.parseDouble(Myapp.accbpt));
-		valtestacc = (int) (Double.parseDouble(Myapp.accstep));
-		valdatas = (int) (Double.parseDouble(Myapp.accstability));
-		
-		
-		if (testsequance.equals("WUPDUP")) {
-			bwd.selectedProperty().set(true);
-			Myapp.testsequence = "WUPDUP";
-
-		}
-
-		else if (testsequance.equals("DUPWUP")) {
-			dbw.selectedProperty().set(true);
-			Myapp.testsequence = "DUPWUP";
-
-		}
-
-		else {
-			bdw.selectedProperty().set(true);
-			Myapp.testsequence = "WUPDCALCULATED";
-
-		}
-
-
-		// Stability Type
-
-				if (stabilitytype.equals("1")) {
-					datas1.selectedProperty().set(true);
-					Myapp.stabilitytype = "1";
-					txtdatastability.setText(accstability);
-
-				}
-
-				else if (stabilitytype.equals("2")) {
-					datas2.selectedProperty().set(true);
-					Myapp.stabilitytype = "2";
-					txtdatastability.setText(accstability);
-				}
-
-				else {
-					datas3.selectedProperty().set(true);
-					Myapp.stabilitytype = "3";
-					txtdatastability.setText(accstability);
-				}
+		Myapp.testdata = alldata.get(0).get(9);
+		Myapp.dataint = alldata.get(0).get(10);
+		Myapp.testtype = alldata.get(0).get(11);
+		Myapp.testmethod= alldata.get(0).get(12);
+	
 		
 		
 	}
@@ -604,14 +468,13 @@ public class PopfxmlController implements Initializable {
 	void teststart() {
 
 		
-		Myapp.endpress = pendp1.getText();
-		Myapp.lotnumber = lotno.getText();
-		Myapp.startpress = pendp2.getText();
-		 Myapp.accbpt = pbptacc.getText();
-		 Myapp.accstep = pporoacc.getText();
-		 Myapp.accstability = txtdatastability.getText();
-		 Myapp.sampleid = psid.getText();
-		 Myapp.thresold=cmbbptthresold.getSelectionModel().getSelectedItem();
+			 Myapp.sampleid = psid.getText();
+			 Myapp.lotnumber = lotno.getText();
+			 Myapp.thikness = txtthickness.getText();
+				
+				Myapp.testdata = txttestdata.getText();
+				Myapp.dataint = txtdatainterval.getText();
+
 			
 		
 		 
@@ -737,41 +600,7 @@ public class PopfxmlController implements Initializable {
 			}
 		});
 		
-		ptfact.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				// TODO Auto-generated method stub
-				setVitual(ptfact, null, "Tortuosity Factor", null);
-
-			}
-		});
-		
-		
-		
-		
-		pendp2.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				// TODO Auto-generated method stub
-				setVitual(pendp2, null, "Start Pressure", null);
-
-			}
-		});
-
-		pendp1.setOnMouseClicked(new EventHandler<Event>() {
-
-			@Override
-			public void handle(Event event) {
-				// TODO Auto-generated method stub
-				setVitual(pendp1, null,  "End Pressure",null);
-			}
-		});
-		
-		
-	
-		lotno.setOnMouseClicked(new EventHandler<Event>() {
+			lotno.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event event) {

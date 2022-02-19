@@ -45,7 +45,7 @@ public class NConfigurePageController implements Initializable {
 	AnchorPane root;
 	
 	@FXML
-    JFXToggleButton pg1,pg2,fm1,fm2,ab1,ab2,re1,re2,tgbkeyboard,curvefittgb,valvecpre,valvecflow;
+    JFXToggleButton pg1,pg2,fm1,fm2,re1,re2,tgbkeyboard,valvecflow;
 	
 	private Notification.Notifier notifier;
 	
@@ -56,7 +56,7 @@ public class NConfigurePageController implements Initializable {
     ImageView imgdownarrow,imgback;
     
     @FXML
-    private TextField ppg1,ppg2,pfm1,pfm2,ppr,pfc,txtthfirst,txtthmoderate,txtthcontinous;
+    private TextField pfm1,pfm2,txtdataint,txttesttype,txttestmethod;
 
     @FXML
     private Button applypro;
@@ -71,7 +71,7 @@ public class NConfigurePageController implements Initializable {
     ComboBox cmbcom;
     
     @FXML
-    ComboBox<String> cmbpg1,cmbpg2,cmbpress, cmbflow, cmblenghth, cmbroundoff;
+    ComboBox<String> cmbpress;
 
 	String propg1="low",profm1="low",propg2="low",profm2="low";
 	
@@ -87,7 +87,7 @@ public class NConfigurePageController implements Initializable {
 	static String selectedrad4 = "",selectedrad5 = "";
 	
 	@FXML
-    RadioButton pressregulator,flowcontrolcalibr,troubleshot,leaktest,boardcali,manual,autometed;
+    RadioButton pressregulator;
 
    MyDialoug mydia;
     
@@ -135,7 +135,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 	
 		setPortList();
 		setCalibrationType();
-		setChamerType();
 		setValveselection();
 		selectelowhigh();
 		
@@ -143,15 +142,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 		DataStore.getthfirstbp();
 		// cmbcom.getItems().addAll("Test", "Test2", "Test3");
 		cmbpress.getItems().addAll("psi", "bar", "torr");
-		cmbflow.getItems().addAll("sccm", "sccs","cfm");
-		cmblenghth.getItems().addAll("nm", "mm");
-		cmbroundoff.getItems().addAll("1", "2", "3","4","5");
 		
-		
-		/*Test Config Unite and Pg Absolute or relative*/
-		
-		cmbpg1.getItems().addAll("psi", "bar", "torr");
-		cmbpg2.getItems().addAll("psi", "bar", "torr");
 		
 			 setkeyboardmode();
 		
@@ -201,23 +192,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 				
 				apllaypro();
 			
-				btncalibration.setOnAction(new EventHandler<ActionEvent>() {
-					
-					@Override
-					public void handle(ActionEvent event) {
-						
-						if (leaktest.isSelected()) {
-							Openscreen.open("/calibration/leaktest_graph.fxml");
-							
-						}
-						else if (flowcontrolcalibr.isSelected()) {
-							Openscreen.open("/calibration/flowcalibration.fxml");
-							
-						}
-
-						
-					}
-				});
+		
 				
 				
 				testconfig.setOnAction(new EventHandler<ActionEvent>() {
@@ -228,9 +203,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						setValveselection();
 						
 						
-						DataStore.thfirtbp=txtthfirst.getText();
-						DataStore.thmoderat=txtthmoderate.getText();
-						DataStore.thcontinous=txtthcontinous.getText();
 						
 						
 						
@@ -310,69 +282,14 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						
 						
 
-								//Pro in absolute and relative in pg1
 								
-										
-											if(ab1.isSelected())
-											{
-												
-												pp1scaletype="relative";
-											}
-											
-											else 
-											{
-												pp1scaletype="absolute";
-											}
-									
-
-								
-									//pro in absolute and relative in pg2
-																							
-												if(ab2.isSelected())
-												{
-
-													pp2scaletype="relative";
-												}
-												
-												else 
-												{
-
-											
-													pp2scaletype="absolute";
-												}
 
 				}
 				
 				void setValveselection()
 				{
 
-					//curve fit
 					
-					if(curvefittgb.isSelected())
-					{
-
-						curvefit="on";
-					}
-					
-					else 
-					{
-
-				
-						curvefit="off";
-					}
-
-					/*Cross over*/
-					if(valvecpre.isSelected())
-					{
-						crospres="1";
-					}
-					
-					else 
-					{
-						crospres="0";
-
-					}
-
 					
 					if(valvecflow.isSelected())
 					{
@@ -410,12 +327,8 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 					String upress, uflow, roundoff, ulenghth;
 
 					upress = cmbpress.getSelectionModel().getSelectedItem();
-					uflow = cmbflow.getSelectionModel().getSelectedItem();
-					ulenghth = cmblenghth.getSelectionModel().getSelectedItem();
-					roundoff = cmbroundoff.getSelectionModel().getSelectedItem();
-
-					String unites = "update unite set pressure='" + upress + "',  flow='" + uflow + "',  length='" + ulenghth
-							+ "',  roundoff='" + roundoff + "'";
+					
+					String unites = "update unite set pressure='" + upress + "'";
 
 					Database dd = new Database();
 
@@ -429,27 +342,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 				
 				
 
-				void Testunitesave() {
-
-					String pg1s, pg2s;
-
-					pg1s = cmbpg1.getSelectionModel().getSelectedItem();
-					pg2s = cmbpg2.getSelectionModel().getSelectedItem();
-					
-
-					String testunites = "update testunite set pg1='" + pg1s + "',  pg2='" + pg2s + "'";
-
-					Database dd = new Database();
-
-					if (dd.Insert(testunites)) {
-						
-
-						//Toast.makeText(Main.mainstage, "Successfully Saved Selected Test Unites", 1000, 200, 200);
-
-					}
-
-				}
-
+				
 				
 				
 		void comsave()
@@ -520,7 +413,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 					{
 					
 					}*/
-					String sql = "update configdata set pg1='"+ppg1.getText()+"', pg2='"+ppg2.getText()+"',fm1='"+pfm1.getText()+"',fm2='"+pfm2.getText()+"',pr='"+ppr.getText()+"',fc='"+pfc.getText()+"',pg1type='"+propg1+"',pg2type='"+propg2+"',fc1type='"+profm1+"',fc2type='"+profm2+"',ch='"+""+"',p1scaletype='"+pp1scaletype+"',p2scaletype='"+pp2scaletype+"'where type='"+"pro"+"'"; 
+					String sql = "update configdata set fm1='"+pfm1.getText()+"',fm2='"+pfm2.getText()+"',pg1type='"+propg1+"',pg2type='"+propg2+"',fc1type='"+profm1+"',fc2type='"+profm2+"',ch='"+""+"',p1scaletype='"+pp1scaletype+"',p2scaletype='"+pp2scaletype+"'where type='"+"pro"+"'"; 
 
 					
 					if(db.Insert(sql))
@@ -534,8 +427,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 
 				
 					
-				
-					Testunitesave();
 					
 				}
 			});
@@ -550,8 +441,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 		
 
 				
-			cmbpg1.setValue(pg1);
-			cmbpg2.setValue(pg2);
 			
 		
 		
@@ -560,14 +449,9 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 		void setLastunite() {
 			List<List<String>> ll = db.getData("select * from unite");
 			String upres = (ll.get(0).get(0));
-			String uflow = (ll.get(0).get(1));
-			String ulength = (ll.get(0).get(2));
-			String uthicknes = (ll.get(0).get(3));
-
+		
 			cmbpress.setValue(upres);
-			cmbflow.setValue(uflow);
-			cmblenghth.setValue(ulength);
-			cmbroundoff.setValue(uthicknes);
+		
 
 		}
 
@@ -584,12 +468,8 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 				String type =(ll.get(0).get(0));
 				
 				System.out.println("type"+type);
-					ppg1.setText(ll.get(0).get(1));
-					ppg2.setText(ll.get(0).get(2));
 					pfm1.setText(ll.get(0).get(3));
 					pfm2.setText(ll.get(0).get(4));
-					ppr.setText(ll.get(0).get(5));
-					pfc.setText(ll.get(0).get(6));
 			//		chamber.setValue(ll.get(0).get(7));
 				
 					String type1p =(ll.get(0).get(8));
@@ -600,9 +480,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 					String pscaletype5p =(ll.get(0).get(13));
 					String chambertype =(ll.get(0).get(15));
 					String curvefittype =(ll.get(0).get(16));
-					txtthfirst.setText(ll.get(0).get(17));
-					txtthmoderate.setText(ll.get(0).get(18));
-					txtthcontinous.setText(ll.get(0).get(19));
 					
 					if(type1p.equals("low"))
 					{
@@ -646,60 +523,16 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						profm2="high";
 					}
 				
-						//absolute and relative pscaletype
 					
-					if (pscaletype4p.equals("relative")) {
-						pp1scaletype = "relative";
-						ab1.setSelected(true);
-					} else {
-						pp1scaletype = "absolute";
-					}
-
-					if (pscaletype5p.equals("relative")) {
-						ab2.setSelected(true);
-						pp2scaletype = "relative";
-					} else {
-						pp2scaletype = "absolute";
-					}
 					
 				
 					
 					
-					/* chamber */
-					if(chambertype.equals("Manual"))
-					{
-						Myapp.chambertype="Manual";
-						manual.selectedProperty().set(true);
+					
+					
+					
+					
 				
-					}
-					else
-					{
-						Myapp.chambertype="Autometed";
-						autometed.selectedProperty().set(true);
-					}
-				/*Curve fit*/
-					if(curvefittype.equals("on"))
-					{
-						curvefittgb.setSelected(true);	
-						curvefit="on";
-					}
-					else
-					{
-						curvefittgb.setSelected(false);	
-						curvefit="off";
-					}
-					
-					
-					List<String> data=DataStore.getAdmin_screen1();
-					
-					if(data.get(8).equals("1"))
-					{
-						valvecpre.setSelected(true);
-					}
-					if(data.get(9).equals("1"))
-					{
-						valvecflow.setSelected(true);
-					}
 					
 				}
 				catch(Exception e)
@@ -735,14 +568,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 
 			pressregulator.setToggleGroup(tgb5);
 			pressregulator.setUserData("1");
-			flowcontrolcalibr.setToggleGroup(tgb5);
-			flowcontrolcalibr.setUserData("2");
-			troubleshot.setToggleGroup(tgb5);
-			troubleshot.setUserData("3");
-			leaktest.setToggleGroup(tgb5);
-			leaktest.setUserData("4");
-			boardcali.setToggleGroup(tgb5);
-			boardcali.setUserData("5");
+			
 
 			selectedrad4 = "1";
 
@@ -785,43 +611,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 
 	}
 
-		void setChamerType() {
-
-			tgb6 = new ToggleGroup();
-
-			manual.setToggleGroup(tgb6);
-			manual.setUserData("1");
-			autometed.setToggleGroup(tgb6);
-			autometed.setUserData("2");
-		
-
-			selectedrad5 = "1";
-			Myapp.testsequence = "Manual";
 	
-			tgb6.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-
-				@Override
-				public void changed(ObservableValue<? extends Toggle> arg0,
-						Toggle arg1, Toggle arg2) {
-					if (arg2 == null)
-						arg1.setSelected(true);
-					selectedrad5 = arg2.getUserData().toString();
-
-					if (selectedrad5.equals("1")) {
-						
-						Myapp.chambertype="Manual";
-						
-					}
-					else {
-
-						Myapp.chambertype="Autometed";
-						
-					}
-				}
-
-			}
-		);
-
-	}
 
 }

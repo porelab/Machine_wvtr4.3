@@ -71,6 +71,7 @@ public class NLogoutpopupController implements Initializable {
 		   String updatequry="update userinfo set login=' ' where uid='"+Myapp.uid+"'";
 			if(db.Insert(updatequry))
 			{
+				 Myapp.isadmin = false;
 		   FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login/loginn.fxml"));
 			try {
 			Pane cmdPane = (Pane) fxmlLoader.load();

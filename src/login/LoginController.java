@@ -86,8 +86,17 @@ DataStore.isconfigure.set(true);
 				System.out.println("Login call");
 				if(!txtemail.getText().trim().equals("")&& !txtpass.getText().trim().equals(""))
 				{
+					
+					 if (txtemail.getText().trim().equals("M19") && txtpass.getText().trim().equals("M19"))
+						{
+						 Myapp.isadmin = true;
+
+						 Openscreen.open("/application/first.fxml");
+						 
+						}
 						
-				if(!txtemail.getText().trim().equals("M19"))
+						
+					 else if(!txtemail.getText().trim().equals("guest"))
 				{
 				
 					Toast.makeText(Main.mainstage, "Please eneter Conrrect User id.", 3000, 500, 500);
@@ -96,7 +105,7 @@ DataStore.isconfigure.set(true);
 				}
 				else
 				{
-					if(!txtpass.getText().trim().equals("M19"))
+					if(!txtpass.getText().trim().equals("guest"))
 					{
 						System.out.println("Wrong pass");
 						Toast.makeText(Main.mainstage, "Please eneter Conrrect password.", 3000, 500, 500);
@@ -110,18 +119,7 @@ DataStore.isconfigure.set(true);
 
 						System.out.println("Login sucsses");
 						
-						Myapp.isadmin = true;
 						
-						if (Myapp.isadmin == true)
-						{
-						
-//							NFirstController.btnadminA.setVisible(false);
-						//	NFirstController.btnadminlogoutA.setVisible(true);
-	//							
-						}
-						
-						
-						System.out.println("Is Admin"+Myapp.isadmin);
 						
 						
 							 Openscreen.open("/application/first.fxml");
@@ -130,7 +128,9 @@ DataStore.isconfigure.set(true);
 					   
 				}
 				
+				
 				}
+				
 				else {
 					Toast.makeText(Main.mainstage, "Fill up the required details.", 3000, 500, 500);
 				}
