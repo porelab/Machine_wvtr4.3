@@ -56,13 +56,15 @@ public class NConfigurePageController implements Initializable {
     ImageView imgdownarrow,imgback;
     
     @FXML
-    private TextField pfm1,pfm2,txtdataint,txttesttype,txttestmethod;
+    private TextField pfm1,pfm2,txtdataint,txtstarttempsystem,txtendttempsystem,txtendthumisystem,txtstartthumisystem,txtstartthumitestconfi,txtendthumitestconfi,txtendttemptestconfi,txtstartttemptestconfi,txttempsensor,txthumiditysensor;
 
     @FXML
     private Button applypro;
 
     @FXML
     private JFXToggleButton tgb215,tgb2111;
+    
+    static ToggleGroup tgbtype,tgbmethod;
 
     @FXML
     private Button btndefaultsetting,comsave,back,btncalibration,testconfig,btnprefrance;
@@ -77,7 +79,7 @@ public class NConfigurePageController implements Initializable {
 	
 	String pp1scaletype="absolute",pp2scaletype="absolute",curvefit="off",crospres="0",crosflov="0";
 
-	static String selectedrad="",Por;
+	static String selectedrad="",Por,selectedradtesttype,selectedradtestmethod;
 	
 	public static boolean bolkey = false;
 	
@@ -87,7 +89,7 @@ public class NConfigurePageController implements Initializable {
 	static String selectedrad4 = "",selectedrad5 = "";
 	
 	@FXML
-    RadioButton pressregulator;
+    RadioButton pressregulator,rbupright,rbinverted,rbwater,rbdesiccant;
 
    MyDialoug mydia;
     
@@ -127,7 +129,9 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 		});
 		
 			addShortCut();
-	     setMainBtns();
+	    setTestmethod();
+	    setTesttype();
+			setMainBtns();
 	     setulastdata();
 	     setTestLastunite();
 			setLastunite();
@@ -141,7 +145,7 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 	
 		DataStore.getthfirstbp();
 		// cmbcom.getItems().addAll("Test", "Test2", "Test3");
-		cmbpress.getItems().addAll("psi", "bar", "torr");
+//		cmbpress.getItems().addAll("psi", "bar", "torr");
 		
 		
 			 setkeyboardmode();
@@ -163,13 +167,13 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 	
 			void setBtnClicks() {
 				
-				/* selected unite save in database */
+				/* selected unite save in database 
 				btnprefrance.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
 					public void handle(ActionEvent arg0) {
 						unitesave();
 					}
-				});
+				});*/
 
 		
 				back.setOnAction(new EventHandler<ActionEvent>() {
@@ -206,18 +210,17 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 						
 						
 						
-						String sql = "update configdata set chambertype='"+Myapp.chambertype+"',curvefittgb='"+curvefit+"' where type='"+"pro"+"'"; 
-						String sql1 = "update admin_screen1 set pc='"+crospres+"',fc='"+crosflov+"'"; 
-						String sqlthresold = "update configdata set thfirst='"+DataStore.thfirtbp+"',thmoderate='"+DataStore.thmoderat+"',thcontinous='"+DataStore.thcontinous+"'"; 
+						String sql = "update Ntestconfi set stemp='"+txtstartttemptestconfi.getText()+"',etemp='"+txtendttemptestconfi.getText()+"',shumi='"+txtstartthumitestconfi.getText()+"',ehumi='"+txtendthumitestconfi.getText()+"',dataint='"+txtdataint.getText()+"',testtype='"+Myapp.testtype+"',testmethod='"+Myapp.testmethod+"'"; 
 						
 						
-						if(db.Insert(sql) && db.Insert(sql1) && db.Insert(sqlthresold))
+						if(db.Insert(sql))
 						{
 							 Toast.makeText(Main.mainstage, "Successfully Save Configuration Data..", 1000, 200, 200);
 
 						}
 						else {
-				//			System.out.println("Configration Data save d Eroorr.....");
+						System.out.println("Configration Data save d Eroorr.....");
+						
 						}
 						
 						
@@ -401,7 +404,6 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					
 					
-					System.out.println("applypro");
 		/*			
 					String type="Pro";
 				
@@ -413,12 +415,14 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 					{
 					
 					}*/
-					String sql = "update configdata set fm1='"+pfm1.getText()+"',fm2='"+pfm2.getText()+"',pg1type='"+propg1+"',pg2type='"+propg2+"',fc1type='"+profm1+"',fc2type='"+profm2+"',ch='"+""+"',p1scaletype='"+pp1scaletype+"',p2scaletype='"+pp2scaletype+"'where type='"+"pro"+"'"; 
+					String sql = "update Nsystem set stemp='"+txtstarttempsystem.getText()+"',etemp='"+txtendttempsystem.getText()+"',shumi='"+txtstartthumisystem.getText()+"',ehumi='"+txtendthumisystem.getText()+"',tempsensor='"+txttempsensor.getText()+"',humisensor='"+txthumiditysensor.getText()+"'"; 
 
 					
 					if(db.Insert(sql))
 					{
 						 Toast.makeText(Main.mainstage, "Successfully Apply", 1000, 200, 200);
+							System.out.println("applypro------>"+sql);
+							
 
 					}
 					else {
@@ -450,11 +454,92 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 			List<List<String>> ll = db.getData("select * from unite");
 			String upres = (ll.get(0).get(0));
 		
-			cmbpress.setValue(upres);
+		//	cmbpress.setValue(upres);
 		
 
 		}
 
+		/*Test Type*/
+		
+		void setTesttype() {
+
+			tgbtype = new ToggleGroup();
+
+			rbupright.setToggleGroup(tgbtype);
+			rbupright.setUserData("1");
+			rbinverted.setToggleGroup(tgbtype);
+			rbinverted.setUserData("2");
+			
+			selectedradtesttype  = "1";
+			Myapp.testtype = "Upright";
+
+			tgbtype.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> arg0,
+						Toggle arg1, Toggle arg2) {
+					if (arg2 == null)
+						arg1.setSelected(true);
+					selectedradtesttype = arg2.getUserData().toString();
+
+					if (selectedrad4.equals("1")) {
+						Myapp.testtype = "Upright";
+					}
+
+					
+					else {
+						Myapp.testtype = "Inverted";
+					}
+
+				}
+
+			}
+
+			);
+
+		}
+
+	/*Test Method*/
+		
+		void setTestmethod() {
+
+			tgbmethod = new ToggleGroup();
+
+			rbwater.setToggleGroup(tgbmethod);
+			rbwater.setUserData("1");
+			rbdesiccant.setToggleGroup(tgbmethod);
+			rbdesiccant.setUserData("2");
+			
+			selectedradtestmethod  = "1";
+			Myapp.testmethod = "Water";
+
+			tgbmethod.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Toggle> arg0,
+						Toggle arg1, Toggle arg2) {
+					if (arg2 == null)
+						arg1.setSelected(true);
+					selectedradtestmethod = arg2.getUserData().toString();
+
+					if (selectedradtestmethod.equals("1")) {
+						Myapp.testmethod = "Water";
+					}
+
+					
+					else {
+						Myapp.testmethod = "Desiccant";
+					}
+
+				}
+
+			}
+
+			);
+
+		}
+
+		
 		
 		public void setulastdata()
 		{	
@@ -464,75 +549,54 @@ btndefaultsetting.setOnAction(new EventHandler<ActionEvent>() {
 			try{
 				Database db=new Database();
 		
-				List<List<String>> ll=db.getData("select * from configdata");
-				String type =(ll.get(0).get(0));
+				List<List<String>> ll=db.getData("select * from Nsystem");
 				
-				System.out.println("type"+type);
-					pfm1.setText(ll.get(0).get(3));
-					pfm2.setText(ll.get(0).get(4));
-			//		chamber.setValue(ll.get(0).get(7));
+				System.out.println("All Data ---->"+ll);
+					txtstarttempsystem.setText(ll.get(0).get(0));
+					txtendttempsystem.setText(ll.get(0).get(1));
+					txtstartthumisystem.setText(ll.get(0).get(2));
+					txtendthumisystem.setText(ll.get(0).get(3));
 				
-					String type1p =(ll.get(0).get(8));
-					String type2p =(ll.get(0).get(9));
-					String type3p =(ll.get(0).get(10));
-					String type4p =(ll.get(0).get(11));
-					String pscaletype4p =(ll.get(0).get(12));
-					String pscaletype5p =(ll.get(0).get(13));
-					String chambertype =(ll.get(0).get(15));
-					String curvefittype =(ll.get(0).get(16));
-					
-					if(type1p.equals("low"))
-					{
-						pg1.setSelected(true);	
-						propg1="low";
-					}
-					else
-					{
-						pg1.setSelected(true);	
-						propg1="high";
-					}
-					
-					if(type2p.equals("low"))
-					{
-						pg2.setSelected(true);	
-						profm1="low";
-					}
-					else
-					{
-						pg2.setSelected(true);	
-						profm1="high";
-					}
-			
-					if(type3p.equals("low")) 
-					{
-						fm1.setSelected(true);
-						propg2="low";
-					}
-					else
-					{
-						propg2="high";
-					}	
-					
-					if(type4p.equals("low"))
-					{
-						fm2.setSelected(true);	
-						profm2="low";
-					}
-					else
-					{
-						profm2="high";
-					}
+					txttempsensor.setText(ll.get(0).get(4));
+					txthumiditysensor.setText(ll.get(0).get(5));
 				
 					
+					List<List<String>> l2=db.getData("select * from Ntestconfi");
+					System.out.println("All Data ---->"+l2);
+					txtstartttemptestconfi.setText(l2.get(0).get(0));
+					txtendttemptestconfi.setText(l2.get(0).get(1));
+					txtstartthumitestconfi.setText(l2.get(0).get(2));
+					txtendthumitestconfi.setText(l2.get(0).get(3));
+
+					txtdataint.setText(l2.get(0).get(4));
+					String testtype = "" + l2.get(0).get(5);
+					String testmethod = "" + l2.get(0).get(6);
 					
-				
+
 					
+					/*Test Type*/
+					if (testtype.equals("Upright")) {
+						rbupright.selectedProperty().set(true);
+						Myapp.testtype = "Upright";
+
+					}
+					else {
+						rbinverted.selectedProperty().set(true);
+						Myapp.testtype = "Inverted";
+
+					}
 					
-					
-					
-					
-					
-				
+					/*Test Method*/
+					if (testmethod.equals("Water")) {
+						rbwater.selectedProperty().set(true);
+						Myapp.testmethod = "Water";
+
+					}
+					else {
+						rbdesiccant.selectedProperty().set(true);
+						Myapp.testmethod = "Desiccant";
+
+					}
 					
 				}
 				catch(Exception e)

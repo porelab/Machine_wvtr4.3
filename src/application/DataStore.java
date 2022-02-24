@@ -216,7 +216,7 @@ public class DataStore {
 
 	public static OutputStream out;
 
-	static String type, pg1, pg2, fm1, fm2, chemb;
+	static String type, pg1, pg2, fm1, fm2, chemb,H,T,Hmin,Hmax,Tmin,Tmax;
 
 	public static boolean isCurveFit = false;
 
@@ -250,6 +250,19 @@ public class DataStore {
 
 	}
 
+	public static void getsystemdata() {
+		Database db = new Database();
+		List<List<String>> ll = db.getData("select * from Nsystem");
+		Tmin = (ll.get(0).get(0));
+		Tmax = (ll.get(0).get(1));
+		Hmin = (ll.get(0).get(2));
+		Hmax = (ll.get(0).get(3));
+	
+		H = (ll.get(0).get(4));
+		T = (ll.get(0).get(5));
+	
+	}
+	
 	public static void getconfigdata() {
 		Database db = new Database();
 		List<List<String>> ll = db.getData("select * from configdata");
@@ -284,26 +297,26 @@ public class DataStore {
 	}
 
 	public static String getH() {
-		return "100";
+		return H;
 	}
 
 	public static String getT() {
-		return "70";
+		return T;
 	}
 	
 	
-	public static int getHmin() {
-		return 26;
+	public static String getHmin() {
+		return Hmin;
 	}
-	public static int getHmax() {
-		return 30;
+	public static String getHmax() {
+		return Hmax;
 	}
 
-	public static int getTmin() {
-		return 40;
+	public static String getTmin() {
+		return Tmin;
 	}
-	public static int getTmax() {
-		return 50;
+	public static String getTmax() {
+		return Tmax;
 	}
 
 	public boolean isCurveFit() {

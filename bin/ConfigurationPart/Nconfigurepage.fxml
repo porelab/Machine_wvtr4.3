@@ -75,12 +75,12 @@
                               </Label>
                               <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="444.0" layoutY="42.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
                               <JFXToggleButton fx:id="pg1" alignment="BASELINE_CENTER" layoutX="435.0" layoutY="28.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                              <Label layoutX="42.0" layoutY="81.0" styleClass="col-gray70" text="Temp (‘C) :  " textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="81.0">
+                              <Label layoutX="42.0" layoutY="81.0" styleClass="col-gray70" text="Temp (‘C) " textFill="WHITE" AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="81.0">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="42.0" layoutY="152.0" styleClass="col-gray70" text="Humidity (%rH): " textFill="WHITE">
+                              <Label layoutX="43.0" layoutY="152.0" styleClass="col-gray70" text="Humidity (%rH)" textFill="WHITE">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
@@ -95,23 +95,6 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="272.0" layoutY="80.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                              <TextField fx:id="ppg1" layoutX="277.0" layoutY="81.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                                 <font>
-                                    <Font size="8.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="uinputtextbox" />
-                                    <String fx:value="col-gray70" />
-                                 </styleClass>
-                              </TextField>
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="272.0" layoutY="151.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                              <TextField fx:id="ppg2" layoutX="277.0" layoutY="152.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                                 <styleClass>
-                                    <String fx:value="uinputtextbox" />
-                                    <String fx:value="col-gray70" />
-                                 </styleClass>
-                              </TextField>
                               <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="272.0" layoutY="222.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="82.0" />
                               <TextField fx:id="pfm1" layoutX="277.0" layoutY="223.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0" visible="false">
                                  <styleClass>
@@ -126,30 +109,6 @@
                                     <String fx:value="col-gray70" />
                                  </styleClass>
                               </TextField>
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="272.0" layoutY="224.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                              <TextField fx:id="ppr" layoutX="277.0" layoutY="225.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                                 <styleClass>
-                                    <String fx:value="uinputtextbox" />
-                                    <String fx:value="col-gray70" />
-                                 </styleClass>
-                              </TextField>
-                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="272.0" layoutY="295.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                              <TextField fx:id="pfc" layoutX="277.0" layoutY="296.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                                 <styleClass>
-                                    <String fx:value="uinputtextbox" />
-                                    <String fx:value="col-gray70" />
-                                 </styleClass>
-                              </TextField>
-                              <Label layoutX="39.0" layoutY="225.0" styleClass="col-gray70" text="Pressure Regulator" textFill="WHITE">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="40.0" layoutY="296.0" styleClass="col-gray70" text="Flow Controller" textFill="WHITE">
-                                 <font>
-                                    <Font size="25.0" />
-                                 </font>
-                              </Label>
                               <Button fx:id="applypro" layoutX="567.0" layoutY="484.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
                                  <font>
                                     <Font name="System Bold" size="20.0" />
@@ -187,60 +146,96 @@
                               </Label>
                               <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="693.0" layoutY="43.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
                               <JFXToggleButton fx:id="ab1" alignment="BASELINE_CENTER" layoutX="684.0" layoutY="29.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                              <Line endX="850.0" layoutX="136.0" layoutY="131.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="401.0" layoutY="106.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="350.0" layoutX="136.0" layoutY="131.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="590.0" layoutY="63.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line endX="850.0" layoutX="149.0" layoutY="203.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line layoutX="401.0" layoutY="178.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="350.0" layoutX="137.0" layoutY="204.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line layoutX="590.0" layoutY="135.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
                               <Line endX="423.0" layoutX="143.0" layoutY="233.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line layoutX="401.0" layoutY="252.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
                               <Line endX="423.0" layoutX="142.0" layoutY="302.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" visible="false" />
-                              <Line layoutX="400.0" layoutY="320.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                              <Line endX="227.0" layoutX="148.0" layoutY="278.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="47.0" />
-                              <Line endX="227.0" layoutX="149.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="254.0" layoutY="80.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                              <TextField fx:id="txtstarttempsystem" layoutX="254.0" layoutY="80.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="353.0" layoutY="80.0" styleClass="col-gray70" text="to" textFill="WHITE">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="404.0" layoutY="82.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                              <TextField fx:id="txtendttempsystem" layoutX="404.0" layoutY="82.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="254.0" layoutY="153.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                              <TextField fx:id="txtstartthumisystem" layoutX="254.0" layoutY="153.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="353.0" layoutY="153.0" styleClass="col-gray70" text="to" textFill="WHITE">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="404.0" layoutY="155.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                              <TextField fx:id="txtendthumisystem" layoutX="404.0" layoutY="155.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="38.0" layoutY="215.0" styleClass="col-gray70" text="Temp (Sensor) " textFill="WHITE">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="250.0" layoutY="214.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="98.0" />
+                              <TextField fx:id="txttempsensor" layoutX="250.0" layoutY="214.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="96.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Label layoutX="38.0" layoutY="280.0" styleClass="col-gray70" text="Humidity (Sensor) " textFill="WHITE">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="250.0" layoutY="279.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="98.0" />
+                              <TextField fx:id="txthumiditysensor" layoutX="250.0" layoutY="279.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="96.0">
+                                 <font>
+                                    <Font size="8.0" />
+                                 </font>
+                                 <styleClass>
+                                    <String fx:value="uinputtextbox" />
+                                    <String fx:value="col-gray70" />
+                                 </styleClass>
+                              </TextField>
+                              <Line endX="350.0" layoutX="136.0" layoutY="266.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                              <Line endX="350.0" layoutX="139.0" layoutY="328.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
                            </children>
                         </AnchorPane>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="827.0" layoutY="163.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                        <JFXToggleButton fx:id="ab2" alignment="BASELINE_CENTER" layoutX="818.0" layoutY="149.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Label layoutX="706.0" layoutY="158.0" styleClass="col-gray70" text="Absolute" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="884.0" layoutY="158.0" styleClass="col-gray70" text="Relative" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="705.0" layoutY="87.0" styleClass="col-gray70" text="Absolute" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="884.0" layoutY="87.0" styleClass="col-gray70" text="Relative" textFill="WHITE">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="824.0" layoutY="91.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                        <JFXToggleButton fx:id="ab1" alignment="BASELINE_CENTER" layoutX="815.0" layoutY="77.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Line layoutX="699.0" layoutY="111.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Line layoutX="699.0" layoutY="183.0" rotate="90.0" startX="-50.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="411.0" layoutY="79.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.topAnchor="76.0" />
-                        <ComboBox fx:id="cmbpg1" layoutX="411.0" layoutY="79.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.topAnchor="76.0" />
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="411.0" layoutY="151.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.topAnchor="148.0" />
-                        <ComboBox fx:id="cmbpg2" layoutX="411.0" layoutY="151.0" prefHeight="48.0" prefWidth="200.0" styleClass="cmbtrasperant" AnchorPane.topAnchor="148.0" />
-                        <Label layoutX="448.0" layoutY="34.0" text="Select Unit" textFill="#0e3c87">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="798.0" layoutY="34.0" text="Scale Type" textFill="#0e3c87">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
                         <Label layoutX="171.0" layoutY="34.0" text="Set Range" textFill="#0e3c87">
                            <font>
                               <Font size="20.0" />
@@ -254,76 +249,53 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
                      <children>
-                        <Label layoutX="39.0" layoutY="56.0" styleClass="col-gray70" text="Temp (‘C): " textFill="#bcbcbc" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
+                        <Label layoutX="37.0" layoutY="114.0" styleClass="col-gray70" text="Temp (‘C)" textFill="#bcbcbc" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="114.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="manual" layoutX="291.0" layoutY="59.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Manual">
+                        <RadioButton layoutX="430.0" layoutY="117.0" mnemonicParsing="false" styleClass="col-gray70" text="Multiple" visible="false">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="autometed" layoutX="408.0" layoutY="59.0" mnemonicParsing="false" styleClass="col-gray70" text="Automated">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton layoutX="432.0" layoutY="59.0" mnemonicParsing="false" styleClass="col-gray70" text="Multiple" visible="false">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Line endX="570.0" layoutX="140.0" layoutY="107.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="106.0" />
-                        <Label layoutX="39.0" layoutY="129.0" styleClass="col-gray70" text="Humidity (%rH): " textFill="WHITE" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="129.0">
+                        <Line endX="570.0" layoutX="138.0" layoutY="165.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="164.0" />
+                        <Label layoutX="37.0" layoutY="187.0" styleClass="col-gray70" text="Humidity (%rH)" textFill="WHITE" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="187.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="570.0" layoutX="140.0" layoutY="183.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="182.0" />
-                        <Label layoutX="304.0" layoutY="130.0" styleClass="col-gray70" text="Disable" textFill="WHITE" AnchorPane.leftAnchor="304.0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="451.0" layoutY="130.0" styleClass="col-gray70" text="Enable" textFill="WHITE" AnchorPane.leftAnchor="451.0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="395.0" layoutY="131.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" AnchorPane.topAnchor="131.0" />
-                        <JFXToggleButton fx:id="valvecpre" alignment="BASELINE_CENTER" layoutX="386.0" layoutY="117.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Label layoutX="38.0" layoutY="203.0" styleClass="col-gray70" text="Low Flov Meter" textFill="WHITE" visible="false">
+                        <Line endX="570.0" layoutX="138.0" layoutY="241.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="37.0" AnchorPane.topAnchor="240.0" />
+                        <Label layoutX="36.0" layoutY="261.0" styleClass="col-gray70" text="Low Flov Meter" textFill="WHITE" visible="false">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="303.0" layoutY="204.0" styleClass="col-gray70" text="Disable" textFill="WHITE" visible="false">
+                        <Label layoutX="301.0" layoutY="262.0" styleClass="col-gray70" text="Disable" textFill="WHITE" visible="false">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Label layoutX="450.0" layoutY="204.0" styleClass="col-gray70" text="Enable" textFill="WHITE" visible="false">
+                        <Label layoutX="448.0" layoutY="262.0" styleClass="col-gray70" text="Enable" textFill="WHITE" visible="false">
                            <font>
                               <Font size="22.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="394.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
-                        <JFXToggleButton fx:id="valvecflow" alignment="BASELINE_CENTER" layoutX="385.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
-                        <Label layoutX="789.0" layoutY="57.0" text="Test Data" textFill="#0e3c87">
+                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="392.0" layoutY="263.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" visible="false" width="46.0" />
+                        <JFXToggleButton fx:id="valvecflow" alignment="BASELINE_CENTER" layoutX="383.0" layoutY="249.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" visible="false" />
+                        <Label layoutX="928.0" layoutY="67.0" text="Test Data" textFill="#0e3c87">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Line endX="170.0" layoutX="889.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Line layoutX="615.0" layoutY="207.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="614.0" AnchorPane.topAnchor="206.0" />
-                        <Label layoutX="790.0" layoutY="126.0" styleClass="col-gray70" text="Data Interval" textFill="WHITE" AnchorPane.leftAnchor="790.0" AnchorPane.topAnchor="126.0">
+                        <Line layoutX="613.0" layoutY="265.0" rotate="90.0" startX="280.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="612.0" AnchorPane.topAnchor="264.0" />
+                        <Label layoutX="798.0" layoutY="125.0" styleClass="col-gray70" text="Data Interval" textFill="WHITE" AnchorPane.leftAnchor="798.0" AnchorPane.topAnchor="125.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="128.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthfirst" layoutX="974.0" layoutY="128.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="982.0" layoutY="127.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                        <TextField fx:id="txtdataint" layoutX="982.0" layoutY="127.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
                            <font>
                               <Font size="8.0" />
                            </font>
@@ -332,40 +304,20 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="185.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.topAnchor="184.0" />
-                        <Label layoutX="790.0" layoutY="206.0" styleClass="col-gray70" text="Test Type" textFill="WHITE" AnchorPane.leftAnchor="790.0">
+                        <Line endX="170.0" layoutX="899.0" layoutY="184.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.topAnchor="183.0" />
+                        <Label layoutX="798.0" layoutY="205.0" styleClass="col-gray70" text="Test Type" textFill="WHITE" AnchorPane.leftAnchor="798.0">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="974.0" layoutY="212.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthmoderate" layoutX="974.0" layoutY="212.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                           <font>
-                              <Font size="8.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="uinputtextbox" />
-                              <String fx:value="col-gray70" />
-                           </styleClass>
-                        </TextField>
-                        <Line endX="170.0" layoutX="888.0" layoutY="269.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="793.0" layoutY="290.0" styleClass="col-gray70" text="Test Method" textFill="WHITE">
+                        <Line endX="340.0" layoutX="896.0" layoutY="268.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                        <Label layoutX="801.0" layoutY="289.0" styleClass="col-gray70" text="Test Method" textFill="WHITE">
                            <font>
                               <Font size="25.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="976.0" layoutY="289.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
-                        <TextField fx:id="txtthcontinous" layoutX="976.0" layoutY="289.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
-                           <font>
-                              <Font size="8.0" />
-                           </font>
-                           <styleClass>
-                              <String fx:value="uinputtextbox" />
-                              <String fx:value="col-gray70" />
-                           </styleClass>
-                        </TextField>
-                        <Line endX="170.0" layoutX="891.0" layoutY="347.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Button fx:id="testconfig" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
+                        <Line endX="340.0" layoutX="899.0" layoutY="346.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
+                        <Button fx:id="testconfig" layoutX="577.0" layoutY="425.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="577.0" AnchorPane.topAnchor="484.0">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -373,153 +325,83 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Label layoutX="41.0" layoutY="203.0" styleClass="col-gray70" text="Curve Fit" textFill="WHITE">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                        <Line endX="570.0" layoutX="142.0" layoutY="257.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Label layoutX="344.0" layoutY="203.0" styleClass="col-gray70" text="Off" textFill="WHITE">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="453.0" layoutY="204.0" styleClass="col-gray70" text="On" textFill="WHITE">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="300.0" arcWidth="30.0" fill="#1f93ff00" height="28.0" layoutX="397.0" layoutY="205.0" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" style="-fx-fill: white;" width="46.0" />
-                        <JFXToggleButton fx:id="curvefittgb" alignment="BASELINE_CENTER" layoutX="388.0" layoutY="191.0" text=" " toggleColor="#0e3c87" toggleLineColor="WHITE" unToggleLineColor="#99999903" />
-                        <Label layoutX="106.0" layoutY="14.0" text="Starting Condition" textFill="#0e3c87">
+                        <Label layoutX="196.0" layoutY="72.0" text="Starting Condition" textFill="#0e3c87">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
+                        <RadioButton fx:id="rbupright" layoutX="983.0" layoutY="208.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Upright" textFill="#797878e0">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbinverted" layoutX="1116.0" layoutY="208.0" mnemonicParsing="false" styleClass="col-gray70" text="Inverted" textFill="#797878e0">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbwater" layoutX="982.0" layoutY="293.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Water" textFill="#797878e0">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbdesiccant" layoutX="1115.0" layoutY="294.0" mnemonicParsing="false" styleClass="col-gray70" text="Desiccant" textFill="#797878e0">
+                           <font>
+                              <Font name="Calibri" size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="293.0" layoutY="112.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                        <TextField fx:id="txtstartttemptestconfi" layoutX="293.0" layoutY="112.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="392.0" layoutY="112.0" styleClass="col-gray70" text="to" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="443.0" layoutY="114.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                        <TextField fx:id="txtendttemptestconfi" layoutX="443.0" layoutY="114.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="293.0" layoutY="185.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                        <TextField fx:id="txtstartthumitestconfi" layoutX="293.0" layoutY="185.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
+                        <Label layoutX="392.0" layoutY="185.0" styleClass="col-gray70" text="to" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#1f93ff00" height="38.0" layoutX="443.0" layoutY="187.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="82.0" />
+                        <TextField fx:id="txtendthumitestconfi" layoutX="443.0" layoutY="187.0" maxHeight="35.0" minHeight="20.0" prefHeight="35.0" prefWidth="77.0">
+                           <font>
+                              <Font size="8.0" />
+                           </font>
+                           <styleClass>
+                              <String fx:value="uinputtextbox" />
+                              <String fx:value="col-gray70" />
+                           </styleClass>
+                        </TextField>
                      </children>
                   </AnchorPane>
-               </content>
-            </Tab>
-          <Tab text="Calibration">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
-                     <children>
-                        <Label layoutX="106.0" layoutY="17.0" text="Select Calibration type" textFill="#0e3c87" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                        <RadioButton fx:id="pressregulator" layoutX="49.0" layoutY="133.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Pressure Regulator Calibration" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="133.0">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Line endX="580.0" layoutX="146.0" layoutY="111.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="110.0" />
-                        <Line endX="580.0" layoutX="146.0" layoutY="186.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="45.0" />
-                        <RadioButton fx:id="flowcontrolcalibr" layoutX="50.0" layoutY="209.0" mnemonicParsing="false" styleClass="col-gray70" text="Flow Controller Calibration">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Line endX="210.0" layoutX="147.0" layoutY="262.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <RadioButton fx:id="troubleshot" layoutX="51.0" layoutY="285.0" mnemonicParsing="false" styleClass="col-gray70" text="Troubleshoot">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Line endX="210.0" layoutX="148.0" layoutY="338.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <RadioButton fx:id="leaktest" layoutX="52.0" layoutY="361.0" mnemonicParsing="false" styleClass="col-gray70" text="Leak Test">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                        <Line endX="210.0" layoutX="149.0" layoutY="414.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" />
-                        <Button fx:id="btncalibration" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Start" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <RadioButton fx:id="boardcali" layoutX="471.0" layoutY="133.0" mnemonicParsing="false" styleClass="col-gray70" text="Board Calibration">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </RadioButton>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Preferences">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="btnprefrance" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Apply" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Label text="Select Unit" textFill="#0e3c87" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="46.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="239.0" layoutY="129.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="120.0" />
-                        <ComboBox fx:id="cmbpress" layoutX="239.0" layoutY="129.0" prefHeight="48.0" prefWidth="200.0" promptText="Pressure" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="120.0">
-                           <styleClass>
-                              <String fx:value="cmbtrasperant" />
-                              <String fx:value="combo-box1" />
-                           </styleClass>
-                        </ComboBox>
-                        <Label layoutX="140.0" layoutY="125.0" styleClass="col-gray70" text="Temperature" textFill="WHITE" AnchorPane.leftAnchor="55.0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="155.0" layoutY="198.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="198.0" />
-                        <ComboBox fx:id="cmbflow" layoutX="155.0" layoutY="198.0" prefHeight="48.0" prefWidth="200.0" promptText="Flow" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="198.0">
-                           <styleClass>
-                              <String fx:value="cmbtrasperant" />
-                              <String fx:value="combo-box1" />
-                           </styleClass>
-                        </ComboBox>
-                        <Label layoutX="50.0" layoutY="207.0" styleClass="col-gray70" text="Flow" textFill="WHITE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="207.0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="55.0" layoutY="286.0" styleClass="col-gray70" text="Diameter" textFill="WHITE" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="286.0">
-                           <font>
-                              <Font size="22.0" />
-                           </font>
-                        </Label>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="155.0" layoutY="277.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0" />
-                        <ComboBox fx:id="cmblenghth" layoutX="155.0" layoutY="277.0" prefHeight="48.0" prefWidth="200.0" promptText="Length" AnchorPane.leftAnchor="155.0" AnchorPane.topAnchor="277.0">
-                           <styleClass>
-                              <String fx:value="cmbtrasperant" />
-                              <String fx:value="combo-box1" />
-                           </styleClass>
-                        </ComboBox>
-                        <Rectangle arcHeight="500.0" arcWidth="42.0" fill="#2197ff00" height="50.0" layoutX="153.0" layoutY="389.0" opacity="0.61" stroke="#bfb9b9" strokeType="INSIDE" strokeWidth="2.0" width="200.0" />
-                        <ComboBox fx:id="cmbroundoff" layoutX="153.0" layoutY="389.0" prefHeight="48.0" prefWidth="200.0" promptText="Roundoff">
-                           <styleClass>
-                              <String fx:value="cmbtrasperant" />
-                              <String fx:value="combo-box1" />
-                           </styleClass>
-                        </ComboBox>
-                        <Label layoutX="44.0" layoutY="350.0" text="Set Data Precision" textFill="#0e3c87">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                        <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="182.0" />
-                        <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="262.0" />
-                        <Line endX="210.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="340.0" />
-                        <Line endX="210.0" layoutX="10.0" layoutY="10.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="450.0" />
-                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Com Port">
@@ -571,7 +453,7 @@
                            <graphic>
                               <ImageView fx:id="imgback1" fitHeight="57.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../porometer4.3/Machine_Porometer_4.3/src/ConfigurationPart/defult.png" />
+                                    <Image url="@defult.png" />
                                  </image>
                               </ImageView>
                            </graphic>
@@ -595,6 +477,32 @@
                   </AnchorPane>
                </content>
             </Tab>
+          <Tab text="Calibration">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@../application/new_application.css">
+                     <children>
+                        <Label layoutX="106.0" layoutY="17.0" text="Select Calibration type" textFill="#0e3c87" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="56.0">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="pressregulator" layoutX="49.0" layoutY="133.0" mnemonicParsing="false" selected="true" styleClass="col-gray70" text="Pressure Regulator Calibration" AnchorPane.leftAnchor="49.0" AnchorPane.topAnchor="133.0">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </RadioButton>
+                        <Line endX="270.0" layoutX="146.0" layoutY="186.0" startX="-100.0" stroke="#bfb9b9" strokeWidth="2.0" AnchorPane.leftAnchor="45.0" />
+                        <Button fx:id="btncalibration" mnemonicParsing="false" prefHeight="60.0" prefWidth="223.0" style="-fx-background-radius: 50;" styleClass="linear-grad-to-bottom-right" text="Start" textFill="WHITE" AnchorPane.leftAnchor="567.0" AnchorPane.topAnchor="484.0">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
         </tabs>
       </TabPane>
       <ImageView fx:id="imgheader" fitHeight="103.0" fitWidth="940.0" layoutX="214.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="0.0">

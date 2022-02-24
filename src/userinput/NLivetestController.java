@@ -347,6 +347,7 @@ public class NLivetestController implements Initializable {
 		isSkiptest = false;
 		//Myapp.testtrial = "4";
 
+		DataStore.getsystemdata();
 		DataStore.getconfigdata();
 
 		isBubbleStart = new SimpleBooleanProperty(false);
