@@ -1,105 +1,436 @@
 package userinput;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
-import toast.Openscreen;
-import application.DataStore;
+import java.util.TooManyListenersException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXToggleButton;
 
+import application.DataStore;
+import application.Myapp;
+import application.writeFormat;
+import communicationProtocol.Mycommand;
+import gnu.io.CommPortIdentifier;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import toast.MyDialoug;
+import toast.Openscreen;
+
 public class manualcontroller implements Initializable {
+
+	@FXML
+	private JFXToggleButton tgbheater;
+
+	@FXML
+	private JFXToggleButton tgbfan;
+
+	@FXML
+	private JFXToggleButton tgbhumi;
+
+	@FXML
+	JFXButton btnback, btnreconnect;
 	
-
-
-	  @FXML
-	    private JFXToggleButton tgbheater;
-
-	    @FXML
-	    private JFXToggleButton tgbfan;
-
-	    @FXML
-	    private JFXToggleButton tgbhumi;
-	    
-	    @FXML
-		JFXButton  btnback, btnreconnect;
-
-	    @FXML
-	    private TextField ctemp,chumi,ttemp,thumi,btemp,bhumi;
+	@FXML
+	Label lblconnection;   
 	
+	@FXML
+	Circle concircle;
+	
+	SerialReader in;
+
+	@FXML
+	private TextField ctemp, chumi, ttemp, thumi, btemp, bhumi;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
-	
+
+		
+		DataStore.getsystemdata();	
+		connectHardware();
 		btnback.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				
+				try {Mycommand.stopADC(2500);}
+				catch(Exception e) {}
 				Openscreen.open("/application/first.fxml");
 
 			}
 		});
-		
-		
-		
-		
+
 		tgbheater.setOnAction(new EventHandler<ActionEvent>() {
-			
-						@Override
-						public void handle(ActionEvent arg0) {
-			
-							if (tgbheater.isSelected()) {
-								
-			
-							} else {
-								
-							}
-			
-						}
-				});
-		
-		
+
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				if (tgbheater.isSelected()) {
+						Mycommand.valveOn('2', 0);
+				} else {
+
+					Mycommand.valveOff('2', 0);
+				}
+
+			}
+		});
+
 		tgbfan.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 
 				if (tgbfan.isSelected()) {
-					
-
+					Mycommand.valveOn('4', 0);
 				} else {
-					
+					Mycommand.valveOff('4', 0);
 				}
 
 			}
-	});
-		
+		});
+
 		tgbhumi.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 
 				if (tgbhumi.isSelected()) {
-					
-
+					Mycommand.valveOn('3', 0);
 				} else {
-					
+					Mycommand.valveOff('3', 0);
 				}
 
 			}
-	});
-			
-		
-	}	
+		});
 
+		
+		
+		
+		
+		DataStore.connect_hardware.addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable,
+					Boolean oldValue, Boolean newValue) {
+				// TODO Auto-generated method stub
+
+				if (newValue) {
+					lblconnection.setText("Connected with  : "
+							+ DataStore.getCom());
+					lblconnection.setTextFill(Paint.valueOf("#00ff00"));
+				} else {
+					lblconnection.setText("Not Connected");
+					lblconnection.setTextFill(Paint.valueOf("#ff0000"));
+					MyDialoug.showError(102);
+				}
+
+			}
+		});
+
+		
+		btnreconnect.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				connectHardware(DataStore.getCom());
+
+			}
+		});
+		
+	}
+
+	
+
+	public boolean connectHardware(String st) {
+
+		boolean bol = false;
+
+		// sendDataToWeb();
+		Enumeration pList = CommPortIdentifier.getPortIdentifiers();
+
+		int count = 0;
+
+		while (pList.hasMoreElements()) {
+
+			CommPortIdentifier cpi = (CommPortIdentifier) pList.nextElement();
+			System.out.print("Port " + cpi.getName() + " " + cpi.getPortType());
+			if (cpi.getName().equals(st)) {
+				DataStore.connect_hardware.set(true);
+				try {
+
+					DataStore.sc.connect(st);
+					bol = true;
+					Myapp.hb.set(false);
+					new Thread(new Runnable() {
+
+						@Override
+						public void run() {
+
+							Mycommand.setDelay(900, 500);
+							Mycommand.sendAdcEnableBits("111111", 1000);
+							Mycommand.startADC(2500);
+
+						}
+					}).start();
+
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}
+
+				break;
+			}
+
+			System.out.println("PORT :" + cpi.getName());
+			count++;
+		}
+
+		DataStore.connect_hardware.set(bol);
+		if (bol == false) {
+			// Toast.makeText(Main.mainstage,
+			// "Hardware not connected please plugout and plugin", 200, 200,
+			// 3000);
+		} else {
+			// Toast.makeText(Main.mainstage, "Successfully Connected", 200,
+			// 200, 3000);
+
+		}
+
+		return bol;
+	}
+
+	
+	
+	void connectHardware() {
+		if (DataStore.connect_hardware.get()) {
+			
+			lblconnection.setText("Connected with  : " + DataStore.getCom());
+			lblconnection.setTextFill(Paint.valueOf("#2A91D8"));
+			
+			
+			try {
+				in = new SerialReader(DataStore.in);
+
+				DataStore.serialPort.removeEventListener();
+				DataStore.serialPort.addEventListener(in);
+				DataStore.serialPort.notifyOnDataAvailable(true);
+				
+				
+				
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+
+						Mycommand.setDelay(900, 500);
+						Mycommand.sendAdcEnableBits("111111", 1000);
+						Mycommand.startADC(2500);
+
+					}
+				}).start();
+				
+
+			} catch (TooManyListenersException e) {
+
+				MyDialoug.showError(102);
+
+			} catch (Exception e) {
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+						MyDialoug.showError(102);
+
+					}
+				});
+
+			}
+
+		} else {
+			lblconnection.setText("Not Connected");
+			lblconnection.setTextFill(Paint.valueOf("#939598"));
+			concircle.setStyle("-fx-fill: #939598;");
+			
+			
+
+			MyDialoug.showError(102);
+
+		}
+
+	}
+	
+
+	List<Integer> getAdcData(List<Integer> data) {
+		List<Integer> d = new ArrayList<Integer>();
+
+		System.out.println("READ ----- ");
+		for (int i = 4; i < 49; i = i + 3) {
+			d.add(getIntFromBit(data.get(i), data.get(i + 1), data.get(i + 2)));
+
+		}
+		System.out.println("READ DONE -----" + d.size());
+		System.out.println("Adc Data :" + d);
+		return d;
+	}
+
+	int getIntFromBit(int a1, int a2, int a3) {
+		System.out.println(a1 + " : " + a2 + ": " + a3);
+		int a = 0;
+
+		a = a1 << 16;
+		a2 = a2 << 8;
+		a = a | a2;
+		a = a | a3;
+
+		return a;
+	}
+	public class SerialReader implements SerialPortEventListener {
+
+		InputStream in;
+		int ind = 0;
+		List<Integer> readData = new ArrayList<Integer>();
+
+		public SerialReader(InputStream in) {
+			this.in = in;
+			DataStore.getconfigdata();
+		}
+
+		public void serialEvent(SerialPortEvent arg0) {
+			int data;
+			try {
+				int len = 0;
+				char prev = '\0';
+				// System.out.println("Reading Started:");
+
+				while ((data = in.read()) > -1) {
+
+					if (data == '\n' && prev == 'E') {
+						break;
+					}
+					if (len > 0 || (data == '\r' && prev == '\n')) {
+						readData.add(data);
+
+						len++;
+					}
+					prev = (char) data;
+					System.out.print(prev);
+
+					// System.out.print(new String(buffer,0,len));
+				}
+
+				for (int i = 1; i < readData.size(); i++) {
+
+					if (readData.get(i) == 'F' && readData.get(i + 1) == (int) 'M'
+							&& readData.get(i + 2) == (int) 'A') {
+						double h1 = 0, h2 = 0, h3 = 0, t1 = 0, t2 = 0, t3 = 0;
+
+						List<Integer> reading = getAdcData(readData);
+
+						System.out.println("Read done : "+reading);
+						
+						
+						System.out.println("get h : "+DataStore.getH());
+					
+						
+						h1 = (double) reading.get(0) * Integer.parseInt(DataStore.getH()) / 65535;
+						System.out.println("step1");
+						h2 = (double) reading.get(1) * Integer.parseInt(DataStore.getH()) / 65535;
+						System.out.println("step2");
+						h3 = (double) reading.get(2) * Integer.parseInt(DataStore.getH()) / 65535;
+						System.out.println("step3");
+
+						t1 = (double) reading.get(3) * Integer.parseInt(DataStore.getT()) / 65535;
+						System.out.println("step4");
+						t2 = (double) reading.get(4) * Integer.parseInt(DataStore.getT()) / 65535;
+						System.out.println("step5");
+						t3 = (double) reading.get(5) * Integer.parseInt(DataStore.getT()) / 65535;
+
+						System.out.println("Data : ........" + reading);
+
+						// System.out.println("Pr1 : " + pr + "\nFc : " + fl);
+
+					
+
+					setPoints(h1, h2, h3, t1, t2, t3);
+
+						
+
+					}
+					readData.clear();
+					break;
+
+				}
+
+			} catch (IOException e) {
+				DataStore.serialPort.removeEventListener();
+				MyDialoug.showErrorHome(103);
+
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						lblconnection.setText("Connection has been lost");
+					}
+				});
+				System.out.println("Live screen error :" + e.getMessage());
+
+			}
+
+		}
+
+	}
+		void setPoints(double h1, double h2, double h3, double tt1, double tt2, double tt3) {
+			System.out.println("H1 : " + h1);
+			System.out.println("H2 : " + h2);
+			System.out.println("H3 : " + h3);
+			System.out.println("T1 : " + tt1);
+			System.out.println("T2 : " + tt2);
+			System.out.println("T3 : " + tt3);
+			
+			
+			Platform.runLater(new Runnable() {
+				public void run() {
+					
+					ctemp.setText(""+tt3);
+					ttemp.setText(""+tt1);
+					btemp.setText(""+tt2);
+					chumi.setText(""+h3);
+					thumi.setText(""+h1);
+					bhumi.setText(""+h2);
+					
+					
+					
+					
+					
+				}
+			});
+			
+			
+			
+			
+			
+	}
+	
 //
 //	public static SimpleStringProperty fm1, fm2, pg1, pg2;
 //	public static SimpleStringProperty fm1count, fm2count, pg1count, pg2count;
