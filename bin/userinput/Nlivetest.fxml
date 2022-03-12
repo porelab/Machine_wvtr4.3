@@ -61,7 +61,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="startautotest" layoutX="1156.0" layoutY="18.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0" AnchorPane.leftAnchor="1220.0">
+      <Button fx:id="startautotest" layoutX="1156.0" layoutY="19.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0" AnchorPane.leftAnchor="1156.0">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -73,7 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="stoptest" layoutX="1224.0" layoutY="18.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0" visible="false">
+      <Button fx:id="stoptest" layoutX="1224.0" layoutY="19.0" maxHeight="53.0" maxWidth="60.0" minHeight="45.0" minWidth="60.0" mnemonicParsing="false" opacity="0.65" prefHeight="53.0" prefWidth="60.0">
          <graphic>
             <ImageView fitHeight="54.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -125,7 +125,7 @@
       </Label>
       <Label fx:id="lbltesttype" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="23.0" layoutY="55.0" prefHeight="29.0" prefWidth="108.0" styleClass="font-montserrat-medium" text="Sample Id" textFill="WHITE" AnchorPane.leftAnchor="65.0" />
       <Label fx:id="lblbpc" alignment="BASELINE_LEFT" contentDisplay="CENTER" layoutX="170.0" layoutY="57.0" prefHeight="29.0" prefWidth="160.0" styleClass="font-montserrat-medium" textFill="WHITE" />
-      <ToggleButton fx:id="chamberonoff" layoutX="1006.0" layoutY="32.0" mnemonicParsing="false" text="Chamber Open" />
+      <ToggleButton fx:id="chamberonoff" layoutX="1006.0" layoutY="32.0" mnemonicParsing="false" text="Chamber Open" visible="false" />
       <Button fx:id="btninfo" layoutX="98.0" layoutY="23.0" maxHeight="40.0" maxWidth="40.0" minHeight="40.0" minWidth="40.0" mnemonicParsing="false" opacity="0.65" prefHeight="40.0" prefWidth="40.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">

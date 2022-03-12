@@ -58,8 +58,8 @@ public class SkiptestpopupControll implements Initializable {
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 			
-				NLivetestController.isSkiptest = true;
-				
+				NLivetestController.isSkiptest.set(false);
+				NLivetestController.isSkiptest.set(true);
 				MyDialoug.closeDialoug();
 
 			}

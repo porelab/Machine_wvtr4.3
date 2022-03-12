@@ -99,7 +99,7 @@ public class NLivetestController implements Initializable {
 	static SimpleBooleanProperty stpropcan = new SimpleBooleanProperty(false);
 
 	static SimpleBooleanProperty isBubbleStart;
-
+	static SimpleBooleanProperty isSkiptest;
 	static SimpleBooleanProperty isDryStart;
 
 	AudioClip tones;
@@ -188,7 +188,7 @@ public class NLivetestController implements Initializable {
 	int testtype = 0; // 0 for bubble 1 for wet 2 for dry
 	SerialReader in;
 
-	static boolean isSkiptest = false;
+	
 
 	@FXML
 	Label lblresult, lbltesttype;
@@ -223,14 +223,15 @@ public class NLivetestController implements Initializable {
 
 		addShortCut();
 		isRestart = new SimpleBooleanProperty(false);
-		isSkiptest = false;
+	
 		// Myapp.testtrial = "4";
 
 		// DataStore.getconfigdata();
 
 		isBubbleStart = new SimpleBooleanProperty(false);
 		isDryStart = new SimpleBooleanProperty(false);
-		lblfilename.setText(Myapp.sampleid);
+		isSkiptest=new SimpleBooleanProperty(false);
+;		lblfilename.setText(Myapp.sampleid);
 
 		setPlateval();
 		lbltesttype.setText("WVTR");
@@ -254,6 +255,18 @@ public class NLivetestController implements Initializable {
 			}
 		});
 
+		isSkiptest.addListener(new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+
+				if (newValue) {
+					System.out.println("bubble call");
+					stopTest();
+				}
+
+			}
+		});
 		// setTableList();
 
 		autotest.setOnAction(new EventHandler<ActionEvent>() {
