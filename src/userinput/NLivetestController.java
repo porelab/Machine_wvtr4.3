@@ -360,7 +360,7 @@ public class NLivetestController implements Initializable {
 		clearList();
 
 		skip = 0;
-		yAxis.setLabel("Mass");
+		yAxis.setLabel("Mass (g)");
 		xAxis.setLabel("Time (min)");
 
 		tempt1 = 0;

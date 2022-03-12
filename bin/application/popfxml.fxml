@@ -281,7 +281,7 @@
          </cursor>
       </Button>
       <Rectangle arcHeight="60.0" arcWidth="40.0" fill="#1f93ff00" height="40.0" layoutX="611.0" layoutY="260.0" stroke="#968f8f" strokeType="INSIDE" width="222.0" />
-      <TextField fx:id="txtdatainterval" alignment="CENTER" editable="false" layoutX="623.0" layoutY="259.0" prefHeight="40.0" prefWidth="202.0">
+      <TextField fx:id="txtdatainterval" alignment="CENTER" layoutX="623.0" layoutY="259.0" prefHeight="40.0" prefWidth="202.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -406,7 +406,7 @@
             <String fx:value="font-montserrat-semiBold" />
          </styleClass>
       </Label>
-      <TextField fx:id="txttestdata" alignment="CENTER" editable="false" layoutX="626.0" layoutY="210.0" prefHeight="40.0" prefWidth="202.0">
+      <TextField fx:id="txttestdata" alignment="CENTER" layoutX="626.0" layoutY="210.0" prefHeight="40.0" prefWidth="202.0">
          <font>
             <Font size="18.0" />
          </font>

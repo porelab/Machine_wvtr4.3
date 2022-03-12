@@ -416,7 +416,7 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Label fx:id="lblendpress11" layoutX="359.0" layoutY="251.0" styleClass="col-gray70" text="Test interval" textFill="#000000b8">
+                        <Label fx:id="lblendpress11" layoutX="359.0" layoutY="251.0" styleClass="col-gray70" text="Test Inverted" textFill="#000000b8">
                            <font>
                               <Font size="22.0" />
                            </font>
@@ -431,7 +431,7 @@
                               <String fx:value="col-gray70" />
                            </styleClass>
                         </TextField>
-                        <Label layoutX="645.0" layoutY="176.0" styleClass="col-gray70" text="(*Note : 6 to 10 )">
+                        <Label layoutX="645.0" layoutY="176.0" styleClass="col-gray70" text="(*Note : 6 to 1000 )">
                            <font>
                               <Font size="18.0" />
                            </font>
