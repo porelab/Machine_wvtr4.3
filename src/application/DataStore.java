@@ -399,7 +399,7 @@ public class DataStore {
 					for (int i = 0; i < 14; i++) {
 
 						if (i < 8) {
-							temp = temp + "1";
+							temp = temp + "0";
 						} else {
 							temp = temp + "0";
 						}
@@ -407,23 +407,23 @@ public class DataStore {
 
 					Mycommand.setLacthing(temp, 500);
 
-					writeFormat wrd1 = new writeFormat();
-					wrd1.addChar('C');
-					wrd1.addChar('O');
-					wrd1.addChar('P');
-					wrd1.addChar('1');
-					wrd1.addChar(getPressureCrossover().charAt(0));
-					wrd1.addLast();
-					sendData(wrd1, 700);
-
-					writeFormat wrd2 = new writeFormat();
-					wrd2.addChar('C');
-					wrd2.addChar('O');
-					wrd2.addChar('F');
-					wrd2.addChar('1');
-					wrd2.addChar(getFlowCrossover().charAt(0));
-					wrd2.addLast();
-					sendData(wrd2, 900);
+//					writeFormat wrd1 = new writeFormat();
+//					wrd1.addChar('C');
+//					wrd1.addChar('O');
+//					wrd1.addChar('P');
+//					wrd1.addChar('1');
+//					wrd1.addChar(getPressureCrossover().charAt(0));
+//					wrd1.addLast();
+//					sendData(wrd1, 700);
+//
+//					writeFormat wrd2 = new writeFormat();
+//					wrd2.addChar('C');
+//					wrd2.addChar('O');
+//					wrd2.addChar('F');
+//					wrd2.addChar('1');
+//					wrd2.addChar(getFlowCrossover().charAt(0));
+//					wrd2.addLast();
+//					sendData(wrd2, 900);
 
 				}
 			}).start();
