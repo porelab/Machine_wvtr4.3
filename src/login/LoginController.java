@@ -87,7 +87,7 @@ DataStore.isconfigure.set(true);
 				if(!txtemail.getText().trim().equals("")&& !txtpass.getText().trim().equals(""))
 				{
 					
-					 if (txtemail.getText().trim().equals("M19") && txtpass.getText().trim().equals("M19"))
+					 if (txtemail.getText().trim().equals("N0049") && txtpass.getText().trim().equals("N0049"))
 						{
 						 Myapp.isadmin = true;
 

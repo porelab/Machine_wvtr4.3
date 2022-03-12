@@ -1,23 +1,19 @@
 package report;
 
-import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
 
 import application.Main;
-import data_read_write.DatareadN;
-import pdfreport.ExcelReport;
-import pdfreport.Multiplepororeport;
-import pdfreport.Singlepororeport;
-import toast.MyDialoug;
-import toast.Toast;
+import application.Myapp;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
@@ -25,29 +21,45 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import pdfreport.ExcelReport;
+import pdfreport.Multiplepororeport;
+import pdfreport.Multiplepororeportblood;
+import pdfreport.Singlepororeport;
+import pdfreport.Singlepororeportblood;
+import toast.MyDialoug;
+import toast.Toast;
 
 public class PdfselectionController implements Initializable {
 
 	@FXML
-	Button btncancel, pdfsave, btnbrows,excelsave,btnbrows1;
+	Button btncancel, pdfsave, btnbrows,excelsave,btnbrows1,btncancel1;
 
 	@FXML
 	TextField txtcomname;
-	
+
+	String teststd;
+	@FXML
+	ScrollPane scrollbrows;
 
 	@FXML
 	TextArea txtnotes;
 
 	@FXML
-	CheckBox chkrow, flowvspre,chkcoverpage;
+	CheckBox chkrow, flowvspre,chkcoverpage,chsampleinfo;
 
 	@FXML
 	ImageView pic,pic1;
@@ -59,13 +71,21 @@ public class PdfselectionController implements Initializable {
 
 	List<String> graphs;
 	
-	boolean bchkcoverpage, bchkrowdata, bflowvspre;
+	boolean bchkcoverpage, bchkrowdata, bflowvspre,bolchsampleinfo;
+	
+	
+	static ToggleGroup tgbpdftype;
+	static String selectedpdftype = "";
 
+	Map<String,String> imgs;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 
-
+		scrollbrows.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		
+		teststd = "1";//Myconstant.getStd();
+		
 		bchkcoverpage = true;
 		chkcoverpage.selectedProperty().addListener(
 				new ChangeListener<Boolean>() {
@@ -89,6 +109,8 @@ public class PdfselectionController implements Initializable {
 					}
 				});
 
+		imgs = new HashMap<String, String>();
+		
 		
 		graphs = new ArrayList<String>();
 		
@@ -98,15 +120,28 @@ public class PdfselectionController implements Initializable {
 			lblbrowse.setVisible(false);
 			btnbrows.setVisible(false);
 			excelsave.setVisible(false);
+			chsampleinfo.setVisible(true);
+			showBrowsebtn();
 		}
-
-		txtnotes.setText("The following test Procedure is based on ASTM F316 (Standard Test Method for Pore Size Characterization.)");
-
+			
+			
+		txtnotes.setText("The following test method is based on ASTM E-96 (Standard test method for Water Vapor Transmission of Materials).");
+		
+		
+		 
 		/*Close Popup*/
 		btncancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				MyDialoug.closeDialoug();
+			}
+		});
+		btncancel1.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				MyDialoug.closeDialoug();
 			}
@@ -185,6 +220,52 @@ public class PdfselectionController implements Initializable {
 		});
 
 	}
+	
+
+	
+	void showBrowsebtn() {
+		VBox v = new VBox(20);
+				
+		int j=0;
+		for (j=0; j <ReportController.list_d.size(); j++) {
+			
+	        ImageView myimg = new ImageView();
+	        myimg.setFitWidth(150);
+	        myimg.setFitHeight(150);
+	        imgs.put(ReportController.list_d.get(j).filename,"_");
+
+			FileChooser fileChooser = new FileChooser();			
+	        Button buttonimg = new Button(""+ReportController.list_d.get(j).filename);
+	        buttonimg.setOnAction(e -> {
+	            File selectedFile = fileChooser.showOpenDialog(MyDialoug.dialog);
+	            
+	            Button b=(Button)e.getSource();
+	        	try {
+	    			BufferedImage bufferedImage = ImageIO.read(selectedFile);
+	    			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+	    			myimg.setImage(image);
+	    	        imgs.replace(b.getText(), selectedFile.getPath());
+	    			
+	    		} catch (IOException ex) {
+	    			  imgs.replace(b.getText(), "_");
+		    			
+	    			System.out.println(ex);
+	    		}
+	            
+	        });
+	
+	    	VBox hs = new VBox(20);
+			BorderPane bp = new BorderPane();
+			bp.setPadding(new Insets(10, 10, 10, 10));
+
+			bp.setTop(buttonimg);
+			bp.setBottom(myimg);
+
+			v.getChildren().add(bp);
+	}
+
+		scrollbrows.setContent(v);
+	}
 
 	void saveReport(String path) {
 		boolean bchkrowdata, bflowvspre;
@@ -200,16 +281,31 @@ public class PdfselectionController implements Initializable {
 		} else {
 			bchkrowdata = false;
 		}
+		
+		if (chsampleinfo.isSelected()) {
+			bolchsampleinfo = true;
+		} else {
+			bolchsampleinfo = false;
+		}
+		
 		if (ReportController.list_d.size() == 1) {
 
-			Singlepororeport sp = new Singlepororeport();
-			sp.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
-					txtcomname.getText(), imgpath, graphs, bchkrowdata, bchkcoverpage, imgpath1);
+			
+				System.out.println("Blood");
+				Singlepororeportblood sp2 = new Singlepororeportblood();
+				sp2.Report(path, ReportController.list_d.get(0), txtnotes.getText(),
+						txtcomname.getText(), imgpath, graphs, bchkrowdata, bchkcoverpage, imgpath1);
 
+			
 		} else {
-			Multiplepororeport mp = new Multiplepororeport();
-			mp.Report(path, ReportController.list_d, txtnotes.getText(), txtcomname.getText(),
-					graphs, bchkrowdata,bchkcoverpage, imgpath1);
+			System.out.println("Selected images : "+imgs);
+			
+				Multiplepororeportblood mp = new Multiplepororeportblood();
+				mp.Report(path, ReportController.list_d, txtnotes.getText(), txtcomname.getText(),
+						graphs, bchkrowdata,bchkcoverpage, imgpath1,bolchsampleinfo,imgs);	
+				
+			
+			
 		}
 	}
 

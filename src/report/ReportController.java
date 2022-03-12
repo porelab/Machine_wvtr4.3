@@ -84,6 +84,7 @@ import application.Myapp;
 import data_read_write.DatareadN;
 import de.tesis.dynaware.javafx.fancychart.zoom.Zoom;
 import drawchart.ChartPlot;
+import drawchart.SmoothedChart;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.Gauge.SkinType;
 import eu.hansolo.medusa.GaugeBuilder;
@@ -111,23 +112,9 @@ public class ReportController implements Initializable
 	  
 	 ArrayList<Boolean> onlyonce;
 	 
-	    @FXML
-	    private ImageView micropic;
+	
 
-	    @FXML
-	    private ImageView mizopic;
-
-	    @FXML
-	    private ImageView macropic;
-
-	    @FXML
-	    private Text microlab;
-
-	    @FXML
-	    private Text mizolab;
-
-	    @FXML
-	    private Text macrolab;
+	 
 
 	 
 	  
@@ -149,9 +136,8 @@ public class ReportController implements Initializable
 	Label grlable;
 	
 	@FXML
-	AnchorPane ancgauge1,pagination1;
+	AnchorPane pagination1;
 
-	 private Gauge   gauge,gauge1;
 	 
 	 Map<String,Map<String,DatareadN>> alldata;
 	 
@@ -226,9 +212,15 @@ public class ReportController implements Initializable
     
        if(i==1)
        {
-    	   Pane p=c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1F/PT vs Time", "Time (Second)", "F/PT",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter");
+    	  // Pane p=c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1F/PT vs Time", "Time (Second)", "Pressure",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter");
+    	 
+     //  Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1Pressure vs Time", "Time (Second)", "Pressure ("+DataStore.getUnitepressure()+")",list_d,"(3) Incremental Filter-Flow % vs Diameter");
+    	   Pane p = c.drawLinechartMix2(pagination1.getPrefWidth(),
+					pagination1.getPrefHeight(), "Flow vs Pressure",
+					"Pressure", "Flow ", list_d,
+					"(1) Flow vs Pressure");
     	   charts.put(p);
-    	   listofchart.add(p);
+  listofchart.add(p);
     	 
     	   
     	
@@ -401,7 +393,7 @@ public class ReportController implements Initializable
 	 String name="";
 	 if(chartNumber == 0)
 	 {
-		 name="1F-PT vs Time";
+		 name="1Pressure Vs Time";
 	 }
 
    return new File(WORKING_DIR,""+ name + ".png").getPath();
@@ -458,7 +450,6 @@ public class ReportController implements Initializable
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 
-		        savePic(ancgauge1,"temp.png");
 			
 				 FileChooser fileChooser = new FileChooser();
 				  
@@ -544,38 +535,24 @@ public class ReportController implements Initializable
 		VBox v=new VBox(10);
 		v.setPadding(new Insets(0,0,0,0));
 		
-		   double avgbp=0,avgbd=0;
-	   	   String fff=null,wpp=null,wff=null;
+	   	   String fff=null,wpp=null,wff=null,per=null;
 	   	   BigDecimal bb=BigDecimal.valueOf(0);
-	   	   List<String> clrs=getColorMultiple();
+	   	   List<String> clrs=DataStore.getColorMultiple();
 		for(int i=0;i<list_d.size();i++)
 		{	
 			fff=""+list_d.get(i).filename;
 	
-			wff = "" + DataStore.ConvertPressure(list_d.get(i).data.get("bpressure").toString());
-			wpp = "" + DataStore.ConvertDiameter(list_d.get(i).data.get("bdiameter").toString());
-			
-			bb.add(BigDecimal.valueOf(Double.parseDouble(wff)));
-			
+			wff = list_d.get(i).data.get("wvtr").toString();
+			wpp =list_d.get(i).data.get("permeance").toString();
+			per =list_d.get(i).data.get("permiability").toString();
 			
 			
-			avgbp=avgbp+Double.parseDouble(wff);
-			avgbd=avgbd+Double.parseDouble(wpp);
-			
-		
-			v.getChildren().add(getVBox(fff, Myapp.getRound(Double.parseDouble(wff), 2),Myapp.getRound(Double.parseDouble(wpp), 2),clrs.get(i)));
-			
+			v.getChildren().add(getVBox(fff, wff,wpp,per,clrs.get(i)));			
 		
 		}
 		
 		
 	
-		double b=(double)avgbd/list_d.size();
-		avgbub.setText("" +Myapp.getRound(b, DataStore.getRoundOff())+ " ("+DataStore.getUnitediameter()+")");
-
-		setgaugeBubb(Myapp.getRound(b+"", DataStore.getRoundOff()));
-		
-		
 		
 		
 		
@@ -719,37 +696,17 @@ public class ReportController implements Initializable
 		
 	}
 	
-	public List<String> getColorMultiple() {
-		
-		
-		
-		List<String> grpclr=new ArrayList<String>();
-		grpclr.add("#DBBA4F");
-		grpclr.add("#3F76B5");
-		grpclr.add("#D67479");
-		grpclr.add("#12B59F");
-		grpclr.add("#F5903D");
-		grpclr.add("#BC4644");
-		grpclr.add("#AD4F73");
-		grpclr.add("#40A7C1");
-		grpclr.add("#95B64F");
-		
-		
-		grpclr.add("#613769");
-		grpclr.add("#234882");
-		grpclr.add("#A1846A");
-		return grpclr;
-	}
-	HBox getVBox(String name,String bubp,String bubd,String clr)
+	
+	HBox getVBox(String name,String bubp,String bubd,String perm,String clr)
 	{
 		
 		HBox v1 = new HBox(5);
 		v1.setPadding(new Insets(5, 0, 0, 3));
 
 		Label l1 = new Label();
-		l1.setMaxWidth(200);
-		l1.setMinWidth(200);
-		l1.setPrefWidth(200);
+		l1.setMaxWidth(150);
+		l1.setMinWidth(150);
+		l1.setPrefWidth(150);
 		l1.setWrapText(true);
 		l1.setFont(fontss.getM_M());
 		l1.setTextFill(Color.web(clr));
@@ -767,11 +724,21 @@ public class ReportController implements Initializable
 		Label lv1 = new Label();
 		lv1.setText(bubd);
 
-		lv1.setMaxWidth(60);
-		lv1.setMinWidth(60);
-		lv1.setPrefWidth(60);
+		lv1.setMaxWidth(75);
+		lv1.setMinWidth(75);
+		lv1.setPrefWidth(75);
 		lv1.setFont(fontss.getM_M());
 		lv1.setTextFill(Color.web("#727376"));
+		
+		
+		Label lv2 = new Label();
+		lv2.setText(bubd);
+
+		lv2.setMaxWidth(60);
+		lv2.setMinWidth(60);
+		lv2.setPrefWidth(60);
+		lv2.setFont(fontss.getM_M());
+		lv2.setTextFill(Color.web("#727376"));
 
 	
 
@@ -781,80 +748,12 @@ public class ReportController implements Initializable
 		
 
 
-		v1.getChildren().addAll(rectangle,l1, lv, lv1);
+		v1.getChildren().addAll(rectangle,l1, lv, lv1, lv2);
 		return v1;
 	}
 		
 	
 /*Bubble Point Diamter Gauge*/
-	void setgaugeBubb(double d)
-	{
-		
-		
-		 VBox v=new VBox(5);
-		
-		 gauge1=GaugeBuilder.create()
-		         .skinType(SkinType.SIMPLE_SECTION)
-		         .title("BP Diameter")
-		         .unit(""+DataStore.getUnitediameter())
-		         .titleColor(Color.web("#727376"))
-		         .unitColor(Color.web("#727376"))
-		         .valueColor(Color.web("#727376"))
-		         .barColor(Color.BLACK)
-		         .animated(true)
-		         .maxValue(200)
-		         .animationDuration(5000)
-		         .sections(new Section(0, 66, Color.GRAY),
-		                   new Section(66, 132, Color.DARKGRAY),
-		                   new Section(132, 200, Color.DARKSLATEGRAY))
-		         .build();
-		 		gauge1.setPrefSize(150, 150);
-				gauge1.setValue(d);
-				
-				if ( d >= 0.00001 && d <= 2 ) {
-
-					lblmporetype.setText("( Micro Pore )");
-					gauge1.setMaxValue(2);
-					
-					
-					microlab.setVisible(true);
-					micropic.setVisible(true);
-					microlab.setText("" +Myapp.getRound(d, DataStore.getRoundOff())+ "");
-
-					
-				}
-				else if (d >= 2 && d <= 50) {
-					lblmporetype.setText("( Mizo Pore )");	
-					gauge1.setMaxValue(50);
-					
-					mizolab.setVisible(true);
-					mizopic.setVisible(true);
-
-					mizolab.setText("" +Myapp.getRound(d, DataStore.getRoundOff())+ "");
-
-				}
-				else {
-					lblmporetype.setText("( Macro Pore )");
-					gauge1.setMaxValue(200);
-					
-					macrolab.setVisible(true);
-					macropic.setVisible(true);
-					macrolab.setText("" +Myapp.getRound(d, DataStore.getRoundOff())+ "");
-				}
-
-
-		
-				savePic(anc);
-				
-	        ancgauge1.getChildren().add(gauge1);
-	        
-	        
-
-	    //   
-			
-
-	        
-	}
 /*Chart Image Snapshot*/
 	private void createChartImagePagination(final SaveChartsTask saveChartsTask) {
 		
@@ -872,16 +771,29 @@ public class ReportController implements Initializable
             if (0 < saveChartsTask.getWorkDone()) {
            	  Pane ap=listofchart.get(0);
            	   
+           	  try {
 	         	  LineChart<Number, Number>  lineChart=(LineChart<Number, Number>) ap.getChildren().get(0);
 	         	 
 	         	    setDataPointPopup(lineChart);
-	     	     
-	         	
+	     	    
 	         	     //  Zoom zoom =new Zoom(lineChart,ap);    	
 	         	
 	           pagination1.getChildren().setAll(ap);
 
               saveChartsTask.workDoneProperty().removeListener(this);
+           	  }
+           	  catch(Exception e)
+           	  {
+           		 SmoothedChart<Number, Number>  lineChart=(SmoothedChart<Number, Number>) ap.getChildren().get(0);
+	         	 
+	         	    setDataPointPopup(lineChart);
+	     	    
+	         	     //  Zoom zoom =new Zoom(lineChart,ap);    	
+	         	
+	           pagination1.getChildren().setAll(ap);
+
+           saveChartsTask.workDoneProperty().removeListener(this);
+           	  }
             
        	   
             }

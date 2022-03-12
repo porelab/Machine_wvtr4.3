@@ -50,7 +50,7 @@ System.out.println("if");
 				 Myapp.status=""+info.get(0).get(4);
 			//	 Myapp.uid=""+info.get(0).get(6);
 				 
-				 Myapp.uid="AUTOCAL1";
+				 Myapp.uid="N0049";
 				 
 				 
 				 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/login/loginn.fxml"));

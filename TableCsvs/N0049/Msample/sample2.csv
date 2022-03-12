@@ -1,0 +1,33 @@
+wvtr
+testname,wvtr
+sample,satyam o
+thikness,1
+lotno,satyam
+duration,0:4:17
+durationsecond,257
+testtime,15:43:04
+testdate,15/07/2019
+customerid,N0049
+indistry,Filtration
+application,Wire Mesh
+materialclassification,Fibrous
+materialtype,Hydrophilic
+splate,Medium
+testdata,10
+datatype,20
+testtype,type1
+method,method1
+tChamber,1,2,4,5,6,7,8
+hChamber,21,32,43,53,62,74,89
+tBottom,1,3,5,6,8,9,10
+hBottom,20,30,40,50,60,70,88
+tTop,1,2,4,5,6,7,8
+hTop,20,30,40,50,60,70,88
+t,60,120,180,240,300,360,420
+svp,11,22,33,44,55,66,77
+avp,10,20,30,40,50,60,70
+mass,23,34,44,55,67,89,99
+wvtr,125
+permeance,150
+diamter,80
+permiability,5

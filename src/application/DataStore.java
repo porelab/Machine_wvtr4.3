@@ -743,6 +743,23 @@ public class DataStore {
 
 		return Myapp.getRoundDouble(diameter, getRoundOff());
 	}
+	
+	public static List<String> getColorMultiple() {
+
+		List<String> grpclr = new ArrayList<String>();
+		grpclr.add("#035aa6");
+		grpclr.add("#fcbf1e");
+		grpclr.add("#c70039");
+		grpclr.add("#f37121");
+		grpclr.add("#e2979c");
+		grpclr.add("#481380");
+		grpclr.add("#00a8cc");
+		grpclr.add("#95B64F");
+		grpclr.add("#be79df");
+		grpclr.add("#ff1e56");
+		
+		return grpclr;
+	}				
 
 	public static double ConvertPressure(String pressure) {
 		double ans;

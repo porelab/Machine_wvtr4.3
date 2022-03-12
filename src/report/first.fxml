@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.paint.*?>
-<?import java.net.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1368.0" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="report.FirstController">
+<AnchorPane maxHeight="768.0" maxWidth="1366.0" minHeight="768.0" minWidth="1368.0" prefHeight="768.0" prefWidth="1368.0" styleClass="bgwhite" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="report.FirstController">
    <children>
       <ImageView fitHeight="104.0" fitWidth="1374.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -103,7 +110,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <JFXToggleButton fx:id="autosync" layoutX="662.0" layoutY="112.0" styleClass="col-gray70" text="Sync" toggleColor="#254f94">
+      <JFXToggleButton fx:id="autosync" layoutX="662.0" layoutY="112.0" styleClass="col-gray70" text="Sync" toggleColor="#254f94" visible="false">
          <font>
             <Font size="15.0" />
          </font>
@@ -117,7 +124,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btndownload" layoutX="761.0" layoutY="109.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" styleClass="trsnpbtn">
+      <Button fx:id="btndownload" layoutX="761.0" layoutY="109.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="56.0" styleClass="trsnpbtn" visible="false">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
