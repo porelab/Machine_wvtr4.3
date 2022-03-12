@@ -734,7 +734,7 @@ public class ReportController implements Initializable
 		
 		
 		Label lv2 = new Label();
-		lv2.setText(bubd);
+		lv2.setText(perm);
 
 		lv2.setMaxWidth(60);
 		lv2.setMinWidth(60);
