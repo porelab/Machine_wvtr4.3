@@ -559,58 +559,58 @@ public class NLivetestController implements Initializable {
 		}
 		
 		
-		showOnGraph(h1, h2, h3, tt1, tt2, tt3);
+		//showOnGraph(h1, h2, h3, tt1, tt2, tt3);
 		//start condition
 
-//		if (t >= tmin && t <= tmax && h >= hmin && h <= hmax) {
-//			testtime=1;
-//			runningCondition = 0;
-//			showOnGraph(h1, h2, h3, tt1, tt2, tt3);
-//		} else if (t < tmin && runningCondition == 0) {
-//			runningCondition = 1;
-//			Mycommand.valveOn('2', 0);
-//			Mycommand.valveOn('4', 1200);
-//		} else if (t > tmax && runningCondition == 0) {
-//			runningCondition = 2;
-//			Mycommand.valveOn('4', 0);
-//		} else if (h < hmin && runningCondition == 0) {
-//			runningCondition = 3;
-//			Mycommand.valveOn('3', 0);
-//			Mycommand.valveOn('4', 1200);
-//
-//		} else if (h > hmax && runningCondition == 0) {
-//			runningCondition = 4;
-//			Mycommand.valveOn('2', 0);
-//			Mycommand.valveOn('4', 1200);
-//		}
-//
-//		// ......
-//
-//		if (t >= tmin && runningCondition == 1) {
-//			// sd
-//			Mycommand.valveOff('2', 0);
-//			Mycommand.valveOff('4', 1200);
-//			runningCondition = 0;
-//		}
-//
-//		if (t <= tmax && runningCondition == 2) {
-//			Mycommand.valveOff('4', 0);
-//			runningCondition = 0;
-//		
-//		}
-//
-//		if (h >= hmin && runningCondition == 3) {
-//			// sd
-//			Mycommand.valveOff('3', 0);
-//			Mycommand.valveOff('4', 1200);
-//			runningCondition = 0;
-//		}
-//
-//		if (h <= hmax && runningCondition == 4) {
-//			Mycommand.valveOff('2', 0);
-//			Mycommand.valveOff('4', 1200);
-//			runningCondition = 0;
-//		}
+		if (t >= tmin && t <= tmax && h >= hmin && h <= hmax) {
+			testtime=1;
+			runningCondition = 0;
+			showOnGraph(h1, h2, h3, tt1, tt2, tt3);
+		} else if (t < tmin && runningCondition == 0) {
+			runningCondition = 1;
+			Mycommand.valveOn('2', 0);
+			Mycommand.valveOn('4', 1200);
+		} else if (t > tmax && runningCondition == 0) {
+			runningCondition = 2;
+			Mycommand.valveOn('4', 0);
+		} else if (h < hmin && runningCondition == 0) {
+			runningCondition = 3;
+			Mycommand.valveOn('3', 0);
+			Mycommand.valveOn('4', 1200);
+
+		} else if (h > hmax && runningCondition == 0) {
+			runningCondition = 4;
+			Mycommand.valveOn('2', 0);
+			Mycommand.valveOn('4', 1200);
+		}
+
+		// ......
+
+		if (t >= tmin && runningCondition == 1) {
+			// sd
+			Mycommand.valveOff('2', 0);
+			Mycommand.valveOff('4', 1200);
+			runningCondition = 0;
+		}
+
+		if (t <= tmax && runningCondition == 2) {
+			Mycommand.valveOff('4', 0);
+			runningCondition = 0;
+		
+		}
+
+		if (h >= hmin && runningCondition == 3) {
+			// sd
+			Mycommand.valveOff('3', 0);
+			Mycommand.valveOff('4', 1200);
+			runningCondition = 0;
+		}
+
+		if (h <= hmax && runningCondition == 4) {
+			Mycommand.valveOff('2', 0);
+			Mycommand.valveOff('4', 1200);
+			runningCondition = 0;
+		}
 
 	}
 
