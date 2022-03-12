@@ -215,10 +215,12 @@ public class ReportController implements Initializable
     	  // Pane p=c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1F/PT vs Time", "Time (Second)", "Pressure",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter");
     	 
      //  Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1Pressure vs Time", "Time (Second)", "Pressure ("+DataStore.getUnitepressure()+")",list_d,"(3) Incremental Filter-Flow % vs Diameter");
-    	   Pane p = c.drawLinechartMix2(pagination1.getPrefWidth(),
-					pagination1.getPrefHeight(), "Flow vs Pressure",
-					"Pressure", "Flow ", list_d,
-					"(1) Flow vs Pressure");
+    	
+    	   
+    	   Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(), pagination1.getPrefHeight(),
+					"Mass vs Time", "Time", "Mass", list_d,
+					"(3) Incremental Filter-Flow % vs Diameter");
+    	   
     	   charts.put(p);
   listofchart.add(p);
     	 
@@ -393,7 +395,7 @@ public class ReportController implements Initializable
 	 String name="";
 	 if(chartNumber == 0)
 	 {
-		 name="1Pressure Vs Time";
+		 name="1F-PT vs Time";
 	 }
 
    return new File(WORKING_DIR,""+ name + ".png").getPath();

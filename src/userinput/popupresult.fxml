@@ -28,35 +28,41 @@
             <Font name="Calibri Bold" size="20.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d3d89" height="65.0" layoutX="134.0" layoutY="77.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="634.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="88.0" layoutX="133.0" layoutY="141.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="634.0" />
-      <Line endX="50.0" layoutX="469.0" layoutY="153.0" rotate="90.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
-      <Label layoutX="204.0" layoutY="96.0" styleClass="font-montserrat-semiBold" text="Bubble Point Pressure" textFill="WHITE" AnchorPane.topAnchor="96.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0d3d89" height="65.0" layoutX="122.0" layoutY="84.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="645.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6e6e6" height="88.0" layoutX="123.0" layoutY="148.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" width="644.0" />
+      <Line endX="50.0" layoutX="361.0" layoutY="159.0" rotate="90.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
+      <Line endX="50.0" layoutX="577.0" layoutY="159.0" rotate="90.0" startX="-100.0" stroke="WHITE" strokeWidth="4.0" />
+      <Label layoutX="207.0" layoutY="105.0" styleClass="font-montserrat-semiBold" text="WVTR" textFill="WHITE" AnchorPane.topAnchor="105.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="537.0" layoutY="96.0" styleClass="font-montserrat-semiBold" text="Bubble Point Diameter" textFill="WHITE" AnchorPane.topAnchor="96.0">
+      <Label layoutX="403.0" layoutY="105.0" styleClass="font-montserrat-semiBold" text="Permeance" textFill="WHITE" AnchorPane.topAnchor="105.0">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="lblbpp" alignment="CENTER" layoutX="233.0" layoutY="156.0" prefHeight="37.0" prefWidth="100.0" styleClass="font-montserrat-semiBold" text="0.14" textFill="#646464">
+      <Label layoutX="618.0" layoutY="105.0" styleClass="font-montserrat-semiBold" text="Permiability" textFill="WHITE" AnchorPane.topAnchor="105.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblbpp" alignment="CENTER" layoutX="139.0" layoutY="163.0" prefHeight="37.0" prefWidth="182.0" styleClass="font-montserrat-semiBold" text="0.14" textFill="#646464">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label graphicTextGap="0.0" layoutX="269.0" layoutY="191.0" styleClass="font-montserrat-semiBold" text="psi" textAlignment="CENTER" textFill="#646464" AnchorPane.topAnchor="191.0">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblbpdiamter" alignment="CENTER" layoutX="562.0" layoutY="156.0" prefWidth="100.0" styleClass="font-montserrat-semiBold" text="0.24" textFill="#646464">
+      <Label fx:id="lblbpdiamter" alignment="CENTER" layoutX="356.0" layoutY="163.0" prefWidth="180.0" styleClass="font-montserrat-semiBold" text="0.24" textFill="#646464">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label graphicTextGap="0.0" layoutX="585.0" layoutY="191.0" styleClass="font-montserrat-semiBold" text="micron" textAlignment="CENTER" textFill="#646464" AnchorPane.topAnchor="191.0">
+      <Label fx:id="lblmeanp" alignment="CENTER" layoutX="574.0" layoutY="162.0" prefWidth="180.0" styleClass="font-montserrat-semiBold" text="0.24" textFill="#646464">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblunitegurley" alignment="CENTER" graphicTextGap="0.0" layoutX="557.0" layoutY="187.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text=" (ng/m.s.pa)" textAlignment="CENTER" textFill="#646464" wrapText="true" AnchorPane.topAnchor="187.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -86,5 +92,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="lblunitefrazier" alignment="CENTER" graphicTextGap="0.0" layoutX="341.0" layoutY="188.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="(ng/m2.s.pa)" textAlignment="CENTER" textFill="#646464" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblunitefrazier1" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="125.0" layoutY="188.0" prefHeight="50.0" prefWidth="211.0" styleClass="font-montserrat-semiBold" text="( g/m^2d )" textAlignment="CENTER" textFill="#646464" wrapText="true">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

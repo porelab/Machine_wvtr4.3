@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,12 +29,12 @@ import application.SerialWriter;
 import application.writeFormat;
 import communicationProtocol.Mycommand;
 import data_read_write.CsvWriter;
+import data_read_write.PolynomialRegression;
 import de.tesis.dynaware.javafx.fancychart.zoom.Zoom;
 import eu.hansolo.tilesfx.Tile;
 import eu.hansolo.tilesfx.Tile.SkinType;
 import eu.hansolo.tilesfx.TileBuilder;
 import eu.hansolo.tilesfx.colors.Bright;
-import eu.hansolo.tilesfx.colors.Dark;
 import extrafont.Myfont;
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
@@ -379,6 +381,137 @@ public class NLivetestController implements Initializable {
 		}).start();
 
 	}
+	void createCsvTableBubble() {
+
+		Myapp.uid="N0049";
+		try {
+			System.out.println("csv creating........");
+			CsvWriter cs = new CsvWriter();
+
+			Date d1 = new Date();
+			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("ddMMyy");
+			String date1 = DATE_FORMAT.format(d1);
+
+			File fff = new File("TableCsvs");
+			if (!fff.exists()) {
+				fff.mkdir();
+			}
+
+			File fffff = new File("TableCsvs/" + Myapp.uid);
+			if (!fffff.exists()) {
+				fffff.mkdir();
+			}
+
+			File f = new File(fffff.getPath() + "/" + Myapp.sampleid);
+			if (!f.isDirectory()) {
+				f.mkdir();
+				System.out.println("Dir csv folder created");
+			}
+
+			String[] ff = f.list();
+
+			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_" + findInt(ff) + ".csv");
+
+			cs.firstLine("wvtr");
+			cs.newLine("testname", "wvtr");
+			cs.newLine("sample", Myapp.sampleid);
+			cs.newLine("thikness", Myapp.thikness);
+
+			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+			Date date = new Date();
+			t1test = System.currentTimeMillis();
+			int s = (int) (t1test - t2test) / 1000;
+
+			int hour = (s / 3600);
+			int min = (s / 60) % 60;
+			int remsec = (s % 60);
+			String durr = "";
+			if (hour != 0) {
+				durr = hour + " hr:" + min + " min:" + remsec + " sec";
+			} else {
+				durr = min + " min:" + remsec + " sec";
+			}
+
+			cs.newLine("duration", durr);
+			cs.newLine("durationsecond", s + "");
+			cs.newLine("testtime", timeFormat.format(date));
+			cs.newLine("testdate", dateFormat.format(date));
+			cs.newLine("customerid", Myapp.uid);
+
+			cs.newLine("indistry", Myapp.indtype);
+			cs.newLine("application", Myapp.materialapp);
+			cs.newLine("materialclassification", Myapp.classification);
+			//cs.newLine("crosssection", Myapp.crossection);
+			cs.newLine("materialtype", Myapp.materialtype);
+			// cs.newLine("tfact", Myapp.tfactore);
+			cs.newLine("splate", Myapp.splate);
+
+			cs.newLine("testdata",Myapp.testdata);
+			cs.newLine("datatype",Myapp.dataint);
+			cs.newLine("testtype",Myapp.testtype);
+			cs.newLine("method",Myapp.testmethod);
+			
+			cs.newLine("tChamber", tChamber);
+			cs.newLine("hChamber", hChamber);
+			cs.newLine("tBottom", tBottom);
+			cs.newLine("hBottom", hBottom);
+			cs.newLine("tTop", tTop);
+			cs.newLine("hTop", hTop);
+			cs.newLine("t", tlist);
+			cs.newLine("svp", svp);
+			cs.newLine("avp", avp);
+			cs.newLine("mass", mass);
+			
+
+			
+		
+			List<String> tt=new ArrayList<String>(tlist);
+			List<String> ma=new ArrayList<String>(mass);
+			
+			getWetFlowSmooth(tt, ma, 50000, 1);
+	
+			cs.newLine("timeline",tt);
+			cs.newLine("massline",ma);
+			
+			
+			double calTime=Double.parseDouble(tlist.get(tlist.size()/2));
+			double calG=getFlowPointOn(tlist,mass, 50000, 1,calTime);
+			double area=(double)(3.14*calculationdia*calculationdia)/4;
+			double wvtr=(double)(calG/calTime)/area;
+			
+			
+			System.out.println("Calculation\nCalTime : "+calTime+"\nCalG : "+calG+"\narea : "+area+"\nWvtr : "+wvtr);
+			
+			
+			double svpp=Double.parseDouble(svp.get(svp.size()/2));
+			double h22=Double.parseDouble(hBottom.get(hBottom.size()/2));
+			double h33=Double.parseDouble(hChamber.get(hChamber.size()/2));
+			double per=wvtr/(svpp*(h22-h33));
+			
+			
+			double permiability=per*Double.parseDouble(Myapp.thikness);
+			
+			cs.newLine("permeance",""+per);
+			cs.newLine("wvtr",""+wvtr);
+			cs.newLine("diameter",calculationdia+"");
+			cs.newLine("permiability",permiability+"");
+					
+			
+			savefile = new File(cs.filename);
+			cs.closefile();
+			showResultPopup();
+
+			System.out.println("csv Created");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// LoadAnchor.LoadCreateTestPage();
+		// LoadAnchor.LoadReportPage();
+	}
 
 	void setPoints(double h1, double h2, double h3, double tt1, double tt2, double tt3) {
 		System.out.println("H1 : " + h1);
@@ -486,7 +619,7 @@ public class NLivetestController implements Initializable {
 				
 
 				double svp1=0.854*Math.getExponent(0.05*tt3);
-				double avp1=h1*svp1;
+				double avp1=h3*svp1;
 				double mass1=(avp1*1000)/(461.5*(tt3+273.15));
 				
 				
@@ -502,6 +635,7 @@ public class NLivetestController implements Initializable {
 				svp.add(""+svp1);
 				avp.add(""+avp1);
 				mass.add(""+mass1);
+				tlist.add(""+time);
 				
 				
 				series2.getData().add(new XYChart.Data(t, mass1));
@@ -565,13 +699,13 @@ public class NLivetestController implements Initializable {
 	// setting plate value ..
 	void setPlateval() {
 		if (Myapp.splate.equals("Small")) {
-			calculationdia = 1;
+			calculationdia = 40;
 		} else if (Myapp.splate.equals("Large")) {
 
-			calculationdia = 9.3;
+			calculationdia = 80;
 		} else {
 
-			calculationdia = 2.3;
+			calculationdia = 60;
 		}
 	}
 
@@ -1222,263 +1356,181 @@ public class NLivetestController implements Initializable {
 
 	}
 
-	void setBubblePoints(double pr, double fl) {
-		Platform.runLater(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				flowserires.getData().add(new XYChart.Data(getTime(), fl));
-				pressureserires.getData().add(new XYChart.Data(getTime(), pr));
-
-			}
-		});
-
-		p2 = pr;
-		t2 = System.currentTimeMillis();
-
-		int conditionpressure = 30;
-
-		if (p2 < conditionpressure) {
-			if (p2 != 0 && p1 != p2) {
-				System.out.println("IN if p2!=0 and  " + p1 + " - " + p2);
-
-				double deltap;// = (double) p2 - p1;
-				double deltat = (double) (t2 - t1) / 1000;
-
-				if (p2 > p1) {
-					deltap = (double) p2 - p1;
-				} else {
-					deltap = (double) p1 - p2;
-				}
-
-				double ans;
-
-				System.out.println("Record Number : " + ind);
-				ans = (fl * deltat) / deltap;
-
-				System.out.println("Flow : " + fl + "\nP1 : " + p1 + "\nP2 : " + p2 + "\nT1 :" + t1 + "\n T2 : " + t2);
-				System.out.println("Delta P : " + deltap + " \nDelta T : " + (deltat));
-				System.out.println("Answer F/PT : " + ans);
-
-				if (ans > 0) {
-					// if(ans<Double.parseDouble(DataStore.thresoldvalue))
-//					p1list.add("" + p1);
-//					p2list.add("" + p2);
-//					daltaplist.add("" + deltap);
-//					daltatlist.add("" + deltat);
-//					flowlist.add("" + fl);
-//					bans.add("" + ans);
-					tlist.add("" + getTime());
-					if (ans < thval) {
-						Platform.runLater(new Runnable() {
-
-							@Override
-							public void run() {
-								// TODO Auto-generated method stub
-								// System.out.println("Size of list is : "+DataStore.intList.get(80).size()+"
-								// .... INDEX : "+ind);
-								series2.getData().add(new XYChart.Data(
-
-										getTime(), ans));
-
-								series1.getData().remove(1);
-								series1.getData().add(new XYChart.Data(getTime() + 10, thval));
-
-								ind++;
-								countbp = 0;
-
-							}
-						});
-
-					} else {
-
-						countbp++;
-
-						if (countbp > 2) {
-							Platform.runLater(new Runnable() {
-
-								@Override
-								public void run() {
-
-									series2.getData().add(new XYChart.Data(getTime(), ans));
-									series1.getData().remove(1);
-									series1.getData().add(new XYChart.Data(getTime() + 10, thval));
-
-									// bbp=(double)DataStore.intList.get("80").get(DataStore.intList.get("80").size()-4);
-									// bbf=(double)DataStore.intList.get("70").get(DataStore.intList.get("70").size()-4);
-
-									ind++;
-									// String bubblepoint = getBubbledia(bbp);
-									// bbd = Double.parseDouble(bubblepoint);
-
-									lblbpc.setText("Bubble Point : " + bbd + " µ");
-
-									// Myapp.bps.put("" + bbp, "" + bubblepoint);
-
-									Mycommand.stopADC(0);
-									Mycommand.valveOn('5', 500);
-									Mycommand.setDACValue('1', 0, 1000);
-									Mycommand.setDACValue('2', 0, 1800);
-
-									testtype = 5;
-									createCsvTableBubble();
-
-								}
-
-							});
-
-						} else {
-							Platform.runLater(new Runnable() {
-
-								@Override
-								public void run() {
-									// TODO Auto-generated method
-									// stub
-
-									series2.getData().add(new XYChart.Data(getTime(), ans));
-									series1.getData().remove(1);
-									series1.getData().add(new XYChart.Data(getTime() + 10, thval));
-
-									ind++;
-								}
-							});
-
-						}
-						System.out.println("--->>>>> Value of trigger counter :" + countbp);
-
-					}
-
-					// bubble point complete send code
-				} else {
-					ind++;
-				}
-				t1 = t2;
-				p1 = p2;
-			} else {
-				t1 = System.currentTimeMillis();
-				ind++;
-			}
-		} else {
-
-			testtype = 5;
-			// DataStore.serialPort.removeEventListener();
-			Mycommand.stopADC(0);
-			Mycommand.valveOn('5', 500);
-			Mycommand.setDACValue('1', 0, 1000);
-			Mycommand.setDACValue('2', 0, 1800);
-
-			Platform.runLater(new Runnable() {
-
-				@Override
-				public void run() {
-					System.out.println("NO buuble fund");
-					status.setText("No Bubble Point found");
-					Toast.makeText(Main.mainstage, "No bubble point found", 1500, 100, 100);
-				}
-			});
-
-			starttest.setDisable(false);
-		}
-
-	}
-
+	
 	// csv create function
-	void createCsvTableBubble() {
+	public double getFlowPointOn(List<String> pressure, List<String> flow,int range, int degree,double pressurePoint)
+	{ 
+	double newFlow=0;
 
-		Myapp.uid="N0090";
-		try {
-			System.out.println("csv creating........");
-			CsvWriter cs = new CsvWriter();
+	List<Double> xx = new ArrayList<Double>();
+	List<Double> yy = new ArrayList<Double>();
 
-			Date d1 = new Date();
-			SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("ddMMyy");
-			String date1 = DATE_FORMAT.format(d1);
+	for (int i = 0; i < pressure.size(); i++) {
+		xx.add(Double.parseDouble(pressure.get(i)));
+		yy.add(Double.parseDouble(flow.get(i)));
+	}
 
-			File fff = new File("TableCsvs");
-			if (!fff.exists()) {
-				fff.mkdir();
+	Map<Integer, Double> peaks = new HashMap<Integer, Double>();
+
+	Map<Integer, Double> xpoints = new HashMap<Integer, Double>();
+	for (int i = 1; i < xx.size() - 1; i++) {
+
+		if (yy.get(i) > yy.get(i - 1) && yy.get(i) > yy.get(i + 1)) {
+
+			int n = (int) Math.abs(yy.get(i) - yy.get(i - 1));
+			int n1 = (int) Math.abs(yy.get(i) - yy.get(i + 1));
+			if (n > range && n1 > range) {
+				peaks.put(i, yy.get(i));
+				xpoints.put(i, xx.get(i));
+				System.out.println(i + " - Peak up : " + n + " y[i] : "
+						+ yy.get(i - 1) + "-" + yy.get(i) + "-"
+						+ yy.get(i + 1));
 			}
 
-			File fffff = new File("TableCsvs/" + Myapp.uid);
-			if (!fffff.exists()) {
-				fffff.mkdir();
+		} else if (yy.get(i) < yy.get(i - 1) && yy.get(i) < yy.get(i + 1)) {
+
+			int n = (int) Math.abs(yy.get(i) - yy.get(i - 1));
+			int n1 = (int) Math.abs(yy.get(i) - yy.get(i + 1));
+			if (n > range && n1 > range) {
+				peaks.put(i, yy.get(i));
+				xpoints.put(i, xx.get(i));
+				System.out.println(i + " - Peak up : " + n + " y[i] : "
+						+ yy.get(i - 1) + "-" + yy.get(i) + "-"
+						+ yy.get(i + 1));
 			}
 
-			File f = new File(fffff.getPath() + "/" + Myapp.sampleid);
-			if (!f.isDirectory()) {
-				f.mkdir();
-				System.out.println("Dir csv folder created");
-			}
+		}
+	}
 
-			String[] ff = f.list();
+	// System.out.println("Original : "+xx);
+	List<Integer> pp = new ArrayList<Integer>(peaks.keySet());
 
-			cs.wtirefile(f.getPath() + "/" + Myapp.sampleid + "_" + findInt(ff) + ".csv");
+	for (int i = 0; i < pp.size(); i++) {
 
-			cs.firstLine("wvtr");
-			cs.newLine("testname", "wvtr");
-			cs.newLine("sample", Myapp.sampleid);
-			cs.newLine("thikness", Myapp.thikness);
+		int mm = pp.get(i) - i;
+	//	System.out.println("Removing : " + yy.get(mm));
 
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+		yy.remove(mm);
+		xx.remove(mm);
+	}
 
-			Date date = new Date();
-			t1test = System.currentTimeMillis();
-			int s = (int) (t1test - t2test) / 1000;
+	System.out.println(yy.size() + " : " + xx.size());
 
-			int hour = (s / 3600);
-			int min = (s / 60) % 60;
-			int remsec = (s % 60);
-			String durr = "";
-			if (hour != 0) {
-				durr = hour + " hr:" + min + " min:" + remsec + " sec";
-			} else {
-				durr = min + " min:" + remsec + " sec";
-			}
+	if (xx.size() <= degree) {
+		degree = xx.size();
+	}
 
-			cs.newLine("duration", durr);
-			cs.newLine("durationsecond", s + "");
-			cs.newLine("testtime", timeFormat.format(date));
-			cs.newLine("testdate", dateFormat.format(date));
-			cs.newLine("customerid", Myapp.uid);
+	PolynomialRegression p = new PolynomialRegression(xx, yy, degree, "n");
+	double[] re = p.polyfit();
 
-			cs.newLine("indistry", Myapp.indtype);
-			cs.newLine("application", Myapp.materialapp);
-			cs.newLine("materialclassification", Myapp.classification);
-			//cs.newLine("crosssection", Myapp.crossection);
-			cs.newLine("materialtype", Myapp.materialtype);
-			// cs.newLine("tfact", Myapp.tfactore);
-			cs.newLine("splate", Myapp.splate);
+	for (int i = 0; i < peaks.size(); i++) {
 
-			cs.newLine("testdata",Myapp.testdata);
-			cs.newLine("datatype",Myapp.dataint);
-			cs.newLine("testtype",Myapp.testtype);
-			cs.newLine("method",Myapp.testmethod);
-			
-			cs.newLine("tChamber", tChamber);
-			cs.newLine("hChamber", hChamber);
-			cs.newLine("tBottom", tBottom);
-			cs.newLine("hBottom", hBottom);
-			cs.newLine("tTop", tTop);
-			cs.newLine("hTop", hTop);
-			cs.newLine("t", tlist);
-			cs.newLine("svp", svp);
-			cs.newLine("avp", avp);
-			cs.newLine("mass", mass);
-			savefile = new File(cs.filename);
-			cs.closefile();
-			showResultPopup();
+		double xpoint = xpoints.get(pp.get(i));
 
-			System.out.println("csv Created");
+		System.out.println("" + pp.get(i) + "- >" + xpoint);
+		double ypoint = p.polynomial(xpoint, re);
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		xx.add(pp.get(i), xpoint);
+		yy.add(pp.get(i), ypoint);
+
+	}
+
+	
+		newFlow = p.polynomial(pressurePoint, re);
+
+	System.out.println("New flow point :  "+newFlow+" at pressure : "+pressurePoint);
+	return newFlow;
+	}
+
+	public void getWetFlowSmooth(List<String> pressure, List<String> flow,
+			int range, int degree) {
+
+		List<Double> xx = new ArrayList<Double>();
+		List<Double> yy = new ArrayList<Double>();
+
+		for (int i = 0; i < pressure.size(); i++) {
+			xx.add(Double.parseDouble(pressure.get(i)));
+			yy.add(Double.parseDouble(flow.get(i)));
 		}
 
-		// LoadAnchor.LoadCreateTestPage();
-		// LoadAnchor.LoadReportPage();
+		Map<Integer, Double> peaks = new HashMap<Integer, Double>();
+
+		Map<Integer, Double> xpoints = new HashMap<Integer, Double>();
+		for (int i = 1; i < xx.size() - 1; i++) {
+
+			if (yy.get(i) > yy.get(i - 1) && yy.get(i) > yy.get(i + 1)) {
+
+				int n = (int) Math.abs(yy.get(i) - yy.get(i - 1));
+				int n1 = (int) Math.abs(yy.get(i) - yy.get(i + 1));
+				if (n > range && n1 > range) {
+					peaks.put(i, yy.get(i));
+					xpoints.put(i, xx.get(i));
+					System.out.println(i + " - Peak up : " + n + " y[i] : "
+							+ yy.get(i - 1) + "-" + yy.get(i) + "-"
+							+ yy.get(i + 1));
+				}
+
+			} else if (yy.get(i) < yy.get(i - 1) && yy.get(i) < yy.get(i + 1)) {
+
+				int n = (int) Math.abs(yy.get(i) - yy.get(i - 1));
+				int n1 = (int) Math.abs(yy.get(i) - yy.get(i + 1));
+				if (n > range && n1 > range) {
+					peaks.put(i, yy.get(i));
+					xpoints.put(i, xx.get(i));
+					System.out.println(i + " - Peak up : " + n + " y[i] : "
+							+ yy.get(i - 1) + "-" + yy.get(i) + "-"
+							+ yy.get(i + 1));
+				}
+
+			}
+		}
+
+		System.out.println("Original : " + yy);
+		// System.out.println("Original : "+xx);
+		List<Integer> pp = new ArrayList<Integer>(peaks.keySet());
+
+		for (int i = 0; i < pp.size(); i++) {
+
+			int mm = pp.get(i) - i;
+			System.out.println("Removing : " + yy.get(mm));
+
+			yy.remove(mm);
+			xx.remove(mm);
+		}
+
+		System.out.println(yy.size() + " : " + xx.size());
+
+		if (xx.size() <= degree) {
+			degree = xx.size();
+		}
+
+		PolynomialRegression p = new PolynomialRegression(xx, yy, degree, "n");
+		double[] re = p.polyfit();
+
+		for (int i = 0; i < peaks.size(); i++) {
+
+			double xpoint = xpoints.get(pp.get(i));
+
+			System.out.println("" + pp.get(i) + "- >" + xpoint);
+			double ypoint = p.polynomial(xpoint, re);
+
+			xx.add(pp.get(i), xpoint);
+			yy.add(pp.get(i), ypoint);
+
+		}
+
+		
+		flow.clear();
+
+		for (int i = 0; i < xx.size(); i++) {
+			double xpoint = xx.get(i);
+			double ypoint = p.polynomial(xpoint, re);
+
+			flow.add("" + ypoint);
+		}
+
 	}
+
 
 	// show result popup
 	void showResultPopup() {

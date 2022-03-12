@@ -36,6 +36,7 @@ import javafx.scene.transform.Transform;
 
 import javax.imageio.ImageIO;
 
+import application.DataStore;
 import application.Myapp;
 
 import com.sun.javafx.charts.Legend;
@@ -333,6 +334,210 @@ public class ChartPlot {
 		}
 	}
 	
+	public Pane drawLinechartWithScatterMultiple(double xsize, double ysize,
+			String Title, String Xname, String Yname, List<DatareadN> d,
+			String imgname) {
+
+		final NumberAxis xAxis = new NumberAxis();
+		final NumberAxis yAxis = new NumberAxis();
+
+		yAxis.setLabel(Yname);
+		xAxis.setLabel(Xname);
+
+		// SmoothedChart<Number, Number> lineChart= new SmoothedChart<>(xAxis,
+		// yAxis);
+		LineChart<Number, Number> lineChart = new LineChart<>(xAxis,
+				yAxis);
+
+		lineChart.setPrefSize(xsize, ysize - 50);
+		lineChart.setMinSize(xsize, ysize - 50);
+		lineChart.setMaxSize(xsize, ysize - 50);
+		//lineChart.setSmoothed(true);
+		////lineChart.setChartType(ChartType.LINE);
+		//lineChart.setInteractive(true);
+		//lineChart.setSubDivisions(8);
+		// creating the chart
+
+		// lineChart.setTitle(Title);
+		lineChart.setLegendVisible(false);
+	
+		List<String> clrlist = DataStore.getColorMultiple();
+		List<String> leglab = new ArrayList<String>();
+
+		XYChart.Series[] series = new XYChart.Series[d.size() * 2];
+		// XYChart.Series[] series1 = new XYChart.Series[d.size()];
+		// XYChart.Series[] series2 = new XYChart.Series[d.size()];
+		int ik = 0;
+		for (int i = 0; i < d.size(); i++) {
+			String clr = clrlist.get(i);
+			series[ik] = new XYChart.Series();
+			leglab.add(d.get(i).filename);
+			// System.out.println("File >>"+(i+1)+" is taking in action");
+
+			// series[i].setName(d.get(i).getFileName());
+			String strokeStyle;
+			DatareadN dr = d.get(i);
+			
+			System.out.println("Read file : "+dr.data);
+
+			List<String> x = new ArrayList<String>();
+			List<String> y = new ArrayList<String>();
+
+		
+			x = dr.getValuesOf("" + dr.data.get("t"));
+			y =dr.getValuesOf("" + dr.data.get("mass"));
+			try {
+				System.out.println("1");
+				for (int j = 0; j < x.size(); j++) {
+					double xd = 0;
+					double yd = 0;
+
+					System.out.println("2");
+					{
+						xd =(double) Double.parseDouble(x.get(j))/60;
+						yd = Double.parseDouble(y.get(j));
+					}
+
+					if(yd>=0)
+					{
+
+						System.out.println("3");
+					series[ik].getData().add(new XYChart.Data(xd, yd));
+					}
+					
+			
+
+				}
+
+				System.out.println("4");
+				lineChart.getData().add(series[ik]);
+
+				ObservableList<Data<Number, Number>> m = lineChart.getData()
+						.get(ik).getData();
+				strokeStyle = "-fx-stroke:transparent ;";
+
+				lineChart.getData().get(ik).getNode()
+						.lookup(".chart-series-line")
+						.setStyle(strokeStyle);
+				m = lineChart.getData().get(ik).getData();
+
+				
+				for (int i2 = 0; i2 < m.size(); i2++) {
+					((Data) m.get(i2)).getNode().setStyle(
+							"-fx-background-color: " + clr + ", transparent;");
+
+				}
+				ik++;
+
+
+				System.out.println("5");
+			} catch (Exception e) {
+
+
+				System.out.println("6");
+				e.printStackTrace();
+			}
+			// series2------
+			series[ik] = new XYChart.Series();
+
+			series[ik].setName(d.get(i).filename);
+
+			List<String> temppre = dr
+					.getValuesOf(dr.data.get("timeline") + "");
+			List<String> tempfl = dr.getValuesOf(dr.data.get("massline") + "");
+
+			
+			System.out.println("Data : "+temppre);
+			
+			System.out.println("7");
+			for (int m = 0; m < temppre.size(); m++) {
+
+				double xd = 0;
+				double yd = 0;
+				xd =(double) Double.parseDouble(temppre.get(m))/60;
+				yd = Double.parseDouble(tempfl.get(m));
+
+
+				System.out.println("8");				
+					
+					if(yd>=0)
+					{
+
+						System.out.println("9");
+					series[ik].getData().add(new XYChart.Data(xd, yd));
+					}
+				
+				
+			}
+
+		
+			try {
+				lineChart.getData().add(series[ik]);
+				
+
+				ObservableList<Data<Number, Number>> m = lineChart.getData()
+						.get(ik).getData();
+				strokeStyle = "-fx-stroke:" + clr + " ;";
+
+				
+				
+				lineChart.getData().get(ik).getNode()
+						.lookup(".chart-series-line")
+						.setStyle(strokeStyle);
+				
+			/*	String symbol="";
+				lineChart.getData().get(ik).getNode()
+				.lookup(".chart-series-line-symbol")
+				.setStyle(strokeStyle);
+				*/
+				m = lineChart.getData().get(ik).getData();
+
+				for (int i2 = 0; i2 < m.size(); i2++) {
+					((Data) m.get(i2)).getNode().setStyle(
+							"-fx-background-color:  transparent, transparent;");
+
+				}
+				ik++;
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+		
+		}
+
+		Pane p = new Pane();
+		p.setStyle("-fx-background-color: rgba(0, 100, 100, 0.0);");
+		p.getChildren().add(lineChart);
+
+		p.setPrefSize(xsize, ysize - 50);
+		p.setMinSize(xsize, ysize - 50);
+		p.setMaxSize(xsize, ysize - 50);
+		lineChart.setAnimated(false);
+		Legend ll = (Legend) lineChart.lookup(".chart-legend");
+		ll.getItems().clear();
+		for (int y = 0; y < leglab.size(); y++) {
+
+			@SuppressWarnings("restriction")
+			Legend.LegendItem ll1 = new Legend.LegendItem(leglab.get(y),
+					new Circle(6, Paint.valueOf(clrlist.get(y))));
+
+			String backgroundColorStyle = "-fx-background-color: "
+					+ clrlist.get(y) + ", white;";
+
+			ll.setStyle(backgroundColorStyle);
+
+			lineChart.getStylesheets()
+					.add(getClass().getResource("dynamicgraph.css")
+							.toExternalForm());
+			ll.getItems().add(ll1);
+		}
+
+		System.out.println("LineChart is Created");
+
+	       Zoom zoom =new Zoom(lineChart,p);
+		return p;
+	}
+
 	public Pane drawLinechartMix2single(double xsize, double ysize,
 			String Title, String Xname, String Yname, List<DatareadN> d,
 			String imgname) {

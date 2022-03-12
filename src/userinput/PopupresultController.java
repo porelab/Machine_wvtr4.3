@@ -23,8 +23,9 @@ import drawchart.ChartPlot;
 
 public class PopupresultController implements Initializable {
 
-    @FXML
-    private Label lblsamplename,lblbpp,lblbpdiamter;
+	 @FXML
+	    private Label lblsamplename,lblbpp,lblbpdiamter,lblmeanp,lblunitegurley,lblunitefrazier;
+
 
     @FXML
     private Button btnhome,startautotest;
@@ -84,16 +85,25 @@ public class PopupresultController implements Initializable {
 	//pagination1.getChildren().add(c.drawBarchart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)", list_d.get(0).getDistributionChart(list_d.get(0).getValuesOf(list_d.get(0).data.get("diameter")+""),list_d.get(0).getValuesOf(list_d.get(0).data.get("psd")+""),30)));
 	//pagination1.getChildren().add(c.drawBarchartNumber(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"Pore size Distribution", "Diameter (micron)", "Percentage (%)", list_d.get(0).getValuesOf(list_d.get(0).data.get("diameter").toString()),list_d.get(0).getValuesOf(list_d.get(0).data.get("psd").toString())));
 	
-		pagination1.getChildren().add(c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1FPT vs Time", "Time (Second)", "FPT",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter"));
+		//pagination1.getChildren().add(c.drawLinechart(pagination1.getPrefWidth(),pagination1.getPrefHeight(),"1FPT vs Time", "Time (Second)", "FPT",list_d,false,11,12,"(3) Incremental Filter-Flow % vs Diameter"));
   	  
+
+		Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(), pagination1.getPrefHeight(),
+				"Flow vs Pressure", "Pressure ("+DataStore.getUnitepressure()+")", "Flow ("+DataStore.getUniteflow()+")", list_d,
+				"(3) Incremental Filter-Flow % vs Diameter");
+		
+		pagination1.getChildren().add(p);
 		
 		
 		
 		lblsamplename.setText(""+dr.data.get("sample"));
-		lblbpdiamter.setText(""+DataStore.ConvertPressure("" + dr.data.get("bdiameter")));
 		
-		lblbpp.setText(""+DataStore.ConvertPressure("" + dr.data.get("bpressure")));
-
-
+		  lblmeanp.setText(dr.data.get("permiability").toString());
+		     lblbpp.setText(dr.data.get("wvtr").toString());
+		     lblbpdiamter.setText(dr.data.get("permeance").toString());
+		     
+		
+		
+	
 	}
 }
