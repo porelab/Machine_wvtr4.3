@@ -105,7 +105,7 @@ public class NLivetestController implements Initializable {
 	AudioClip tones;
 
 	@FXML
-	private Button btnabr, starttestdry, starttest, stoptest, starttestwet, startautotest;
+	private Button btnabr, starttestdry, starttest, stoptest, starttestwet, startautotest,btninfo;
 
 	int thval = 3000;
 	int delayinauto = 2500;
@@ -1117,7 +1117,19 @@ public class NLivetestController implements Initializable {
 		btnabr.getStyleClass().add("transperant_comm");
 		startautotest.getStyleClass().add("transperant_comm");
 		stoptest.getStyleClass().add("transperant_comm");
+		btninfo.getStyleClass().add("transperant_comm");
 
+		btninfo.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				testinfo();
+
+			}
+		});
+		
+		
 		btnabr.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -1129,6 +1141,15 @@ public class NLivetestController implements Initializable {
 
 	}
 
+	// set test stop popup
+		void testinfo() {
+
+			mydia = new MyDialoug(Main.mainstage, "/userinput/Testinfopopup.fxml");
+
+			mydia.showDialoug();
+
+		}
+		
 	// stop test popup
 	void testabourd() {
 

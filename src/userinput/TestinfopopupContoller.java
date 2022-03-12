@@ -25,7 +25,7 @@ public class TestinfopopupContoller implements Initializable {
 
 
 	    @FXML
-	    private Label lblsname,lblsplate,lblfluid,lblbptthresold,lbltfactore,lblbptacc,lbltestpressure;
+	    private Label lbltestdata,lblsname,lblsplate,lblfluid,lblbptthresold,lbltfactore,lblbptacc,lbltestpressure,lbllotno;
 
 	    
 	  	@Override
@@ -35,7 +35,7 @@ public class TestinfopopupContoller implements Initializable {
 		
 		lblsname.setText(Myapp.sampleid);
 				
-		if (Myapp.splate.equals("Small")) {
+	/*	if (Myapp.splate.equals("Small")) {
 			lblsplate.setText(Myapp.splate +" : 1");
 			
 			} else if (Myapp.splate.equals("Large")) {
@@ -45,7 +45,7 @@ public class TestinfopopupContoller implements Initializable {
 
 					lblsplate.setText(Myapp.splate +" : 2.3");
 			}
-		
+		*/
 		
 //			
 //		if (Myapp.thresold.equals("First Bubble")) {
@@ -63,11 +63,14 @@ public class TestinfopopupContoller implements Initializable {
 //		
 //		
 //	
-//		lbltfactore.setText(""+Myapp.tfactore);
-//		lblfluid.setText(Myapp.fluidname+" : "+Myapp.fluidvalue+" mN/m");
-//		lblbptacc.setText(Myapp.accbpt+" %");
-//		lbltestpressure.setText(Myapp.endpress+" psi");
-//		
+		lblsplate.setText(""+Myapp.thikness);
+		lbllotno.setText(""+Myapp.lotnumber);
+		lbltestdata.setText(""+Myapp.testdata);
+		lblfluid.setText(Myapp.dataint+"");
+		lbltfactore.setText(Myapp.testtype+"");
+		lblbptacc.setText(Myapp.testmethod+" ");
+		
+		
 		btnclose.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
