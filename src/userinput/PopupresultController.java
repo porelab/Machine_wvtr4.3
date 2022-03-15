@@ -89,8 +89,8 @@ public class PopupresultController implements Initializable {
   	  
 
 		Pane p=c.drawLinechartWithScatterMultiple(pagination1.getPrefWidth(), pagination1.getPrefHeight(),
-				"Flow vs Pressure", "Pressure ("+DataStore.getUnitepressure()+")", "Flow ("+DataStore.getUniteflow()+")", list_d,
-				"(3) Incremental Filter-Flow % vs Diameter");
+				"Mass vs Time ", "Mass", "Time", list_d,
+				"");
 		
 		pagination1.getChildren().add(p);
 		
